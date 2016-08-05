@@ -2,59 +2,116 @@ package com.tel_ran.hederkosher.service.security.implementation;
 
 import com.tel_ran.hederkosher.model.security.User;
 import com.tel_ran.hederkosher.model.security.dao.UserDAO;
+import com.tel_ran.hederkosher.model.security.dao.UserDAOFabric;
+import com.tel_ran.hederkosher.service.ServiceResultFactory;
 import com.tel_ran.hederkosher.service.security.UserCRUDService;
-import com.tel_ran.hederkosher.service.serviceResult;
+import com.tel_ran.hederkosher.service.ServiceResult;
+import org.springframework.http.server.ServerHttpAsyncRequestControl;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
-import java.util.concurrent.atomic.AtomicLong;
 
 /**
  * Created by Igor on 05.08.2016.
  */
-@Service("user")
+@Service("userCRUDService")
 @Transactional
 public class UserCRUDServiceImpl implements UserCRUDService {
-    private UserDAO userDao;
+    private UserDAO userDao = UserDAOFabric.getUserDAO("test");
+    private ServiceResult result;
 
     @Override
-    public serviceResult findByID(long id) {
-        return null;
+    public ServiceResult findByID(long id) {
+        User user = userDao.findByID(id);
+        if (user == null) {
+            result = ServiceResultFactory.USER_NOT_FOUND;
+            result.setData((Long)id);
+            result.setDescription("user with id = " + id + " not found");
+            return result;
+        }
+        result = ServiceResultFactory.OK;
+        result.setData(user);
+        return result;
     }
 
     @Override
-    public serviceResult findByName(String name) {
-        return null;
+    public ServiceResult findByEmail(String email) {
+        User user = userDao.findByMail(email);
+        if (user == null) {
+            result = ServiceResultFactory.USER_NOT_FOUND;
+            result.setData(email);
+            result.setDescription("user with email = '" + email + "' not found");
+            return result;
+        }
+        result = ServiceResultFactory.OK;
+        result.setData(user);
+        return result;
     }
 
     @Override
-    public serviceResult findAllUser() {
-        return null;
+    public ServiceResult findAllUser() {
+        result = ServiceResultFactory.OK;
+        result.setData(userDao.findAllUser());
+        return result;
     }
 
     @Override
-    public serviceResult isUserExist(User user) {
-        return null;
+    public ServiceResult isUserExist(User user) {
+        result = ServiceResultFactory.OK;
+        result.setData(userDao.isUserExist(user));
+        return result;
     }
 
     @Override
-    public serviceResult createUser(User user) {
-        return null;
+    public ServiceResult createUser(User user) {
+        if (userDao.isUserExist(user)) {
+            result = ServiceResultFactory.USER_CONFLICT;
+        } else {
+            if (userDao.createUser(user)) {
+                result = ServiceResultFactory.OK;
+            } else {
+                result = ServiceResultFactory.CREATING_ERROR;
+            }
+        }
+        result.setData(user);
+        return result;
     }
 
     @Override
-    public serviceResult updateUser(User user) {
-        return null;
+    public ServiceResult updateUser(User user) {
+        User currentUser = userDao.findByID(user.getId());
+        if (currentUser == null) {
+            result = ServiceResultFactory.USER_NOT_FOUND;
+            result.setData(user);
+            return result;
+        }
+        currentUser.setEmail(user.getEmail());
+
+        if (userDao.updateUser(currentUser)) {
+            result = ServiceResultFactory.OK;
+        } else {
+            result = ServiceResultFactory.UPDATING_ERROR;
+        }
+        result.setData(currentUser);
+        return result;
     }
 
     @Override
-    public serviceResult deleteUser(User user) {
-        return null;
+    public ServiceResult deleteUser(long id) {
+        User currentUser = userDao.findByID(id);
+
+        if (currentUser == null) {
+            result = ServiceResultFactory.USER_NOT_FOUND;
+            result.setData(id);
+            return result;
+        }
+
+        if (userDao.deleteUser(id)) {
+            result = ServiceResultFactory.OK;
+        } else {
+            result = ServiceResultFactory.DELETING_ERROR;
+        }
+        result.setData(id);
+        return result;
     }
 
-    @Override
-    public serviceResult deleteUser(long id) {
-        return null;
-    }
 }

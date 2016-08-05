@@ -17,6 +17,5 @@ public interface UserDAO {
 
     boolean createUser(User user);
     boolean updateUser(User user);
-    boolean deleteUser(User user);
     boolean deleteUser(long id);
 }

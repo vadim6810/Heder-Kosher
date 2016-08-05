@@ -11,7 +11,7 @@ import java.util.concurrent.atomic.AtomicLong;
 /**
  * Created by Igor on 05.08.2016.
  */
-public class UserDAOImpl implements UserDAO{
+public class UserDAOImplTest implements UserDAO{
 
     private static final AtomicLong counter = new AtomicLong();
 
@@ -44,12 +44,12 @@ public class UserDAOImpl implements UserDAO{
 
     @Override
     public List<User> findAllUser() {
-        return null;
+        return users;
     }
 
     @Override
     public boolean isUserExist(User user) {
-        return false;
+        return users.contains(user);
     }
 
     @Override
@@ -64,11 +64,6 @@ public class UserDAOImpl implements UserDAO{
         int index = users.indexOf(user);
         users.set(index, user);
         return true;
-    }
-
-    @Override
-    public boolean deleteUser(User user) {
-        return deleteUser(user.getId());
     }
 
     @Override

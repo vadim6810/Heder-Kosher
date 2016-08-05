@@ -3,13 +3,13 @@ package com.tel_ran.hederkosher.service;
 /**
  * Created by Igor on 05.08.2016.
  */
-public class serviceResult {
+public class ServiceResult {
     private int code;
     private String message;
     private String description;
     private Object data;
 
-    public serviceResult(int code, String message) {
+    public ServiceResult(int code, String message) {
         this.code = code;
         this.message = message;
         this.description = "";
