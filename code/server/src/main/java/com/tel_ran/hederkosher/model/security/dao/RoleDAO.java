@@ -1,6 +1,6 @@
 package com.tel_ran.hederkosher.model.security.dao;
 
-import com.tel_ran.hederkosher.model.security.Role;
+import com.tel_ran.hederkosher.model.security.*;
 
 import java.util.List;
 

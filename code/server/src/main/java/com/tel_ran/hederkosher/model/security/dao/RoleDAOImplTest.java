@@ -1,6 +1,6 @@
 package com.tel_ran.hederkosher.model.security.dao;
 
-import com.tel_ran.hederkosher.model.security.Role;
+import com.tel_ran.hederkosher.model.security.*;
 
 import java.util.*;
 import java.util.concurrent.atomic.AtomicLong;
@@ -8,7 +8,7 @@ import java.util.concurrent.atomic.AtomicLong;
 /**
  * Created by Igor on 07.08.2016.
  */
-public class RoleDAOImplTest implements RoleDAO{
+public class RoleDAOImplTest implements RoleDAO {
     private static final AtomicLong counter = new AtomicLong();
     private static List<Role> roles;
     
