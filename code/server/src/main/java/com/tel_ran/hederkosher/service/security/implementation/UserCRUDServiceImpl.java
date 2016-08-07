@@ -6,7 +6,6 @@ import com.tel_ran.hederkosher.model.security.dao.UserDAOFabric;
 import com.tel_ran.hederkosher.service.ServiceResultFactory;
 import com.tel_ran.hederkosher.service.security.UserCRUDService;
 import com.tel_ran.hederkosher.service.ServiceResult;
-import org.springframework.http.server.ServerHttpAsyncRequestControl;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,7 +22,7 @@ public class UserCRUDServiceImpl implements UserCRUDService {
     public ServiceResult findByID(long id) {
         User user = userDao.findByID(id);
         if (user == null) {
-            result = ServiceResultFactory.USER_NOT_FOUND;
+            result = ServiceResultFactory.NOT_FOUND;
             result.setData((Long)id);
             result.setDescription("user with id = " + id + " not found");
             return result;
@@ -37,7 +36,7 @@ public class UserCRUDServiceImpl implements UserCRUDService {
     public ServiceResult findByEmail(String email) {
         User user = userDao.findByMail(email);
         if (user == null) {
-            result = ServiceResultFactory.USER_NOT_FOUND;
+            result = ServiceResultFactory.NOT_FOUND;
             result.setData(email);
             result.setDescription("user with email = '" + email + "' not found");
             return result;
@@ -64,7 +63,7 @@ public class UserCRUDServiceImpl implements UserCRUDService {
     @Override
     public ServiceResult createUser(User user) {
         if (userDao.isUserExist(user)) {
-            result = ServiceResultFactory.USER_CONFLICT;
+            result = ServiceResultFactory.ENTITY_CONFLICT;
         } else {
             if (userDao.createUser(user)) {
                 result = ServiceResultFactory.OK;
@@ -80,10 +79,11 @@ public class UserCRUDServiceImpl implements UserCRUDService {
     public ServiceResult updateUser(User user) {
         User currentUser = userDao.findByID(user.getId());
         if (currentUser == null) {
-            result = ServiceResultFactory.USER_NOT_FOUND;
+            result = ServiceResultFactory.NOT_FOUND;
             result.setData(user);
             return result;
         }
+
         currentUser.setEmail(user.getEmail());
 
         if (userDao.updateUser(currentUser)) {
@@ -98,9 +98,8 @@ public class UserCRUDServiceImpl implements UserCRUDService {
     @Override
     public ServiceResult deleteUser(long id) {
         User currentUser = userDao.findByID(id);
-
         if (currentUser == null) {
-            result = ServiceResultFactory.USER_NOT_FOUND;
+            result = ServiceResultFactory.NOT_FOUND;
             result.setData(id);
             return result;
         }
