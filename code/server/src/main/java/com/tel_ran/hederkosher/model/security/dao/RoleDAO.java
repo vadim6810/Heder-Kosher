@@ -1,6 +1,8 @@
 package com.tel_ran.hederkosher.model.security.dao;
 
+import com.tel_ran.hederkosher.annotations.RoleAdmin;
 import com.tel_ran.hederkosher.model.security.*;
+import org.springframework.security.access.prepost.PreAuthorize;
 
 import java.util.List;
 

@@ -1,7 +1,5 @@
 package com.tel_ran.hederkosher.model.security;
 
-import com.tel_ran.hederkosher.model.Room;
-
 import java.util.*;
 
 /**
@@ -11,13 +9,13 @@ public class Role {
     private long id;
     private String name;
     private String description;
-    private HashSet<Action> actions;
+    private HashSet<Authority> authorities;
 
     public Role(long id, String name, String description) {
         this.id = id;
         this.name = name;
         this.description = description;
-        actions = new HashSet<>();
+        authorities = new HashSet<>();
     }
 
     public Role() {
@@ -57,12 +55,12 @@ public class Role {
                 '}';
     }
 
-    public HashSet<Action> getActions() {
-        return actions;
+    public HashSet<Authority> getAuthorities() {
+        return authorities;
     }
 
-    public void addAction(Action action) {
-        actions.add(action);
+    public void addAuthority(Authority authority) {
+        authorities.add(authority);
     }
 
 }
