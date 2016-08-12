@@ -3,11 +3,13 @@
  */
 
 package com.tel_ran.hederkosher.model;
+import com.tel_ran.hederkosher.annotations.Markable;
 import com.tel_ran.hederkosher.model.security.User;
 
 import java.util.Date;
 
-public class Person implements Markable  {
+@Markable
+public class Person {
     private int idPerson;
     private String passportNo;
     private String firstname;

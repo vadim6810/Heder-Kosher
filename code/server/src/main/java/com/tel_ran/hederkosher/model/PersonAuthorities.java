@@ -8,7 +8,7 @@ import com.tel_ran.hederkosher.model.security.Role;
 import java.util.Date;
 import java.util.HashSet;
 
-public class PersonRoom {
+public class PersonAuthorities {
     private int id;
     private Date date;
 

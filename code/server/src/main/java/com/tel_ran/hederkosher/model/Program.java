@@ -1,5 +1,7 @@
 package com.tel_ran.hederkosher.model;
 
+import com.tel_ran.hederkosher.annotations.Markable;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -8,7 +10,9 @@ import java.util.List;
  * Created by Egor on 07.08.2016.
  * Entity class for programm of excercises
  */
-public class Program implements Markable {
+
+@Markable
+public class Program {
     private int id;
     private String name;
     private Date dCreate;

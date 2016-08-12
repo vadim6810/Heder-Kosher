@@ -1,10 +1,14 @@
 package com.tel_ran.hederkosher.model;
 
+import com.tel_ran.hederkosher.annotations.Markable;
+
 /**
  * Created by Egor on 05.08.2016.
  * Entity class for excercise
  */
-public class Task implements Markable{
+
+@Markable
+public class Task {
     private int id;
     private String name;
     private String description;
