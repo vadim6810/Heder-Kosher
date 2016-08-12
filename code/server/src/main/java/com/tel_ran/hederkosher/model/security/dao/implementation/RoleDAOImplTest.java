@@ -1,12 +1,9 @@
 package com.tel_ran.hederkosher.model.security.dao.implementation;
 
-import com.tel_ran.hederkosher.annotations.RoleAdmin;
 import com.tel_ran.hederkosher.model.security.*;
 import com.tel_ran.hederkosher.model.security.dao.AuthorityDAO;
 import com.tel_ran.hederkosher.model.security.dao.RoleDAO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
