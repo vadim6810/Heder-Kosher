@@ -12,18 +12,16 @@ public class Role {
     private String name;
     private String description;
     private HashSet<Action> actions;
-    private Room room;
 
-    public Role(long id, String name, String description, Room room) {
+    public Role(long id, String name, String description) {
         this.id = id;
         this.name = name;
         this.description = description;
         actions = new HashSet<>();
-        this.room = room;
     }
 
     public Role() {
-        this(0, "", "", null);
+        this(0, "", "");
     }
 
     public long getId() {
@@ -67,11 +65,4 @@ public class Role {
         actions.add(action);
     }
 
-    public Room getRoom() {
-        return room;
-    }
-
-    public void setRoom(Room room) {
-        this.room = room;
-    }
 }

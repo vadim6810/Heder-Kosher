@@ -28,6 +28,9 @@ public class Room   {
         this(name,"",new Date());
     }
 
+    public Room() {
+    }
+
     public String getName() {
         return this.name;
     }

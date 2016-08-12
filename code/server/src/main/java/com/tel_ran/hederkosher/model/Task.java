@@ -4,7 +4,7 @@ package com.tel_ran.hederkosher.model;
  * Created by Egor on 05.08.2016.
  * Entity class for excercise
  */
-public class Task {
+public class Task implements Markable{
     private int id;
     private String name;
     private String description;
@@ -28,6 +28,9 @@ public class Task {
         this.time = time;
         this.program = program;
         this.owner = owner;
+    }
+
+    public Task() {
     }
 
     public int getId() {

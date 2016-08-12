@@ -8,7 +8,7 @@ import java.util.List;
  * Created by Egor on 07.08.2016.
  * Entity class for programm of excercises
  */
-public class Program {
+public class Program implements Markable {
     private int id;
     private String name;
     private Date dCreate;
@@ -33,6 +33,9 @@ public class Program {
         this.client = client;
         this.room = room;
         this.state = state;
+    }
+
+    public Program() {
     }
 
     public int getId() {

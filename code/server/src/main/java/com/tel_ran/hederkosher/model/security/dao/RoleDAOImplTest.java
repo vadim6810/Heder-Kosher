@@ -21,28 +21,17 @@ public class RoleDAOImplTest implements RoleDAO {
     private static List<Role> createTestRoles() {
         List<Role> res = new ArrayList<>();
 
-        Room room1 = new Room("Gym 1", "Address gym1", new Date());
-        Room room2 = new Room("Gym 2", "Address gym2", new Date());
-
-        res.add(new Role(0, "ADMIN", "Application Administrator", null));
-        res.add(new Role(1, "MANAGER 1", "Manager of gym", room1));
-        res.add(new Role(2, "TRAINER 1", "Trainer in gym", room1));
-        res.add(new Role(3, "CLIENT 1", "Simple user", room1));
-
-        res.add(new Role(4, "MANAGER 2", "Manager of gym", room2));
-        res.add(new Role(5, "TRAINER 2", "Trainer in gym", room2));
-        res.add(new Role(6, "CLIENT 2", "Simple user", room2));
+        res.add(new Role(0, "ADMIN", "Application Administrator"));
+        res.add(new Role(1, "MANAGER", "Manager of gym"));
+        res.add(new Role(2, "TRAINER", "Trainer in gym"));
+        res.add(new Role(3, "CLIENT", "Simple user"));
 
         createAdminRole(res.get(0));
 
         createManagerRole(res.get(1));
-        createManagerRole(res.get(4));
-
         createTrainerRole(res.get(2));
-        createTrainerRole(res.get(5));
-
         createClientRole(res.get(3));
-        createClientRole(res.get(6));
+
         return res;
     }
 
