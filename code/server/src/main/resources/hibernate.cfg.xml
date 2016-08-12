@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+ *************************************************************************
+ * The contents of this file are subject to the Openbravo Public License
+ * Version 1.1 (the "License"), being the Mozilla Public License
+ * version 1.1  with a permitted attribution clause ; you may not use
+ * this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * http://www.openbravo.com/legal/license.txt
+ * Software distributed under the License is distributed on an
+ * "AS IS" basis, WITHOUT WARRANTY OF  ANY KIND, either express or
+ * implied. See the License for the specific language governing rights
+ * and  limitations under the License.
+ * The Original Code is Openbravo ERP.
+ * The Initial Developer of the Original Code is Openbravo SLU
+ * All portions are Copyright (C) 2010 Openbravo SLU
+ * All Rights Reserved.
+ * Contributor(s): Openbravo S.L.U.
+ ************************************************************************
+-->
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+        <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="connection.url">jdbc:mysql://localhost:3306/Heder-Kosher</property>
+        <property name="show_sql">true</property>
+        <property name="connection.pool_size">1</property>
+        <property name="current_session_context_class">thread</property>
+
+        <!--<property name="cache.provider_class">org.hibernate.cache.NoCacheProvider</property>-->
+        <property name="hbm2ddl.auto">validate</property>
+
+        <mapping resource="com/tel_ran/hederkosher/model/PersonEntity.hbm.xml"/>
+        <mapping class="com.tel_ran.hederkosher.model.PersonEntity"/>
+        <mapping class="com.tel_ran.hederkosher.model.entity.PersonEntity"/>
+        <mapping resource="com/tel_ran/hederkosher/model/entity/PersonEntity.hbm.xml"/>
+        <mapping class="com.tel_ran.hederkosher.model.entity.PersonRoleEntity"/>
+        <mapping resource="com/tel_ran/hederkosher/model/entity/PersonRoleEntity.hbm.xml"/>
+        <mapping resource="com/tel_ran/hederkosher/model/entity/RoomEntity.hbm.xml"/>
+        <mapping class="com.tel_ran.hederkosher.model.entity.RoomEntity"/>
+        <mapping resource="com/tel_ran/hederkosher/model/entity/TokenEntity.hbm.xml"/>
+        <mapping class="com.tel_ran.hederkosher.model.entity.TokenEntity"/>
+        <mapping resource="com/tel_ran/hederkosher/model/entity/PersonRoomEntity.hbm.xml"/>
+        <mapping class="com.tel_ran.hederkosher.model.entity.PersonRoomEntity"/>
+        <mapping resource="com/tel_ran/hederkosher/model/entity/ContactEntity.hbm.xml"/>
+        <mapping class="com.tel_ran.hederkosher.model.entity.ContactEntity"/>
+
+
+    </session-factory>
+</hibernate-configuration>
