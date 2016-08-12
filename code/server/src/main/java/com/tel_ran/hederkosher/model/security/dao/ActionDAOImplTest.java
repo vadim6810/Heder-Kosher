@@ -24,6 +24,32 @@ public class ActionDAOImplTest implements ActionDAO {
         res.add(new Action(6, "CREATE ROLE", ""));
         res.add(new Action(7, "UPDATE ROLE", ""));
         res.add(new Action(8, "DELETE ROLE", ""));
+
+        res.add(new Action(9, "LIST PERSON", ""));
+        res.add(new Action(10, "CREATE PERSON", ""));
+        res.add(new Action(11, "UPDATE PERSON", ""));
+        res.add(new Action(12, "DELETE PERSON", ""));
+
+        res.add(new Action(13, "LIST ROOM", ""));
+        res.add(new Action(14, "CREATE ROOM", ""));
+        res.add(new Action(15, "UPDATE ROOM", ""));
+        res.add(new Action(16, "DELETE ROOM", ""));
+
+        res.add(new Action(17, "LIST PROGRAM", ""));
+        res.add(new Action(18, "CREATE PROGRAM", ""));
+        res.add(new Action(19, "UPDATE PROGRAM", ""));
+        res.add(new Action(20, "DELETE PROGRAM", ""));
+
+        res.add(new Action(21, "LIST STATE", ""));
+        res.add(new Action(22, "CREATE STATE", ""));
+        res.add(new Action(23, "UPDATE STATE", ""));
+        res.add(new Action(24, "DELETE STATE", ""));
+
+        res.add(new Action(25, "LIST TASK", ""));
+        res.add(new Action(26, "CREATE TASK", ""));
+        res.add(new Action(27, "UPDATE TASK", ""));
+        res.add(new Action(28, "DELETE TASK", ""));
+
         return res;
     }
 
@@ -36,5 +62,10 @@ public class ActionDAOImplTest implements ActionDAO {
             }
         }
         return null;
+    }
+
+    @Override
+    public List<Action> getAllActions() {
+        return actions;
     }
 }
