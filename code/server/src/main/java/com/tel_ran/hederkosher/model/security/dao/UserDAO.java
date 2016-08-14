@@ -7,10 +7,12 @@ import java.util.List;
 /**
  * Created by Igor on 05.08.2016.
  */
+
+
 public interface UserDAO {
     User findByID(long id);
-
     User findByMail(String mail);
+
     List<User> findAllUser();
 
     boolean isUserExist(User user);

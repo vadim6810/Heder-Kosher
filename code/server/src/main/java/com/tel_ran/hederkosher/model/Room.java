@@ -1,63 +1,93 @@
-/**
- * Created by Ruslan on 06.08.2016.
- */
-
 package com.tel_ran.hederkosher.model;
-import java.util.Date;
 
-public class Room   {
+import javax.persistence.*;
+import java.sql.Timestamp;
+
+/**
+ * Created by user on 12.08.2016.
+ */
+@Entity
+@Table(name = "room", schema = "heder-kosher", catalog = "")
+public class Room {
     private int idRoom;
     private String name;
-    private String address;
-    private Date dCreate;
-    private Date dClose;
+    private String adress;
+    private Timestamp dcreate;
+    private Timestamp dclose;
 
+    @Id
+    @Column(name = "idRoom")
     public int getIdRoom() {
-        return this.idRoom;
+        return idRoom;
     }
 
-    public Room(String name, String address, Date dCreate) {
-        this.name = name;
-        this.address = address;
-        this.dCreate = dCreate;
-    }
-    public Room(String name, String address) {
-        this(name,address,new Date());
-    }
-    public Room(String name) {
-        this(name,"",new Date());
+    public void setIdRoom(int idRoom) {
+        this.idRoom = idRoom;
     }
 
+    @Basic
+    @Column(name = "name")
     public String getName() {
-        return this.name;
+        return name;
     }
 
     public void setName(String name) {
         this.name = name;
     }
 
-    public String getAddress() {
-        return this.address;
+    @Basic
+    @Column(name = "adress")
+    public String getAdress() {
+        return adress;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setAdress(String adress) {
+        this.adress = adress;
     }
 
-    public Date getDCreate() {
-        return this.dCreate;
+    @Basic
+    @Column(name = "dcreate")
+    public Timestamp getDcreate() {
+        return dcreate;
     }
 
-    public void setDCreate(Date dCreate) {
-        this.dCreate = dCreate;
+    public void setDcreate(Timestamp dcreate) {
+        this.dcreate = dcreate;
     }
 
-    public Date getDClose() {
-        return this.dClose;
+    @Basic
+    @Column(name = "dclose")
+    public Timestamp getDclose() {
+        return dclose;
     }
 
-    public void setDClose(Date dClose) {
-        this.dClose = dClose;
+    public void setDclose(Timestamp dclose) {
+        this.dclose = dclose;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Room that = (Room) o;
+
+        if (idRoom != that.idRoom) return false;
+        if (name != null ? !name.equals(that.name) : that.name != null) return false;
+        if (adress != null ? !adress.equals(that.adress) : that.adress != null) return false;
+        if (dcreate != null ? !dcreate.equals(that.dcreate) : that.dcreate != null) return false;
+        if (dclose != null ? !dclose.equals(that.dclose) : that.dclose != null) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = idRoom;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (adress != null ? adress.hashCode() : 0);
+        result = 31 * result + (dcreate != null ? dcreate.hashCode() : 0);
+        result = 31 * result + (dclose != null ? dclose.hashCode() : 0);
+        return result;
+    }
 }

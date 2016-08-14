@@ -3,3 +3,4 @@
 .idea
 Heder-Kosher.iml
 target
+*.vpp~*

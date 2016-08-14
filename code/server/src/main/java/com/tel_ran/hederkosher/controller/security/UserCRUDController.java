@@ -1,14 +1,13 @@
 package com.tel_ran.hederkosher.controller.security;
 
 import com.tel_ran.hederkosher.model.security.User;
-import com.tel_ran.hederkosher.service.ServiceResult;
-import com.tel_ran.hederkosher.service.ServiceResultFactory;
-import com.tel_ran.hederkosher.service.security.UserCRUDService;
+import com.tel_ran.hederkosher.rest.ServiceResult;
+import com.tel_ran.hederkosher.rest.security.UserCRUDService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 

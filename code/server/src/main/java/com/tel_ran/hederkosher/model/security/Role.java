@@ -9,13 +9,13 @@ public class Role {
     private long id;
     private String name;
     private String description;
-    private List<Action> actions;
+    private HashSet<Authority> authorities;
 
     public Role(long id, String name, String description) {
         this.id = id;
         this.name = name;
         this.description = description;
-        actions = new ArrayList<>();
+        authorities = new HashSet<>();
     }
 
     public Role() {
@@ -55,16 +55,12 @@ public class Role {
                 '}';
     }
 
-    public List<Action> getActions() {
-        return actions;
+    public HashSet<Authority> getAuthorities() {
+        return authorities;
     }
 
-    public boolean addAction(Action action) {
-        return actions.add(action);
-    }
-
-    public boolean removeAction(Action action) {
-        return actions.remove(action);
+    public void addAuthority(Authority authority) {
+        authorities.add(authority);
     }
 
 }

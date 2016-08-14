@@ -2,11 +2,7 @@ package com.tel_ran.hederkosher.configuration;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
-/**
- * Created by Igor on 03.08.2016.
- */
-
-public class HKInit  extends AbstractAnnotationConfigDispatcherServletInitializer{
+public class HKInit extends AbstractAnnotationConfigDispatcherServletInitializer {
     protected Class<?>[] getRootConfigClasses() {
         return new Class[] {HKConfig.class};
     }
