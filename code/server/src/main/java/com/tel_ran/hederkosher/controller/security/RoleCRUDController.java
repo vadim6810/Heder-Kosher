@@ -1,10 +1,12 @@
 package com.tel_ran.hederkosher.controller.security;
 
 import com.tel_ran.hederkosher.model.security.Role;
-import com.tel_ran.hederkosher.service.ServiceResult;
-import com.tel_ran.hederkosher.service.security.RoleCRUDService;
+import com.tel_ran.hederkosher.rest.ServiceResult;
+import com.tel_ran.hederkosher.rest.security.RoleCRUDService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
