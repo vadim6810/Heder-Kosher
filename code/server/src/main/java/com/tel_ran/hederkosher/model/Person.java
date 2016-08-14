@@ -1,20 +1,42 @@
-package com.tel_ran.hederkosher.model.entity;
-
-import javax.persistence.*;
-import java.sql.Date;
-
 /**
  * Created by Ruslan on 12.08.2016.
  */
+
+package com.tel_ran.hederkosher.model;
+
+import com.tel_ran.hederkosher.annotations.Markable;
+import com.tel_ran.hederkosher.model.security.User;
+
+import javax.persistence.*;
+//import java.sql.Date;
+import java.util.Date;
+
+
+@Markable
 @Entity
 @Table(name = "person", schema = "heder-kosher", catalog = "")
-public class PersonEntity {
+public class Person {
     private int idPerson;
     private String passportNo;
     private String fistName;
     private String lastname;
     private String secondname;
     private Date birthday;
+    private User user;
+
+    public Person(int idPerson, String passportNo, String firstname, String secondname, String lastname, Date birthday, User user) {
+        this.idPerson = idPerson;
+        this.passportNo = passportNo;
+        this.fistName = firstname;
+        this.secondname = secondname;
+        this.lastname = lastname;
+        this.birthday = birthday;
+        this.user = user;
+    }
+
+    public Person() {
+        this(0, "", "", "", "", new Date(), null);
+    }
 
     @Id
     @Column(name = "idPerson")
@@ -76,12 +98,24 @@ public class PersonEntity {
         this.birthday = birthday;
     }
 
+
+    @Basic
+    @Column(name = "user")
+//    public User getUser() {
+//        return user;
+//    }
+//    public void setUser(User user) {
+//        this.user = user;
+//    }
+
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        PersonEntity that = (PersonEntity) o;
+        Person that = (Person) o;
 
         if (idPerson != that.idPerson) return false;
         if (passportNo != null ? !passportNo.equals(that.passportNo) : that.passportNo != null) return false;

@@ -1,4 +1,4 @@
-package com.tel_ran.hederkosher.model.entity;
+package com.tel_ran.hederkosher.model;
 
 import javax.persistence.*;
 import java.sql.Timestamp;

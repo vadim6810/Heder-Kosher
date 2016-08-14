@@ -1,7 +1,6 @@
 package com.tel_ran.hederkosher.model.dao;
 
-import com.tel_ran.hederkosher.model.dao.PersonDAO;
-import com.tel_ran.hederkosher.model.entity.PersonEntity;
+import com.tel_ran.hederkosher.model.Person;
 import com.tel_ran.hederkosher.service.HibernateUtil;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -15,7 +14,7 @@ import java.util.List;
 public class PersonDAOImpl implements PersonDAO {
 
     @Override
-    public void add(PersonEntity obj) throws SQLException {
+    public void add(Person obj) throws SQLException {
         Session session =null;
         try {
             session= HibernateUtil.getSessionFactory().openSession();
@@ -30,7 +29,7 @@ public class PersonDAOImpl implements PersonDAO {
     }
 
     @Override
-    public void delete(PersonEntity obj) throws SQLException {
+    public void delete(Person obj) throws SQLException {
         Session session =null;
         try {
             session= HibernateUtil.getSessionFactory().openSession();
@@ -46,12 +45,12 @@ public class PersonDAOImpl implements PersonDAO {
     }
 
     @Override
-    public PersonEntity get(int id) throws SQLException {
-        PersonEntity result = null;
+    public Person get(int id) throws SQLException {
+        Person result = null;
         Session session =null;
         try {
             session= HibernateUtil.getSessionFactory().openSession();
-            result = (PersonEntity) session.get(PersonEntity.class,id);
+            result = (Person) session.get(Person.class,id);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -61,13 +60,13 @@ public class PersonDAOImpl implements PersonDAO {
     }
 
     @Override
-    public List<PersonEntity> gets() throws SQLException {
-        List<PersonEntity> list = null;
+    public List<Person> gets() throws SQLException {
+        List<Person> list = null;
 
         Session session =null;
         try {
             session= HibernateUtil.getSessionFactory().openSession();
-            list = session.createCriteria(PersonEntity.class).list();
+            list = session.createCriteria(Person.class).list();
         } catch (Exception e) {
             e.printStackTrace();
         } finally {

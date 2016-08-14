@@ -4,8 +4,11 @@
     "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 
-    <class name="com.tel_ran.hederkosher.model.entity.PersonRoleEntity" table="personrole" schema="heder-kosher">
-        <id name="idRole" column="idRole"/>
+    <class name="com.tel_ran.hederkosher.model.Room" table="room" schema="heder-kosher">
+        <id name="idRoom" column="idRoom"/>
         <property name="name" column="name"/>
+        <property name="adress" column="adress"/>
+        <property name="dcreate" column="dcreate"/>
+        <property name="dclose" column="dclose"/>
     </class>
 </hibernate-mapping>

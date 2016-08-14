@@ -1,4 +1,4 @@
-package com.tel_ran.hederkosher.model.entity;
+package com.tel_ran.hederkosher.model;
 
 import javax.persistence.*;
 
@@ -7,7 +7,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "token", schema = "heder-kosher", catalog = "")
-public class TokenEntity {
+public class Token {
     private int idtoken;
     private String token;
     private Byte enabled;
@@ -58,7 +58,7 @@ public class TokenEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        TokenEntity that = (TokenEntity) o;
+        Token that = (Token) o;
 
         if (idtoken != that.idtoken) return false;
         if (person != that.person) return false;

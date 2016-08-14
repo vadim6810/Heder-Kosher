@@ -1,4 +1,4 @@
-package com.tel_ran.hederkosher.model.entity;
+package com.tel_ran.hederkosher.model;
 
 import javax.persistence.*;
 
@@ -7,7 +7,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "contact", schema = "heder-kosher", catalog = "")
-public class ContactEntity {
+public class Contact {
     private int person;
     private String telephones;
     private String email;
@@ -58,7 +58,7 @@ public class ContactEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        ContactEntity that = (ContactEntity) o;
+        Contact that = (Contact) o;
 
         if (person != that.person) return false;
         if (idPerson != that.idPerson) return false;

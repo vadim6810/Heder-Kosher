@@ -4,10 +4,10 @@
     "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 
-    <class name="com.tel_ran.hederkosher.model.entity.ContactEntity" table="contact" schema="heder-kosher">
-        <id name="idPerson" column="idPerson"/>
+    <class name="com.tel_ran.hederkosher.model.Token" table="token" schema="heder-kosher">
+        <id name="idtoken" column="idtoken"/>
+        <property name="token" column="token"/>
+        <property name="enabled" column="enabled"/>
         <property name="person" column="person"/>
-        <property name="telephones" column="telephones"/>
-        <property name="email" column="email"/>
     </class>
 </hibernate-mapping>

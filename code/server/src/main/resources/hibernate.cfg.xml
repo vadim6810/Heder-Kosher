@@ -33,20 +33,25 @@
         <!--<property name="cache.provider_class">org.hibernate.cache.NoCacheProvider</property>-->
         <property name="hbm2ddl.auto">validate</property>
 
-        <mapping resource="com/tel_ran/hederkosher/model/PersonEntity.hbm.xml"/>
-        <mapping class="com.tel_ran.hederkosher.model.PersonEntity"/>
-        <mapping class="com.tel_ran.hederkosher.model.entity.PersonEntity"/>
-        <mapping resource="com/tel_ran/hederkosher/model/entity/PersonEntity.hbm.xml"/>
-        <mapping class="com.tel_ran.hederkosher.model.entity.PersonRoleEntity"/>
-        <mapping resource="com/tel_ran/hederkosher/model/entity/PersonRoleEntity.hbm.xml"/>
-        <mapping resource="com/tel_ran/hederkosher/model/entity/RoomEntity.hbm.xml"/>
-        <mapping class="com.tel_ran.hederkosher.model.entity.RoomEntity"/>
-        <mapping resource="com/tel_ran/hederkosher/model/entity/TokenEntity.hbm.xml"/>
-        <mapping class="com.tel_ran.hederkosher.model.entity.TokenEntity"/>
-        <mapping resource="com/tel_ran/hederkosher/model/entity/PersonRoomEntity.hbm.xml"/>
-        <mapping class="com.tel_ran.hederkosher.model.entity.PersonRoomEntity"/>
-        <mapping resource="com/tel_ran/hederkosher/model/entity/ContactEntity.hbm.xml"/>
-        <mapping class="com.tel_ran.hederkosher.model.entity.ContactEntity"/>
+        <mapping resource="com/tel_ran/hederkosher/model/dao/Stats.hbm.xml"/>
+
+        <!--<mapping class="com.tel_ran.hederkosher.model.Person"/>-->
+        <!--<mapping resource="com/tel_ran/hederkosher/model/Person.hbm.xml"/>-->
+
+        <!--<mapping class="com.tel_ran.hederkosher.model.PersonRole"/>-->
+        <!--<mapping resource="com/tel_ran/hederkosher/model/PersonRole.hbm.xml"/>-->
+
+        <!--<mapping resource="com/tel_ran/hederkosher/model/Room.hbm.xml"/>-->
+        <!--<mapping class="com.tel_ran.hederkosher.model.Room"/>-->
+
+        <!--<mapping resource="com/tel_ran/hederkosher/model/Token.hbm.xml"/>-->
+        <!--<mapping class="com.tel_ran.hederkosher.model.Token"/>-->
+
+        <!--<mapping resource="com/tel_ran/hederkosher/model/PersonRoom.hbm.xml"/>-->
+        <!--<mapping class="com.tel_ran.hederkosher.model.PersonRoom"/>-->
+
+        <!--<mapping resource="com/tel_ran/hederkosher/model/Contact.hbm.xml"/>-->
+        <!--<mapping class="com.tel_ran.hederkosher.model.Contact"/>-->
 
 
     </session-factory>

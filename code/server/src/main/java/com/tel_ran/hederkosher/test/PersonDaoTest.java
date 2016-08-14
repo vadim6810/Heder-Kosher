@@ -5,7 +5,7 @@ package com.tel_ran.hederkosher.test;
 
 import com.tel_ran.hederkosher.model.dao.PersonDAO;
 import com.tel_ran.hederkosher.model.dao.PersonDAOFactory;
-import com.tel_ran.hederkosher.model.entity.PersonEntity;
+import com.tel_ran.hederkosher.model.Person;
 import com.tel_ran.hederkosher.service.HibernateUtil;
 import org.hibernate.SessionFactory;
 
@@ -20,9 +20,9 @@ public class PersonDaoTest {
         PersonDAOFactory factory= PersonDAOFactory.getInstance();
         PersonDAO personDAO= factory.getPersonDAO();
 
-        List<PersonEntity> persons = personDAO.gets();
+        List<Person> persons = personDAO.gets();
 
-        for (PersonEntity person  :persons) {
+        for (Person person  :persons) {
             System.out.println(person.getFistName());
         }
 

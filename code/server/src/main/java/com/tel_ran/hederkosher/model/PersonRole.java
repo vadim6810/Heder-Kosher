@@ -1,4 +1,4 @@
-package com.tel_ran.hederkosher.model.entity;
+package com.tel_ran.hederkosher.model;
 
 import javax.persistence.*;
 
@@ -7,7 +7,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "personrole", schema = "heder-kosher", catalog = "")
-public class PersonRoleEntity {
+public class PersonRole {
     private int idRole;
     private String name;
 
@@ -36,7 +36,7 @@ public class PersonRoleEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        PersonRoleEntity that = (PersonRoleEntity) o;
+        PersonRole that = (PersonRole) o;
 
         if (idRole != that.idRole) return false;
         if (name != null ? !name.equals(that.name) : that.name != null) return false;

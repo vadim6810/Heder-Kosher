@@ -1,4 +1,4 @@
-package com.tel_ran.hederkosher.model.entity;
+package com.tel_ran.hederkosher.model;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -8,7 +8,7 @@ import java.sql.Timestamp;
  */
 @Entity
 @Table(name = "room", schema = "heder-kosher", catalog = "")
-public class RoomEntity {
+public class Room {
     private int idRoom;
     private String name;
     private String adress;
@@ -70,7 +70,7 @@ public class RoomEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        RoomEntity that = (RoomEntity) o;
+        Room that = (Room) o;
 
         if (idRoom != that.idRoom) return false;
         if (name != null ? !name.equals(that.name) : that.name != null) return false;

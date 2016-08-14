@@ -4,7 +4,7 @@
     "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 
-    <class name="com.tel_ran.hederkosher.model.entity.PersonRoomEntity" table="personroom" schema="heder-kosher">
+    <class name="com.tel_ran.hederkosher.model.PersonRoomEntity" table="personroom" schema="heder-kosher">
         <id name="id" column="id"/>
         <property name="person" column="person"/>
         <property name="role" column="role"/>

@@ -1,9 +1,13 @@
 package com.tel_ran.hederkosher.model;
 
+import com.tel_ran.hederkosher.annotations.Markable;
+
 /**
  * Created by Egor on 05.08.2016.
  * Entity class for excercise
  */
+
+@Markable
 public class Task {
     private int id;
     private String name;
@@ -28,6 +32,9 @@ public class Task {
         this.time = time;
         this.program = program;
         this.owner = owner;
+    }
+
+    public Task() {
     }
 
     public int getId() {
