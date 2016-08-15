@@ -11,11 +11,12 @@ import javax.persistence.*;
 
 @Markable
 @Entity
-@Table(name = "TASK")
+@Table(name = "task")
 public class Task {
 
     @Id
     @Column(name = "ID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Column(name = "NAME")
@@ -39,12 +40,10 @@ public class Task {
     @Column(name = "TIME")
     private int time;
 
-    @Column(name = "OWNER_ID")
-    @ManyToOne
+    @ManyToOne(targetEntity = Person.class, fetch = FetchType.LAZY)
     private Person owner;
 
-    @Column(name = "STATE_ID")
-    @ManyToOne
+    @ManyToOne(targetEntity = State.class)
     private State state;
 
     public Task(int id, String name, String description, boolean isTemplate, int amountIterations, int amountTries, int weight, int time, Person owner) {
