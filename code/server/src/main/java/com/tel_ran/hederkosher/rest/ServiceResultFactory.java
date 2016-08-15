@@ -11,6 +11,7 @@ public class ServiceResultFactory {
     public static ServiceResult UPDATING_ERROR;
     public static ServiceResult DELETING_ERROR;
     public static ServiceResult ENTITY_CONFLICT;
+    public static ServiceResult CREDENTIALS_NOT_FOUND;
 
     static {
         OK = new ServiceResult(0, "Ok");
@@ -20,6 +21,7 @@ public class ServiceResultFactory {
         UPDATING_ERROR = new ServiceResult(-4, "Object was not updated!");
         DELETING_ERROR = new ServiceResult(-5, "Object was not deleted!");
         ENTITY_CONFLICT = new ServiceResult(-6, "Object already exist");
+        CREDENTIALS_NOT_FOUND = new ServiceResult(-7, "Username or password are invalid.");
     }
 }
 
