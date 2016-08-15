@@ -1,11 +1,21 @@
 package com.tel_ran.hederkosher.model;
 
+import javax.persistence.*;
+
 /**
  * Created by Egor on 07.08.2016.
  * Entity class for states of Task and Program
  */
+@Entity
+@Table(name = "state")
 public class State {
+
+    @Id
+    @Column(name = "ID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
+    @Column(name = "NAME")
     private String name;
 
     public State(String name) {

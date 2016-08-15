@@ -2,7 +2,7 @@ package com.tel_ran.hederkosher.model;
 
 import com.tel_ran.hederkosher.annotations.Markable;
 
-import java.util.ArrayList;
+import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
@@ -12,18 +12,43 @@ import java.util.List;
  */
 
 @Markable
+@Entity
+@Table(name = "program")
 public class Program {
+
+    @Id
+    @Column(name = "ID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
+    @Column(name = "NAME")
     private String name;
+
+    @Column(name = "DATE_CREATE")
     private Date dCreate;
+
+    @Column(name = "DATE_CLOSE")
     private Date dClose;
+
+    @Column(name = "IS_TEMPLATE")
     private boolean isTemplate;
+
+    @ManyToOne(targetEntity = Person.class, fetch = FetchType.LAZY)
     private Person owner;
+
+    @ManyToOne(targetEntity = Person.class, fetch = FetchType.LAZY)
     private Person producer;
+
+    @ManyToOne(targetEntity = Person.class, fetch = FetchType.LAZY)
     private Person client;
+
+    @ManyToOne(targetEntity = Room.class, fetch = FetchType.LAZY)
     private Room room;
+
+    @ManyToOne(targetEntity = State.class)
     private State state;
 
+    @OneToMany(targetEntity = Task.class, mappedBy = "owner")
     private List<Task> tasks;
 
     public Program(int id, String name, Date dCreate, Date dClose, boolean isTemplate, Person owner, Person producer, Person client, Room room, State state) {
@@ -122,19 +147,4 @@ public class Program {
         this.state = state;
     }
 
-    public List<Task> getTasks() {
-        if (tasks == null){
-            tasks = getTasksList();
-        }
-        return tasks;
-    }
-
-    private List<Task> getTasksList() {
-        //TODO DAL
-        return new ArrayList<>();
-    }
-
-//    public void setTasks(List<Task> tasks) {
-//        this.tasks = tasks;
-//    }
 }

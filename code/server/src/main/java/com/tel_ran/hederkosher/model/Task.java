@@ -2,26 +2,51 @@ package com.tel_ran.hederkosher.model;
 
 import com.tel_ran.hederkosher.annotations.Markable;
 
+import javax.persistence.*;
+
 /**
  * Created by Egor on 05.08.2016.
  * Entity class for excercise
  */
 
 @Markable
+@Entity
+@Table(name = "task")
 public class Task {
+
+    @Id
+    @Column(name = "ID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
+    @Column(name = "NAME")
     private String name;
+
+    @Column(name = "DESCRIPTION", columnDefinition = "TEXT")
     private String description;
+
+    @Column(name = "IS_TEMPLATE")
     private boolean isTemplate;
+
+    @Column(name = "AMOUNT_ITERATIONS")
     private int amountIterations;
+
+    @Column(name = "AMOUNT_TRIES")
     private int amountTries;
+
+    @Column(name = "WEIGHT")
     private int weight;
+
+    @Column(name = "TIME")
     private int time;
-    private Program program;
+
+    @ManyToOne(targetEntity = Person.class, fetch = FetchType.LAZY)
     private Person owner;
+
+    @ManyToOne(targetEntity = State.class)
     private State state;
 
-    public Task(int id, String name, String description, boolean isTemplate, int amountIterations, int amountTries, int weight, int time, Program program, Person owner) {
+    public Task(int id, String name, String description, boolean isTemplate, int amountIterations, int amountTries, int weight, int time, Person owner) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -30,7 +55,6 @@ public class Task {
         this.amountTries = amountTries;
         this.weight = weight;
         this.time = time;
-        this.program = program;
         this.owner = owner;
     }
 
@@ -99,14 +123,6 @@ public class Task {
 
     public void setTime(int time) {
         this.time = time;
-    }
-
-    public Program getProgram() {
-        return program;
-    }
-
-    public void setProgram(Program program) {
-        this.program = program;
     }
 
     public Person getOwner() {
