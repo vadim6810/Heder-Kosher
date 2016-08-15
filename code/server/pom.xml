@@ -9,6 +9,7 @@
     <version>0.0.1-SNAPSHOT</version>
     <name>Heder Kosher Server App</name>
     <packaging>war</packaging>
+    <!-- check commit -->
 
     <properties>
         <spring.version>4.3.1.RELEASE</spring.version>
