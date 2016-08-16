@@ -11,11 +11,11 @@ import javax.persistence.*;
 public class State {
 
     @Id
-    @Column(name = "ID")
+    @Column(name = "ID", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "NAME")
+    @Column(name = "NAME", nullable = false)
     private String name;
 
     public State(String name) {
