@@ -1,6 +1,8 @@
 package com.tel_ran.hederkosher.model.security;
 
-import java.util.Date;
+import com.tel_ran.hederkosher.model.Room;
+
+import java.util.*;
 import java.util.concurrent.atomic.AtomicLong;
 
 /**
@@ -11,6 +13,7 @@ public class User {
     private String email;
     private String password;
     private Date regDate;
+    private Map<Room, Role> roles;
 
     public User() {
         this(0, "", "", new Date());
@@ -21,6 +24,7 @@ public class User {
         this.email = email;
         this.password = password;
         this.regDate = regDate;
+        roles = new HashMap<>();
     }
 
     public long getId() {
@@ -54,7 +58,6 @@ public class User {
     public void setRegDate(Date regDate) {
         this.regDate = regDate;
     }
-
     @Override
     public String toString() {
         return "User{" +
@@ -63,5 +66,21 @@ public class User {
                 ", password='" + password + '\'' +
                 ", regDate=" + regDate +
                 '}';
+    }
+
+    public Map<Room, Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Map<Room, Role> roles) {
+        this.roles = roles;
+    }
+
+    public Role getRole(Room room) {
+        return this.roles.get(room);
+    }
+
+    public Role setRole(Room room, Role role) {
+        return this.roles.put(room, role);
     }
 }
