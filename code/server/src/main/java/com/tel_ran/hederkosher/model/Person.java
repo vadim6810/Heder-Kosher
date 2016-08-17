@@ -16,13 +16,36 @@ import java.util.Date;
 @Entity
 @Table(name = "person", schema = "heder-kosher", catalog = "")
 public class Person {
+
+    @Id
+    @Column(name = "idPerson")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idPerson;
+
+    @Basic
+    @Column(name = "passportNo")
     private String passportNo;
+
+    @Basic
+    @Column(name = "fistName")
     private String fistName;
+
+    @Basic
+    @Column(name = "lastname")
     private String lastname;
+
+    @Basic
+    @Column(name = "secondname")
     private String secondname;
+
+    @Basic
+    @Column(name = "birthday")
     private Date birthday;
+
+    @Basic
+    @Column(name = "user")
     private User user;
+
 
     public Person(int idPerson, String passportNo, String firstname, String secondname, String lastname, Date birthday, User user) {
         this.idPerson = idPerson;
@@ -38,8 +61,6 @@ public class Person {
         this(0, "", "", "", "", new Date(), null);
     }
 
-    @Id
-    @Column(name = "idPerson")
     public int getIdPerson() {
         return idPerson;
     }
@@ -48,8 +69,6 @@ public class Person {
         this.idPerson = idPerson;
     }
 
-    @Basic
-    @Column(name = "passportNo")
     public String getPassportNo() {
         return passportNo;
     }
@@ -58,8 +77,6 @@ public class Person {
         this.passportNo = passportNo;
     }
 
-    @Basic
-    @Column(name = "fistName")
     public String getFistName() {
         return fistName;
     }
@@ -68,8 +85,6 @@ public class Person {
         this.fistName = fistName;
     }
 
-    @Basic
-    @Column(name = "lastname")
     public String getLastname() {
         return lastname;
     }
@@ -78,8 +93,6 @@ public class Person {
         this.lastname = lastname;
     }
 
-    @Basic
-    @Column(name = "secondname")
     public String getSecondname() {
         return secondname;
     }
@@ -88,8 +101,6 @@ public class Person {
         this.secondname = secondname;
     }
 
-    @Basic
-    @Column(name = "birthday")
     public Date getBirthday() {
         return birthday;
     }
@@ -98,16 +109,12 @@ public class Person {
         this.birthday = birthday;
     }
 
-
-    @Basic
-    @Column(name = "user")
-//    public User getUser() {
-//        return user;
-//    }
-//    public void setUser(User user) {
-//        this.user = user;
-//    }
-
+    public User getUser() {
+        return user;
+    }
+    public void setUser(User user) {
+        this.user = user;
+    }
 
 
     @Override

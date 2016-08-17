@@ -9,8 +9,9 @@ import java.util.List;
  * Created by Ruslan on 12.08.2016.
  */
 public interface PersonDAO {
-    public void add(Person obj) throws SQLException;
-    public void delete(Person obj) throws SQLException;
-    public Person get(int id) throws SQLException;
-    public List<Person>  gets() throws SQLException;
+    public void add(Person obj);
+    public void delete(Person obj);
+    public void delete(int id);
+    public Person get(int id) ;
+    public List<Person>  gets() ;
 }

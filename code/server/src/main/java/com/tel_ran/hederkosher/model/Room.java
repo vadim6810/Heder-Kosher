@@ -1,67 +1,80 @@
+/**
+ * Created by Ruslan on 12.08.2016.
+ */
 package com.tel_ran.hederkosher.model;
 
-import javax.persistence.*;
-import java.sql.Timestamp;
+import com.tel_ran.hederkosher.annotations.Markable;
 
-/**
- * Created by user on 12.08.2016.
- */
+import javax.persistence.*;
+//import java.sql.Timestamp;
+import java.util.Date;
+
+//@Markable
 @Entity
 @Table(name = "room", schema = "heder-kosher", catalog = "")
 public class Room {
-    private int idRoom;
-    private String name;
-    private String adress;
-    private Timestamp dcreate;
-    private Timestamp dclose;
-
     @Id
     @Column(name = "idRoom")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int idRoom;
+
+    @Basic
+    @Column(name = "name")
+    private String name;
+
+    @Basic
+    @Column(name = "adress", columnDefinition = "TEXT")
+    private String adress;
+
+    @Basic
+    @Column(name = "dcreate")
+    private Date dcreate;
+
+    @Basic
+    @Column(name = "dclose")
+    private Date dclose;
+
+    public Room(String name, String adress, Date dcreate) {
+        this.name = name;
+        this.adress = adress;
+        this.dcreate = dcreate;
+    }
+
+    public Room(){this("","",new Date());
+    }
+
     public int getIdRoom() {
         return idRoom;
     }
-
     public void setIdRoom(int idRoom) {
         this.idRoom = idRoom;
     }
 
-    @Basic
-    @Column(name = "name")
     public String getName() {
         return name;
     }
-
     public void setName(String name) {
         this.name = name;
     }
 
-    @Basic
-    @Column(name = "adress")
     public String getAdress() {
         return adress;
     }
-
     public void setAdress(String adress) {
         this.adress = adress;
     }
 
-    @Basic
-    @Column(name = "dcreate")
-    public Timestamp getDcreate() {
+    public Date getDcreate() {
         return dcreate;
     }
-
-    public void setDcreate(Timestamp dcreate) {
+    public void setDcreate(Date dcreate) {
         this.dcreate = dcreate;
     }
 
-    @Basic
-    @Column(name = "dclose")
-    public Timestamp getDclose() {
+    public Date getDclose() {
         return dclose;
     }
-
-    public void setDclose(Timestamp dclose) {
+    public void setDclose(Date dclose) {
         this.dclose = dclose;
     }
 

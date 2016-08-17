@@ -29,30 +29,10 @@
         <property name="show_sql">true</property>
         <property name="connection.pool_size">1</property>
         <property name="current_session_context_class">thread</property>
-
+        <property name="hibernate.connection.username">root</property>
+        <property name="hibernate.connection.password">root</property>
         <!--<property name="cache.provider_class">org.hibernate.cache.NoCacheProvider</property>-->
         <property name="hbm2ddl.auto">validate</property>
-
-        <mapping resource="com/tel_ran/hederkosher/model/dao/Stats.hbm.xml"/>
-
-        <!--<mapping class="com.tel_ran.hederkosher.model.Person"/>-->
-        <!--<mapping resource="com/tel_ran/hederkosher/model/Person.hbm.xml"/>-->
-
-        <!--<mapping class="com.tel_ran.hederkosher.model.PersonRole"/>-->
-        <!--<mapping resource="com/tel_ran/hederkosher/model/PersonRole.hbm.xml"/>-->
-
-        <!--<mapping resource="com/tel_ran/hederkosher/model/Room.hbm.xml"/>-->
-        <!--<mapping class="com.tel_ran.hederkosher.model.Room"/>-->
-
-        <!--<mapping resource="com/tel_ran/hederkosher/model/Token.hbm.xml"/>-->
-        <!--<mapping class="com.tel_ran.hederkosher.model.Token"/>-->
-
-        <!--<mapping resource="com/tel_ran/hederkosher/model/PersonRoom.hbm.xml"/>-->
-        <!--<mapping class="com.tel_ran.hederkosher.model.PersonRoom"/>-->
-
-        <!--<mapping resource="com/tel_ran/hederkosher/model/Contact.hbm.xml"/>-->
-        <!--<mapping class="com.tel_ran.hederkosher.model.Contact"/>-->
-
 
     </session-factory>
 </hibernate-configuration>

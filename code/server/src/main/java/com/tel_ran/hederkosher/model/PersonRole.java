@@ -1,32 +1,44 @@
+/**
+ * Created by Ruslan on 12.08.2016.
+ */
+
 package com.tel_ran.hederkosher.model;
+
+import com.tel_ran.hederkosher.annotations.Markable;
 
 import javax.persistence.*;
 
-/**
- * Created by user on 12.08.2016.
- */
+//@Markable
 @Entity
 @Table(name = "personrole", schema = "heder-kosher", catalog = "")
 public class PersonRole {
-    private int idRole;
-    private String name;
 
     @Id
     @Column(name = "idRole")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int idRole;
+
+    @Basic
+    @Column(name = "name")
+    private String name;
+
+    public PersonRole(String name) {
+        this.name = name;
+    }
+
+    public PersonRole(){this("");
+    }
+
     public int getIdRole() {
         return idRole;
     }
-
     public void setIdRole(int idRole) {
         this.idRole = idRole;
     }
 
-    @Basic
-    @Column(name = "name")
     public String getName() {
         return name;
     }
-
     public void setName(String name) {
         this.name = name;
     }
@@ -43,7 +55,6 @@ public class PersonRole {
 
         return true;
     }
-
     @Override
     public int hashCode() {
         int result = idRole;

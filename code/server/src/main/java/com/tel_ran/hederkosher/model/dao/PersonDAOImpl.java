@@ -1,77 +1,52 @@
+/**
+ * Created by Ruslan on 12.08.2016.
+ */
 package com.tel_ran.hederkosher.model.dao;
 
 import com.tel_ran.hederkosher.model.Person;
 import com.tel_ran.hederkosher.service.HibernateUtil;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
+import org.springframework.stereotype.Repository;
 
 import java.sql.SQLException;
 import java.util.List;
 
-/**
- * Created by Ruslan on 12.08.2016.
- */
+@Repository
 public class PersonDAOImpl implements PersonDAO {
 
+    @Autowired
+    private SessionFactory sessionFactory;
+
     @Override
-    public void add(Person obj) throws SQLException {
-        Session session =null;
-        try {
-            session= HibernateUtil.getSessionFactory().openSession();
-            session.beginTransaction();
-            session.save(obj);
-            session.getTransaction().commit();
-        } catch (HibernateException e) {
-            e.printStackTrace();
-        } finally {
-            if ((session!=null) && (session.isOpen()))     session.close();
+    public void add(Person obj) {
+        if (null != obj) {
+        sessionFactory.getCurrentSession().save(obj);
+    }
+
+    @Override
+    public void delete(Person obj) {
+         if (null != obj) {
+            sessionFactory.getCurrentSession().delete(obj);
+    }
+
+    @Override
+    public void delete(int obj) {
+        Person person = get(obj);
+        if (null != person) {
+            sessionFactory.getCurrentSession().delete(person);
         }
     }
 
     @Override
-    public void delete(Person obj) throws SQLException {
-        Session session =null;
-        try {
-            session= HibernateUtil.getSessionFactory().openSession();
-            session.beginTransaction();
-            session.delete(obj);
-            session.getTransaction().commit();
-        } catch (HibernateException e) {
-            e.printStackTrace();
-        } finally {
-            if ((session!=null) && (session.isOpen()))     session.close();
-        }
-
+    public Person get(int id) {
+        return (Person) sessionFactory.getCurrentSession().load(Person.class, id);
     }
 
     @Override
-    public Person get(int id) throws SQLException {
-        Person result = null;
-        Session session =null;
-        try {
-            session= HibernateUtil.getSessionFactory().openSession();
-            result = (Person) session.get(Person.class,id);
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if ((session!=null) && (session.isOpen()))     session.close();
-        }
-        return result;
-    }
-
-    @Override
-    public List<Person> gets() throws SQLException {
-        List<Person> list = null;
-
-        Session session =null;
-        try {
-            session= HibernateUtil.getSessionFactory().openSession();
-            list = session.createCriteria(Person.class).list();
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if ((session!=null) && (session.isOpen()))     session.close();
-        }
-        return list;
-    }
+    @SuppressWarnings("unchecked")
+    public List<Person> gets() {
+                return sessionFactory.getCurrentSession().createQuery("from Person")
+                        .list();
+            }
 }
