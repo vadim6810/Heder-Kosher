@@ -5,16 +5,17 @@ package com.tel_ran.hederkosher.model.dao;
  */
 public class PersonDAOFactory {
     public static PersonDAOFactory instance = new PersonDAOFactory();
-    public PersonDAO factory;
+    public PersonDao1 factory;
 
     private PersonDAOFactory(){}
 
     public static PersonDAOFactory getInstance(){
         return PersonDAOFactory.instance;
     }
-    public PersonDAO getPersonDAO(){
-        if (factory== null) factory= new PersonDAOImpl();
-        return factory;
+    public PersonDao1 getPersonDAO(){
+//        if (factory== null) factory= new PersonDaoImpl1();
+//        return factory;
+return null;
     }
 
 

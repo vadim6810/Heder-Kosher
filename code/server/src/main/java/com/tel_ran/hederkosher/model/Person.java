@@ -7,6 +7,7 @@ package com.tel_ran.hederkosher.model;
 import com.tel_ran.hederkosher.annotations.Markable;
 import com.tel_ran.hederkosher.model.security.User;
 
+import org.hibernate.annotations.Type;
 import javax.persistence.*;
 //import java.sql.Date;
 import java.util.Date;
@@ -14,7 +15,7 @@ import java.util.Date;
 
 @Markable
 @Entity
-@Table(name = "person", schema = "heder-kosher", catalog = "")
+@Table(name = "person")
 public class Person {
 
     @Id

@@ -53,12 +53,12 @@
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-annotations</artifactId>
-            <version>${hibernate.version}</version>
+            <version>3.3.1.GA</version>
         </dependency>
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-commons-annotations</artifactId>
-            <version>${hibernate.version}</version>
+            <version>3.3.0.ga</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.springframework/spring-orm -->
         <dependency>
@@ -74,6 +74,7 @@
             <artifactId>mysql-connector-java</artifactId>
             <version>${mysql.version}</version>
         </dependency>
+
 
         <!-- JSON -->
         <dependency>
@@ -102,7 +103,7 @@
             <scope>test</scope>
         </dependency>
 
-        <!--org.apache.logging.log4j/log4j -->
+        //org.apache.logging.log4j/log4j
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-api</artifactId>

@@ -3,7 +3,7 @@
  */
 package com.tel_ran.hederkosher.test;
 
-import com.tel_ran.hederkosher.model.dao.PersonDAO;
+import com.tel_ran.hederkosher.model.dao.PersonDao1;
 import com.tel_ran.hederkosher.model.dao.PersonDAOFactory;
 import com.tel_ran.hederkosher.model.Person;
 import com.tel_ran.hederkosher.service.HibernateUtil;
@@ -18,7 +18,7 @@ public class PersonDaoTest {
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 
         PersonDAOFactory factory= PersonDAOFactory.getInstance();
-        PersonDAO personDAO= factory.getPersonDAO();
+        PersonDao1 personDAO= factory.getPersonDAO();
 
         List<Person> persons = personDAO.gets();
 

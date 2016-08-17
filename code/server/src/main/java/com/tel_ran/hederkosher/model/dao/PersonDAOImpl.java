@@ -1,52 +1,46 @@
 /**
  * Created by Ruslan on 12.08.2016.
  */
+
 package com.tel_ran.hederkosher.model.dao;
 
-import com.tel_ran.hederkosher.model.Person;
-import com.tel_ran.hederkosher.service.HibernateUtil;
-import org.hibernate.HibernateException;
-import org.hibernate.Session;
-import org.springframework.stereotype.Repository;
-
-import java.sql.SQLException;
 import java.util.List;
 
-@Repository
-public class PersonDAOImpl implements PersonDAO {
+import org.hibernate.Criteria;
+import org.hibernate.Query;
+import org.hibernate.criterion.Restrictions;
+import org.springframework.stereotype.Repository;
 
-    @Autowired
-    private SessionFactory sessionFactory;
+import com.tel_ran.hederkosher.model.Person;
 
-    @Override
-    public void add(Person obj) {
-        if (null != obj) {
-        sessionFactory.getCurrentSession().save(obj);
+@Repository("personDao")
+public class PersonDaoImpl extends AbstractDao implements PersonDao{
+
+    public void savePerson(Person person) {
+        persist(person);
     }
 
-    @Override
-    public void delete(Person obj) {
-         if (null != obj) {
-            sessionFactory.getCurrentSession().delete(obj);
-    }
-
-    @Override
-    public void delete(int obj) {
-        Person person = get(obj);
-        if (null != person) {
-            sessionFactory.getCurrentSession().delete(person);
-        }
-    }
-
-    @Override
-    public Person get(int id) {
-        return (Person) sessionFactory.getCurrentSession().load(Person.class, id);
-    }
-
-    @Override
     @SuppressWarnings("unchecked")
-    public List<Person> gets() {
-                return sessionFactory.getCurrentSession().createQuery("from Person")
-                        .list();
-            }
+    public List<Person> findAllPersons() {
+        Criteria criteria = getSession().createCriteria(Person.class);
+        return (List<Person>) criteria.list();
+    }
+
+    public void deletePersonBySsn(String ssn) {
+        Query query = getSession().createSQLQuery("delete from Person where ssn = :ssn");
+        query.setString("ssn", ssn);
+        query.executeUpdate();
+    }
+
+
+    public Person findBySsn(String ssn){
+        Criteria criteria = getSession().createCriteria(Person.class);
+        criteria.add(Restrictions.eq("ssn",ssn));
+        return (Person) criteria.uniqueResult();
+    }
+
+    public void updatePerson(Person person){
+        getSession().update(person);
+    }
+
 }
