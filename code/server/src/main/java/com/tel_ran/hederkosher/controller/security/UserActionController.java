@@ -1,19 +1,12 @@
 package com.tel_ran.hederkosher.controller.security;
 
-import com.tel_ran.hederkosher.model.security.Token;
-import com.tel_ran.hederkosher.model.security.User;
-import com.tel_ran.hederkosher.model.security.dao.TokenDAO;
-import com.tel_ran.hederkosher.model.security.dao.UserDAO;
-import com.tel_ran.hederkosher.rest.ServiceResult;
-import com.tel_ran.hederkosher.rest.ServiceResultFactory;
+import com.tel_ran.hederkosher.model.security.*;
+import com.tel_ran.hederkosher.model.security.dao.*;
+import com.tel_ran.hederkosher.rest.*;
 import com.tel_ran.hederkosher.security.UserLoginInfo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.*;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * Created by Igor on 14.08.2016.

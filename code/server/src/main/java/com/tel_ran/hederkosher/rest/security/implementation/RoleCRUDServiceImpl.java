@@ -5,6 +5,7 @@ import com.tel_ran.hederkosher.model.security.dao.*;
 import com.tel_ran.hederkosher.rest.*;
 import com.tel_ran.hederkosher.rest.security.RoleCRUDService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,11 +22,18 @@ public class RoleCRUDServiceImpl implements RoleCRUDService {
 
     @Override
     public ServiceResult findById(long id) {
-        Role role = roleDao.findById(id);
-        if (role == null) {
-            result = ServiceResultFactory.NOT_FOUND;
+        Role role = null;
+        try {
+            role = roleDao.findById(id);
+            if (role == null) {
+                result = ServiceResultFactory.NOT_FOUND;
+                result.setData(id);
+                result.setDescription("Role with ID = " + id + " not found");
+                return result;
+            }
+        } catch (AccessDeniedException e) {
+            result = ServiceResultFactory.ACCESS_DENIED;
             result.setData(id);
-            result.setDescription("Role with ID = " + id + " not found");
             return result;
         }
         result = ServiceResultFactory.OK;
@@ -36,7 +44,12 @@ public class RoleCRUDServiceImpl implements RoleCRUDService {
     @Override
     public ServiceResult findAll() {
         result = ServiceResultFactory.OK;
-        result.setData(roleDao.getAll());
+        try {
+            result.setData(roleDao.getAll());
+        } catch (AccessDeniedException e) {
+            result = ServiceResultFactory.ACCESS_DENIED;
+            return result;
+        }
         return result;
     }
 

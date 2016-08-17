@@ -37,9 +37,6 @@ public class UserCRUDController {
     @RequestMapping(value = "/user/", method = RequestMethod.POST)
     public ResponseEntity<ServiceResult> createUser(@RequestBody User user, UriComponentsBuilder ucBuilder) {
         ServiceResult res  = userCRUDService.createUser(user);
-        //HttpHeaders headers = new HttpHeaders();
-        //headers.setLocation(ucBuilder.path("/user/{id}").buildAndExpand(user.getId()).toUri());
-        //return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
         return new ResponseEntity<>(res, HttpStatus.CREATED);
     }
 

@@ -5,5 +5,5 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 public interface VerifierService {
     boolean checkAuthority(String authName);
-    //boolean checkAuthority(String authName, Room room);
+    boolean checkAuthority(String authName, String room);
 }

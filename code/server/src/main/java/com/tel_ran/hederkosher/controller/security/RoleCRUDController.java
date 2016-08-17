@@ -1,9 +1,9 @@
 package com.tel_ran.hederkosher.controller.security;
 
-import com.tel_ran.hederkosher.security.TokenChecker;
 import com.tel_ran.hederkosher.model.security.Role;
 import com.tel_ran.hederkosher.rest.ServiceResult;
 import com.tel_ran.hederkosher.rest.security.RoleCRUDService;
+import com.tel_ran.hederkosher.security.TokenChecker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
@@ -43,9 +43,6 @@ public class RoleCRUDController {
     @RequestMapping(value = "/role/", method = RequestMethod.POST)
     public ResponseEntity<ServiceResult> createRole(@RequestBody Role role) { //, UriComponentsBuilder ucBuilder) {
         ServiceResult res  = service.createRole(role);
-        //HttpHeaders headers = new HttpHeaders();
-        //headers.setLocation(ucBuilder.path("/user/{id}").buildAndExpand(user.getId()).toUri());
-        //return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
         return new ResponseEntity<>(res, HttpStatus.CREATED);
     }
 

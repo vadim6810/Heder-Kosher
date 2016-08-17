@@ -3,7 +3,6 @@ package com.tel_ran.hederkosher.model.security;
 import com.tel_ran.hederkosher.model.Room;
 
 import java.util.*;
-import java.util.concurrent.atomic.AtomicLong;
 
 /**
  * Created by Igor on 05.08.2016.
@@ -13,7 +12,8 @@ public class User {
     private String email;
     private String password;
     private Date regDate;
-    private Map<Room, Role> roles;
+    //private Map<Room, Role> roles;
+    private Set<UserGrantedAuthority> authorities;
 
     public User() {
         this(0, "", "", new Date());
@@ -24,7 +24,7 @@ public class User {
         this.email = email;
         this.password = password;
         this.regDate = regDate;
-        roles = new HashMap<>();
+        authorities = new HashSet<>();
     }
 
     public long getId() {
@@ -68,19 +68,32 @@ public class User {
                 '}';
     }
 
-    public Map<Room, Role> getRoles() {
-        return roles;
+    public Set<UserGrantedAuthority> getAuthorities() {
+        return this.authorities;
     }
 
-    public void setRoles(Map<Room, Role> roles) {
-        this.roles = roles;
+    public void setAuthorities( Set<UserGrantedAuthority> authorities) {
+        this.authorities = authorities;
     }
 
     public Role getRole(Room room) {
-        return this.roles.get(room);
+        for (UserGrantedAuthority ga : this.authorities) {
+            if (ga.getRoom().equals(room))
+                return ga.getRole();
+        }
+        return null;
     }
 
     public Role setRole(Room room, Role role) {
-        return this.roles.put(room, role);
+        for (UserGrantedAuthority ga : this.authorities) {
+            if (ga.getRoom().equals(room)) {
+                Role oldRole = ga.getRole();
+                ga.setRole(role);
+                return oldRole;
+            }
+        }
+        UserGrantedAuthority uga = new UserGrantedAuthority(new Date(), role, room);
+        this.authorities.add(uga);
+        return null;
     }
 }
