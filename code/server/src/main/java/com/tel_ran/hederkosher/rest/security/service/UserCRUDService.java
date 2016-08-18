@@ -1,4 +1,4 @@
-package com.tel_ran.hederkosher.rest.security;
+package com.tel_ran.hederkosher.rest.security.service;
 
 import com.tel_ran.hederkosher.model.security.User;
 import com.tel_ran.hederkosher.rest.ServiceResult;

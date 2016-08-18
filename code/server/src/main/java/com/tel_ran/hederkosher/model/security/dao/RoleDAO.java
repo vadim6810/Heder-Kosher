@@ -10,7 +10,7 @@ import java.util.List;
  */
 public interface RoleDAO {
 
-    @PreAuthorize("@Verifier.checkAuthority('GET_ROLE')")
+    @PreAuthorize("@Verifier.checkAuthority('LIST_ROLES')")
     Role findById(long id);
 
     Role findByName(String name);
@@ -20,7 +20,10 @@ public interface RoleDAO {
 
     boolean isRoleExist(Role role);
 
+    @PreAuthorize("@Verifier.checkAuthority('CREATE_ROLE')")
     boolean createRole(Role role);
+    @PreAuthorize("@Verifier.checkAuthority('UPDATE_ROLE')")
     boolean updateRole(Role role);
+    @PreAuthorize("@Verifier.checkAuthority('DELETE_ROLE')")
     boolean deleteRole(long id);
 }

@@ -1,9 +1,9 @@
-package com.tel_ran.hederkosher.rest.security.implementation;
+package com.tel_ran.hederkosher.rest.security.service.implementation;
 
 import com.tel_ran.hederkosher.model.security.Role;
 import com.tel_ran.hederkosher.model.security.dao.*;
 import com.tel_ran.hederkosher.rest.*;
-import com.tel_ran.hederkosher.rest.security.RoleCRUDService;
+import com.tel_ran.hederkosher.rest.security.service.RoleCRUDService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;

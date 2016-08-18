@@ -4,6 +4,8 @@ import com.tel_ran.hederkosher.model.Room;
 import com.tel_ran.hederkosher.model.security.Role;
 import com.tel_ran.hederkosher.model.security.User;
 import com.tel_ran.hederkosher.model.security.dao.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -25,15 +27,22 @@ import java.util.*;
 @Service("TokenChecker")
 public class TokenChecker {
 
+    Logger logger = LoggerFactory.getLogger(TokenChecker.class);
+
     @Autowired
     private TokenDAO tokenDAO;
 
     List<GrantedAuthority> authorities = new ArrayList<>();
 
     public void verifyToken(String stToken) {
-        User user =  tokenDAO.getUser(stToken);
+        logger.info("Verify token : " + stToken);
 
-        authorities.addAll(user.getAuthorities());
+        User user =  tokenDAO.getUser(stToken);
+        logger.info("Got user + " + user);
+        for (GrantedAuthority ga : user.getAuthorities()) {
+            logger.info("     roles : " + ga);
+            authorities.add(ga);
+        }
 
         Authentication auth = new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword(), authorities);
         SecurityContextHolder.getContext().setAuthentication(auth);
