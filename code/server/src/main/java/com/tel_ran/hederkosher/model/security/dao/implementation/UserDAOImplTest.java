@@ -1,5 +1,6 @@
 package com.tel_ran.hederkosher.model.security.dao.implementation;
 
+import com.tel_ran.hederkosher.model.Room;
 import com.tel_ran.hederkosher.model.security.Role;
 import com.tel_ran.hederkosher.model.security.User;
 import com.tel_ran.hederkosher.model.security.dao.RoleDAO;
@@ -7,10 +8,8 @@ import com.tel_ran.hederkosher.model.security.dao.UserDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
+import javax.annotation.PostConstruct;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicLong;
 
 /**
@@ -22,10 +21,6 @@ public class UserDAOImplTest implements UserDAO {
     private static final AtomicLong counter = new AtomicLong();
 
     private static List<User> users;
-
-    static{
-        users= populateDummyUsers();
-    }
 
     @Autowired
     RoleDAO roleDAO;
@@ -89,12 +84,39 @@ public class UserDAOImplTest implements UserDAO {
         return result;
     }
 
-    private static List<User> populateDummyUsers(){
-        List<User> users = new ArrayList<User>();
-        users.add(new User(counter.incrementAndGet(),"Sam", "123qwe", new Date()));
-        users.add(new User(counter.incrementAndGet(),"Tom", "qweasd", new Date()));
-        users.add(new User(counter.incrementAndGet(),"Jerome", "asdzxc", new Date()));
-        users.add(new User(counter.incrementAndGet(),"Silvia", "zxc123", new Date()));
+    @PostConstruct
+    private List<User> populateDummyUsers(){
+        users = new ArrayList<>();
+
+        Role roleAdmin = roleDAO.findByName("ADMIN");
+        Role roleManager = roleDAO.findByName("MANAGER");
+        Role roleTrainer = roleDAO.findByName("TRAINER");
+        Role roleClient = roleDAO.findByName("CLIENT");
+
+        Room gym = new Room(); gym.setName("Gym");
+        Room pool = new Room(); pool.setName("Pool");
+        Room sauna = new Room(); sauna.setName("Sauna");
+
+        User sam = new User(counter.incrementAndGet(),"Sam@hk.co.il", "123qwe", new Date());
+        sam.setRole(gym, roleAdmin);
+        users.add(sam);
+
+        User tom = new User(counter.incrementAndGet(),"Tom@hk.co.il", "qweasd", new Date());
+        tom.setRole(gym, roleManager);
+        tom.setRole(pool, roleTrainer);
+        users.add(tom);
+
+        User jerome = new User(counter.incrementAndGet(),"Jerome@hk.co.il", "asdzxc", new Date());
+        jerome.setRole(sauna, roleManager);
+        jerome.setRole(pool, roleTrainer);
+        users.add(jerome);
+
+        User silvia = new User(counter.incrementAndGet(),"Silvia@hk.co.il", "zxc123", new Date());
+        silvia.setRole(gym, roleClient);
+        silvia.setRole(pool, roleClient);
+        silvia.setRole(sauna, roleClient);
+        users.add(silvia);
+
         return users;
     }
 }

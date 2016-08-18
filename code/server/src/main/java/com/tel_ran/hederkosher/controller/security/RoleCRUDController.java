@@ -23,7 +23,9 @@ public class RoleCRUDController {
 
     //----------------Get one role
     @RequestMapping(value = "/role/{id}", method = RequestMethod.GET)
-    public ResponseEntity<ServiceResult> getRole(@PathVariable("id") long id) {
+    public ResponseEntity<ServiceResult> getRole(@PathVariable("id") long id, @RequestParam("token") String token) {
+        checker.verifyToken(token);
+
         ServiceResult res = service.findById(id);
         return new ResponseEntity<>(res, HttpStatus.OK);
     }
