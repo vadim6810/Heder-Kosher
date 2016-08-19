@@ -1,5 +1,7 @@
 package com.tel_ran.hederkosher.model;
 
+import org.hibernate.annotations.NaturalId;
+
 import javax.persistence.*;
 
 /**
@@ -13,21 +15,24 @@ public class State {
     @Id
     @Column(name = "ID", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private long id;
+
+    @NaturalId
+    @Column(name = "CODE", nullable = false)
+    private String code;
 
     @Column(name = "NAME", nullable = false)
     private String name;
 
-    public State(String name) {
-        this.name = name;
-    }
-
-    public State(int id, String name) {
-        this.id = id;
-        this.name = name;
-    }
-
     public State() {
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -36,5 +41,13 @@ public class State {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 }
