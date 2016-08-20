@@ -1,6 +1,6 @@
 package com.tel_ran.hederkosher.rest.security.controller;
 
-import com.tel_ran.hederkosher.model.security.User;
+import com.tel_ran.hederkosher.model.security.entity.User;
 import com.tel_ran.hederkosher.rest.ServiceResult;
 import com.tel_ran.hederkosher.rest.security.service.UserCRUDService;
 import org.springframework.beans.factory.annotation.Autowired;

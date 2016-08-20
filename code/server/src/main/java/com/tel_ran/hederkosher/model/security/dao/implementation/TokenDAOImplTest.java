@@ -1,7 +1,7 @@
 package com.tel_ran.hederkosher.model.security.dao.implementation;
 
-import com.tel_ran.hederkosher.model.security.Token;
-import com.tel_ran.hederkosher.model.security.User;
+import com.tel_ran.hederkosher.model.security.entity.Token;
+import com.tel_ran.hederkosher.model.security.entity.User;
 import com.tel_ran.hederkosher.model.security.dao.TokenDAO;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;

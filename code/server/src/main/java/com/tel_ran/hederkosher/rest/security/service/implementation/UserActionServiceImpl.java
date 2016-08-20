@@ -1,7 +1,7 @@
 package com.tel_ran.hederkosher.rest.security.service.implementation;
 
-import com.tel_ran.hederkosher.model.security.Token;
-import com.tel_ran.hederkosher.model.security.User;
+import com.tel_ran.hederkosher.model.security.entity.Token;
+import com.tel_ran.hederkosher.model.security.entity.User;
 import com.tel_ran.hederkosher.model.security.dao.TokenDAO;
 import com.tel_ran.hederkosher.model.security.dao.UserDAO;
 import com.tel_ran.hederkosher.rest.ServiceResult;

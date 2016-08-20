@@ -1,10 +1,7 @@
 package com.tel_ran.hederkosher.model.security.dao;
 
-import com.tel_ran.hederkosher.model.Room;
-import com.tel_ran.hederkosher.model.security.Role;
-import com.tel_ran.hederkosher.model.security.User;
+import com.tel_ran.hederkosher.model.security.entity.User;
 
-import java.util.Collection;
 import java.util.List;
 
 /**

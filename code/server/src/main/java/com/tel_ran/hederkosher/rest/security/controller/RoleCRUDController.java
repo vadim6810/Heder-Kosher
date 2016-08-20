@@ -1,6 +1,6 @@
 package com.tel_ran.hederkosher.rest.security.controller;
 
-import com.tel_ran.hederkosher.model.security.Role;
+import com.tel_ran.hederkosher.model.security.entity.Role;
 import com.tel_ran.hederkosher.rest.ServiceResult;
 import com.tel_ran.hederkosher.rest.security.service.RoleCRUDService;
 import com.tel_ran.hederkosher.security.TokenChecker;

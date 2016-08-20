@@ -1,8 +1,9 @@
 package com.tel_ran.hederkosher.model.security.dao.implementation;
 
-import com.tel_ran.hederkosher.model.security.*;
 import com.tel_ran.hederkosher.model.security.dao.AuthorityDAO;
 import com.tel_ran.hederkosher.model.security.dao.RoleDAO;
+import com.tel_ran.hederkosher.model.security.entity.Authority;
+import com.tel_ran.hederkosher.model.security.entity.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

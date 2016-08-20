@@ -1,8 +1,8 @@
 package com.tel_ran.hederkosher.model.security.dao.implementation;
 
-import com.tel_ran.hederkosher.model.Room;
-import com.tel_ran.hederkosher.model.security.Role;
-import com.tel_ran.hederkosher.model.security.User;
+import com.tel_ran.hederkosher.model.common.entity.Room;
+import com.tel_ran.hederkosher.model.security.entity.Role;
+import com.tel_ran.hederkosher.model.security.entity.User;
 import com.tel_ran.hederkosher.model.security.dao.RoleDAO;
 import com.tel_ran.hederkosher.model.security.dao.UserDAO;
 import org.springframework.beans.factory.annotation.Autowired;

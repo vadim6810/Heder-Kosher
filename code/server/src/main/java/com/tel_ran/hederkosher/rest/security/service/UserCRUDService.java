@@ -1,8 +1,7 @@
 package com.tel_ran.hederkosher.rest.security.service;
 
-import com.tel_ran.hederkosher.model.security.User;
+import com.tel_ran.hederkosher.model.security.entity.User;
 import com.tel_ran.hederkosher.rest.ServiceResult;
-import org.springframework.security.access.prepost.PreAuthorize;
 
 /**
  * Created by Igor on 05.08.2016.

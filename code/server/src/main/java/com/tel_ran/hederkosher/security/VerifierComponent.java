@@ -1,9 +1,9 @@
 package com.tel_ran.hederkosher.security;
 
-import com.tel_ran.hederkosher.model.Room;
-import com.tel_ran.hederkosher.model.security.Authority;
-import com.tel_ran.hederkosher.model.security.Role;
-import com.tel_ran.hederkosher.model.security.UserGrantedAuthority;
+import com.tel_ran.hederkosher.model.common.entity.Room;
+import com.tel_ran.hederkosher.model.security.entity.Authority;
+import com.tel_ran.hederkosher.model.security.entity.Role;
+import com.tel_ran.hederkosher.model.security.entity.UserGrantedAuthority;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
