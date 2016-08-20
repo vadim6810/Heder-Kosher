@@ -1,77 +1,90 @@
+/**
+ * Created by Ruslan on 12.08.2016.
+ */
+
 package com.tel_ran.hederkosher.model.dao;
 
 import com.tel_ran.hederkosher.model.Person;
-import com.tel_ran.hederkosher.service.HibernateUtil;
+import com.tel_ran.hederkosher.service.HibUtil;
+//import com.tel_ran.hederkosher.service.HibernateUtil;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
 import java.util.List;
 
-/**
- * Created by Ruslan on 12.08.2016.
- */
-public class PersonDAOImpl implements PersonDAO {
+@Service("personDao")
+public class PersonDaoImpl implements PersonDao {
 
-    @Override
-    public void add(Person obj) throws SQLException {
-        Session session =null;
-        try {
-            session= HibernateUtil.getSessionFactory().openSession();
-            session.beginTransaction();
-            session.save(obj);
-            session.getTransaction().commit();
-        } catch (HibernateException e) {
-            e.printStackTrace();
-        } finally {
-            if ((session!=null) && (session.isOpen()))     session.close();
-        }
+    @Autowired
+    private HibUtil hibernateUtil;
+
+    public void setHibernateUtil(HibUtil hibernateUtil) {
+        this.hibernateUtil = hibernateUtil;
     }
 
     @Override
-    public void delete(Person obj) throws SQLException {
-        Session session =null;
+    public boolean add(Person person) throws SQLException {
+        if (person == null){
+            //throw new NullPointerException();
+            return false;
+        }
         try {
-            session= HibernateUtil.getSessionFactory().openSession();
+            Session session= hibernateUtil.getSessionFactory().openSession();
             session.beginTransaction();
-            session.delete(obj);
+            session.save(person);
             session.getTransaction().commit();
         } catch (HibernateException e) {
-            e.printStackTrace();
-        } finally {
-            if ((session!=null) && (session.isOpen()))     session.close();
+//            e.printStackTrace();
+            return false;
         }
-
+        return true;
     }
 
     @Override
-    public Person get(int id) throws SQLException {
+    public boolean delete(Person person) throws SQLException {
+        if (person == null){
+            //throw new NullPointerException();
+            return false;
+        }
+        try {
+            Session session= hibernateUtil.getSessionFactory().openSession();
+            session.beginTransaction();
+            session.delete(person);
+            session.getTransaction().commit();
+        } catch (HibernateException e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public Person getById(long id) throws SQLException {
         Person result = null;
-        Session session =null;
         try {
-            session= HibernateUtil.getSessionFactory().openSession();
+            Session session= hibernateUtil.getSessionFactory().openSession();
             result = (Person) session.get(Person.class,id);
         } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if ((session!=null) && (session.isOpen()))     session.close();
+//            e.printStackTrace();
         }
         return result;
     }
 
     @Override
     public List<Person> gets() throws SQLException {
-        List<Person> list = null;
-
-        Session session =null;
+        List<Person> result = null;
         try {
-            session= HibernateUtil.getSessionFactory().openSession();
-            list = session.createCriteria(Person.class).list();
+            Session session= hibernateUtil.getSessionFactory().openSession();
+            result = (List<Person>)session.createQuery("FROM Person").list();
+
         } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if ((session!=null) && (session.isOpen()))     session.close();
+//            e.printStackTrace();
         }
-        return list;
+        return result;
     }
 }
+

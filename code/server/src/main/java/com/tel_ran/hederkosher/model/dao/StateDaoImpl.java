@@ -2,7 +2,7 @@ package com.tel_ran.hederkosher.model.dao;
 
 import com.tel_ran.hederkosher.model.State;
 import com.tel_ran.hederkosher.service.HibUtil;
-import com.tel_ran.hederkosher.service.HibernateUtil;
+//import com.tel_ran.hederkosher.service.HibernateUtil;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
