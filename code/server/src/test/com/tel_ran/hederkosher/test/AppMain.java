@@ -14,7 +14,7 @@ import com.tel_ran.hederkosher.model.security.User;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.AbstractApplicationContext;
 
-import com.tel_ran.hederkosher.configuration.AppConfig;
+//import com.tel_ran.hederkosher.configuration.AppConfig;
 import com.tel_ran.hederkosher.model.Person;
 import com.tel_ran.hederkosher.service.PersonService;
 
@@ -23,7 +23,7 @@ public class AppMain {
     public static void main(String args[]) {
         //AbstractApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
         AnnotationConfigApplicationContext  context = new AnnotationConfigApplicationContext();
-        context.scan("com.tel_ran.hederkosher.model");
+        context.scan("com.tel_ran.hederkosher");
         context.refresh();
 
         PersonService service = (PersonService) context.getBean("personService");

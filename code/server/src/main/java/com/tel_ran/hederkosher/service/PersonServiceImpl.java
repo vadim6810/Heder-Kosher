@@ -12,8 +12,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.tel_ran.hederkosher.model.Person;
 import com.tel_ran.hederkosher.model.dao.PersonDao;
 
-@Service("personService")
 @Transactional
+@Service("personService")
 public class PersonServiceImpl implements PersonService{
 
     @Autowired
@@ -27,8 +27,11 @@ public class PersonServiceImpl implements PersonService{
         return dao.findAllPersons();
     }
 
-    public void deletePersonBySsn(String ssn) {
-        dao.deletePersonBySsn(ssn);
+//    public void deletePersonById(int IdPeson) {
+//        dao.deletePersonBySsn(person);
+//    }
+    public void deletePerson(Person person) {
+        dao.deletePerson(person);
     }
 
     public Person findBySsn(String ssn) {

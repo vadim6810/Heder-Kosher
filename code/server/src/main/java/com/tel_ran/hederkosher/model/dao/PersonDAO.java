@@ -11,7 +11,8 @@ public interface PersonDao {
 
     List<Person> findAllPersons();
 
-    void deletePersonBySsn(String ssn);
+    void deletePerson(Person person);
+//    void deletePersonBySsn(String ssn);
 
     Person findBySsn(String ssn);
 

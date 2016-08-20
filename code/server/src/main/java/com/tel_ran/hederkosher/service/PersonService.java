@@ -13,7 +13,8 @@ public interface PersonService {
 
     List<Person> findAllPersons();
 
-    void deletePersonBySsn(String ssn);
+//    void deletePersonBySsn(String ssn);
+    void deletePerson(Person person);
 
     Person findBySsn(String ssn);
 

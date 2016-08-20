@@ -5,6 +5,7 @@
 package com.tel_ran.hederkosher.model.dao;
 
 import java.util.List;
+import java.util.Collection;
 
 import org.hibernate.Criteria;
 import org.hibernate.Query;
@@ -26,10 +27,13 @@ public class PersonDaoImpl extends AbstractDao implements PersonDao{
         return (List<Person>) criteria.list();
     }
 
-    public void deletePersonBySsn(String ssn) {
-        Query query = getSession().createSQLQuery("delete from Person where ssn = :ssn");
-        query.setString("ssn", ssn);
-        query.executeUpdate();
+//    public void deletePersonBySsn(String ssn) {
+//        Query query = getSession().createSQLQuery("delete from Person where ssn = :ssn");
+//        query.setString("ssn", ssn);
+//        query.executeUpdate();
+//    }
+    public void deletePerson(Person person) {
+        getSession().delete(person);
     }
 
 
@@ -41,6 +45,13 @@ public class PersonDaoImpl extends AbstractDao implements PersonDao{
 
     public void updatePerson(Person person){
         getSession().update(person);
+    }
+
+    public Collection loadProductsByCategory(String fistName) {
+        return this.getSession()
+                .createQuery("from Person person where person.fistName=?")
+                .setParameter(0, fistName)
+                .list();
     }
 
 }
