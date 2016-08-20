@@ -19,23 +19,20 @@ import java.util.*;
 
 @Service("TokenChecker")
 public class TokenChecker {
-
-    Logger logger = LoggerFactory.getLogger(TokenChecker.class);
-
     @Autowired
     private TokenDAO tokenDAO;
 
     List<GrantedAuthority> authorities = new ArrayList<>();
 
     public void verifyToken(String stToken) {
-        logger.info("Verify token : " + stToken);
 
         User user =  tokenDAO.getUser(stToken);
-        logger.info("Got user + " + user);
+        //TODO return back
+        /*
         for (GrantedAuthority ga : user.getAuthorities()) {
             logger.info("     roles : " + ga);
             authorities.add(ga);
-        }
+        }*/
 
         Authentication auth = new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword(), authorities);
         SecurityContextHolder.getContext().setAuthentication(auth);

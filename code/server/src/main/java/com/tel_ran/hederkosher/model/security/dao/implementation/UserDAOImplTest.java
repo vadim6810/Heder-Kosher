@@ -5,6 +5,7 @@ import com.tel_ran.hederkosher.model.security.entity.Role;
 import com.tel_ran.hederkosher.model.security.entity.User;
 import com.tel_ran.hederkosher.model.security.dao.RoleDAO;
 import com.tel_ran.hederkosher.model.security.dao.UserDAO;
+import com.tel_ran.hederkosher.model.security.entity.UserGrantedAuthority;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +16,7 @@ import java.util.concurrent.atomic.AtomicLong;
 /**
  * Created by Igor on 05.08.2016.
  */
-@Service("userDAOService")
+
 public class UserDAOImplTest implements UserDAO {
 
     private static final AtomicLong counter = new AtomicLong();
@@ -32,8 +33,6 @@ public class UserDAOImplTest implements UserDAO {
                 return user;
             }
         }
-        Role role = roleDAO.findById(1);
-        System.out.println(role);
         return null;
     }
 

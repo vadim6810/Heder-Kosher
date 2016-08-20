@@ -1,13 +1,16 @@
 package com.tel_ran.hederkosher.rest.security.service.implementation;
 
-import com.tel_ran.hederkosher.model.security.entity.User;
 import com.tel_ran.hederkosher.model.security.dao.UserDAO;
+import com.tel_ran.hederkosher.model.security.entity.Role;
+import com.tel_ran.hederkosher.model.security.entity.User;
+import com.tel_ran.hederkosher.rest.ServiceResult;
 import com.tel_ran.hederkosher.rest.ServiceResultFactory;
 import com.tel_ran.hederkosher.rest.security.service.UserCRUDService;
-import com.tel_ran.hederkosher.rest.ServiceResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Set;
 
 /**
  * Created by Igor on 05.08.2016.
@@ -87,7 +90,7 @@ public class UserCRUDServiceImpl implements UserCRUDService {
             return result;
         }
 
-        currentUser.setEmail(user.getEmail());
+        currentUser.setPassword(user.getPassword());
 
         if (userDao.updateUser(currentUser)) {
             result = ServiceResultFactory.OK;
@@ -116,4 +119,18 @@ public class UserCRUDServiceImpl implements UserCRUDService {
         return result;
     }
 
+    @Override
+    public ServiceResult getAuthoritiesByUser(long id) {
+        User user = userDao.findByID(id);
+        if (user == null) {
+            result = ServiceResultFactory.NOT_FOUND;
+            result.setData((Long)id);
+            result.setDescription("user with id = " + id + " not found");
+            return result;
+        }
+        result = ServiceResultFactory.OK;
+        //TODO return back
+        //result.setData(user.getAuthorities());
+        return result;
+    }
 }

@@ -10,8 +10,8 @@ import javax.persistence.*;
  */
 
 @Markable
-@Entity
-@Table(name = "task")
+//@Entity
+//@Table(name = "task")
 public class Task {
 
     @Id

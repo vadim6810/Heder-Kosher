@@ -1,5 +1,7 @@
 package com.tel_ran.hederkosher.model.security.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.*;
 
 /**

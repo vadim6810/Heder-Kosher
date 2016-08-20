@@ -19,4 +19,5 @@ public interface UserCRUDService {
     ServiceResult updateUser(User user);
     ServiceResult deleteUser(long id);
 
+    ServiceResult getAuthoritiesByUser(long id);
 }

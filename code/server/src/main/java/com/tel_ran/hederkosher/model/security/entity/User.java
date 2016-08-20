@@ -1,19 +1,49 @@
 package com.tel_ran.hederkosher.model.security.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.tel_ran.hederkosher.model.common.entity.Room;
+import com.tel_ran.hederkosher.model.security.dao.RoleDAO;
+import org.hibernate.annotations.NaturalId;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 
+import javax.persistence.*;
 import java.util.*;
 
 /**
  * Created by Igor on 05.08.2016.
  */
+@Entity
+@Table(name = "user")
 public class User {
+
+    @Id
+    @Column(name = "ID", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
+    @NaturalId
+    @Column(name = "EMAIL", nullable = false)
     private String email;
+
+    @JsonIgnore
+    @Column(name = "PASSWORD", nullable = false)
     private String password;
+
+    @JsonIgnore
+    @Column(name = "REG_DATE", nullable = false)
     private Date regDate;
-    //private Map<Room, Role> roles;
-    private Set<UserGrantedAuthority> authorities;
+
+    //TODO Return authorities
+    //@JsonIgnore
+    /*@OneToMany(targetEntity = UserGrantedAuthority.class)
+    @Lazy*/
+    //private Set<UserGrantedAuthority> authorities;
+    /*
+    @OneToMany(targetEntity = Task.class, mappedBy = "owner")
+    private List<Task> tasks;
+     */
 
     public User() {
         this(0, "", "", new Date());
@@ -24,7 +54,7 @@ public class User {
         this.email = email;
         this.password = password;
         this.regDate = regDate;
-        authorities = new HashSet<>();
+        //authorities = new HashSet<>();
     }
 
     public long getId() {
@@ -68,24 +98,25 @@ public class User {
                 '}';
     }
 
-    public Set<UserGrantedAuthority> getAuthorities() {
-        return this.authorities;
-    }
+//    public Set<UserGrantedAuthority> getAuthorities() {
+//        return null;
+//        //return this.authorities;
+//    }
 
     public void setAuthorities( Set<UserGrantedAuthority> authorities) {
-        this.authorities = authorities;
+        //this.authorities = authorities;
     }
 
     public Role getRole(Room room) {
-        for (UserGrantedAuthority ga : this.authorities) {
+        /*for (UserGrantedAuthority ga : this.authorities) {
             if (ga.getRoom().equals(room))
                 return ga.getRole();
-        }
+        }*/
         return null;
     }
 
     public Role setRole(Room room, Role role) {
-        for (UserGrantedAuthority ga : this.authorities) {
+        /*for (UserGrantedAuthority ga : this.authorities) {
             if (ga.getRoom().equals(room)) {
                 Role oldRole = ga.getRole();
                 ga.setRole(role);
@@ -93,7 +124,28 @@ public class User {
             }
         }
         UserGrantedAuthority uga = new UserGrantedAuthority(new Date(), role, room);
-        this.authorities.add(uga);
+        this.authorities.add(uga);*/
         return null;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        User user = (User) o;
+
+        if (id != user.id) return false;
+        if (!email.equals(user.email)) return false;
+        return regDate.equals(user.regDate);
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = (int) (id ^ (id >>> 32));
+        result = 31 * result + email.hashCode();
+        result = 31 * result + regDate.hashCode();
+        return result;
     }
 }

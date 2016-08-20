@@ -12,8 +12,8 @@ import java.util.List;
  */
 
 @Markable
-@Entity
-@Table(name = "program")
+//@Entity
+//@Table(name = "program")
 public class Program {
 
     @Id
