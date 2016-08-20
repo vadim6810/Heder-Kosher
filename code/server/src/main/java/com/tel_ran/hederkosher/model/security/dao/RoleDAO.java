@@ -9,18 +9,21 @@ import java.util.List;
  * Created by Igor on 07.08.2016.
  */
 public interface RoleDAO {
-    //@PreAuthorize("hasRole('ROLE_USER')")
-    @PreAuthorize("@Verifier.checkAuthority('GET_ROLE')")
+
+    @PreAuthorize("@Verifier.checkAuthority('LIST_ROLES')")
     Role findById(long id);
+
     Role findByName(String name);
 
     @PreAuthorize("@Verifier.checkAuthority('LIST_ROLES')")
-    //@PreAuthorize("hasRole('ROLE_ADMIN')")
     List<Role> getAll();
 
     boolean isRoleExist(Role role);
 
+    @PreAuthorize("@Verifier.checkAuthority('CREATE_ROLE')")
     boolean createRole(Role role);
+    @PreAuthorize("@Verifier.checkAuthority('UPDATE_ROLE')")
     boolean updateRole(Role role);
+    @PreAuthorize("@Verifier.checkAuthority('DELETE_ROLE')")
     boolean deleteRole(long id);
 }

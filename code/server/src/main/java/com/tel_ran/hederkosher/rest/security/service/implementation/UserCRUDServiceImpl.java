@@ -1,9 +1,9 @@
-package com.tel_ran.hederkosher.rest.security.implementation;
+package com.tel_ran.hederkosher.rest.security.service.implementation;
 
 import com.tel_ran.hederkosher.model.security.User;
 import com.tel_ran.hederkosher.model.security.dao.UserDAO;
 import com.tel_ran.hederkosher.rest.ServiceResultFactory;
-import com.tel_ran.hederkosher.rest.security.UserCRUDService;
+import com.tel_ran.hederkosher.rest.security.service.UserCRUDService;
 import com.tel_ran.hederkosher.rest.ServiceResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
