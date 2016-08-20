@@ -4,7 +4,8 @@ package com.tel_ran.hederkosher.rest;
  * Created by Igor on 05.08.2016.
  */
 public class ServiceResultFactory {
-    public static final ServiceResult OK;
+    public static ServiceResult OK;
+    public static ServiceResult INVALID_REQUEST;
     public static ServiceResult NOT_FOUND;
     public static ServiceResult ACCESS_DENIED;
     public static ServiceResult CREATING_ERROR;
@@ -22,6 +23,7 @@ public class ServiceResultFactory {
         DELETING_ERROR = new ServiceResult(-5, "Object was not deleted!");
         ENTITY_CONFLICT = new ServiceResult(-6, "Object already exist");
         CREDENTIALS_NOT_FOUND = new ServiceResult(-7, "Username or password are invalid.");
+        INVALID_REQUEST = new ServiceResult(-8, "Request is invalid");
     }
 }
 
