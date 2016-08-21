@@ -18,11 +18,8 @@ import java.util.List;
 @Service
 public class HibUtilImpl implements HibUtil{
     private static SessionFactory sessionFactory;
-    static Logger logger = LoggerFactory.getLogger(HibUtilImpl.class);
 
     static {
-        Marker marker = MarkerFactory.getMarker("HibInit");
-        logger.info(marker, "start");
         try {
             StandardServiceRegistry standardRegistry;
             standardRegistry = new StandardServiceRegistryBuilder()
