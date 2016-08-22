@@ -1,4 +1,4 @@
-package com.tel_ran.hederkosher.model.security.dao.implementation;
+package com.tel_ran.hederkosher.model.security.dao.implementation.test;
 
 import com.tel_ran.hederkosher.model.common.entity.Room;
 import com.tel_ran.hederkosher.model.security.entity.Role;

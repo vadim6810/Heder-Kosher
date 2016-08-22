@@ -1,11 +1,25 @@
 package com.tel_ran.hederkosher.model.security.entity;
 
+import org.hibernate.annotations.NaturalId;
+
+import javax.persistence.*;
+
 /**
  * Created by Igor on 07.08.2016.
  */
+@Entity
+@Table(name = "authority")
 public class Authority {
+    @Id
+    @Column(name = "ID", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
+    @Column(name = "name", insertable = false)
+    @NaturalId
     private String name;
+
+    @Column(name = "description")
     private String description;
 
     public Authority(long id, String name, String description) {

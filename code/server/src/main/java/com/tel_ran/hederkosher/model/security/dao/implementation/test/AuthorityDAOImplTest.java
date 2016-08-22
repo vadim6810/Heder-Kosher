@@ -1,4 +1,4 @@
-package com.tel_ran.hederkosher.model.security.dao.implementation;
+package com.tel_ran.hederkosher.model.security.dao.implementation.test;
 
 import com.tel_ran.hederkosher.model.security.entity.Authority;
 import com.tel_ran.hederkosher.model.security.dao.AuthorityDAO;
@@ -10,7 +10,6 @@ import java.util.*;
  * Created by Igor on 07.08.2016.
  */
 
-@Service("authorityDAOService")
 public class AuthorityDAOImplTest implements AuthorityDAO {
     private static List<Authority> authorities;
     static {

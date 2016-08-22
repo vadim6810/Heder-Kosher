@@ -1,4 +1,4 @@
-package com.tel_ran.hederkosher.model.security.dao.implementation;
+package com.tel_ran.hederkosher.model.security.dao.implementation.test;
 
 import com.tel_ran.hederkosher.model.security.entity.Token;
 import com.tel_ran.hederkosher.model.security.entity.User;
@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
 
-@Service("tokenDAOService")
+
 public class TokenDAOImplTest implements TokenDAO {
     private static final AtomicLong counter = new AtomicLong();
     private List<Token> tokens = new ArrayList<>();
