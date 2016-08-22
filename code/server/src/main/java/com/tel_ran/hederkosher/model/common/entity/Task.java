@@ -3,6 +3,7 @@ package com.tel_ran.hederkosher.model.common.entity;
 import com.tel_ran.hederkosher.annotations.Markable;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * Created by Egor on 05.08.2016.
@@ -10,28 +11,28 @@ import javax.persistence.*;
  */
 
 @Markable
-//@Entity
-//@Table(name = "task")
-public class Task {
+@Entity
+@Table(name = "task")
+public class Task implements Serializable {
 
     @Id
-    @Column(name = "ID")
+    @Column(name = "ID", nullable = false, unique = true)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private long id;
 
-    @Column(name = "NAME")
+    @Column(name = "NAME", nullable = false)
     private String name;
 
     @Column(name = "DESCRIPTION", columnDefinition = "TEXT")
     private String description;
 
-    @Column(name = "IS_TEMPLATE")
+    @Column(name = "IS_TEMPLATE", nullable = false)
     private boolean isTemplate;
 
-    @Column(name = "AMOUNT_ITERATIONS")
+    @Column(name = "AMOUNT_ITERATIONS", nullable = false)
     private int amountIterations;
 
-    @Column(name = "AMOUNT_TRIES")
+    @Column(name = "AMOUNT_TRIES", nullable = false)
     private int amountTries;
 
     @Column(name = "WEIGHT")
@@ -40,14 +41,18 @@ public class Task {
     @Column(name = "TIME")
     private int time;
 
-    @ManyToOne(targetEntity = Person.class, fetch = FetchType.LAZY)
+    @ManyToOne//(targetEntity = Person.class, fetch = FetchType.LAZY)
+    @JoinColumn(name = "OWNER_ID", foreignKey = @ForeignKey(name = "FK_TASK$OWNER_ID"))
     private Person owner;
 
-    @ManyToOne(targetEntity = State.class)
+    //@ManyToOne(targetEntity = State.class)
+    @Enumerated(EnumType.STRING)
+    @Column(name = "STATE", length = 100)
     private State state;
 
-    public Task(int id, String name, String description, boolean isTemplate, int amountIterations, int amountTries, int weight, int time, Person owner) {
-        this.id = id;
+    public Task() {}
+
+    public Task(String name, String description, boolean isTemplate, int amountIterations, int amountTries, int weight, int time, Person owner, State state) {
         this.name = name;
         this.description = description;
         this.isTemplate = isTemplate;
@@ -56,16 +61,14 @@ public class Task {
         this.weight = weight;
         this.time = time;
         this.owner = owner;
+        this.state = state;
     }
 
-    public Task() {
-    }
-
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -131,5 +134,13 @@ public class Task {
 
     public void setOwner(Person owner) {
         this.owner = owner;
+    }
+
+    public State getState() {
+        return state;
+    }
+
+    public void setState(State state) {
+        this.state = state;
     }
 }

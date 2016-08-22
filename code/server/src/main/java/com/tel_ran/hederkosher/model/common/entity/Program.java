@@ -3,56 +3,70 @@ package com.tel_ran.hederkosher.model.common.entity;
 import com.tel_ran.hederkosher.annotations.Markable;
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
 /**
  * Created by Egor on 07.08.2016.
- * Entity class for programm of excercises
+ * Entity class for program of excercises
  */
 
 @Markable
-//@Entity
-//@Table(name = "program")
+@Entity
+@Table(name = "program")
 public class Program {
 
     @Id
-    @Column(name = "ID")
+    @Column(name = "ID", nullable = false, unique = true)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private long id;
 
-    @Column(name = "NAME")
+    @Column(name = "NAME", nullable = false)
     private String name;
 
-    @Column(name = "DATE_CREATE")
-    private Date dCreate;
+    @Column(name = "DATE_CREATE", nullable = false)
+    private LocalDateTime dCreate;
 
     @Column(name = "DATE_CLOSE")
-    private Date dClose;
+    private LocalDateTime dClose;
 
-    @Column(name = "IS_TEMPLATE")
+    @Column(name = "IS_TEMPLATE", nullable = false)
     private boolean isTemplate;
 
-    @ManyToOne(targetEntity = Person.class, fetch = FetchType.LAZY)
+    //@ManyToOne(targetEntity = Person.class, fetch = FetchType.LAZY)
+    @ManyToOne
+    @JoinColumn(name = "OWNER_ID", foreignKey = @ForeignKey(name = "FK_PROGRAM$OWNER_ID"))
     private Person owner;
 
-    @ManyToOne(targetEntity = Person.class, fetch = FetchType.LAZY)
+    //@ManyToOne(targetEntity = Person.class, fetch = FetchType.LAZY)
+    @ManyToOne
+    @JoinColumn(name = "PRODUCER_ID", foreignKey = @ForeignKey(name = "FK_PROGRAM$PRODUCER_ID"))
     private Person producer;
 
-    @ManyToOne(targetEntity = Person.class, fetch = FetchType.LAZY)
+    //@ManyToOne(targetEntity = Person.class, fetch = FetchType.LAZY)
+    @ManyToOne
+    @JoinColumn(name = "CLIENT_ID", foreignKey = @ForeignKey(name = "FK_PROGRAM$CLIENT_ID"))
     private Person client;
 
-    @ManyToOne(targetEntity = Room.class, fetch = FetchType.LAZY)
+    //@ManyToOne(targetEntity = Room.class, fetch = FetchType.LAZY)
+    @ManyToOne
+    @JoinColumn(name = "ROOM_ID", foreignKey = @ForeignKey(name = "FK_PROGRAM$ROOM_ID"))
     private Room room;
 
-    @ManyToOne(targetEntity = State.class)
+    //@ManyToOne(targetEntity = State.class)
+    @Enumerated(EnumType.STRING)
+    @Column(name = "STATE", length = 100)
     private State state;
 
     @OneToMany(targetEntity = Task.class, mappedBy = "owner")
     private List<Task> tasks;
 
-    public Program(int id, String name, Date dCreate, Date dClose, boolean isTemplate, Person owner, Person producer, Person client, Room room, State state) {
-        this.id = id;
+    public Program() {
+    }
+
+    public Program(String name, LocalDateTime dCreate, LocalDateTime dClose, boolean isTemplate, Person owner, Person producer, Person client, Room room, State state) {
         this.name = name;
         this.dCreate = dCreate;
         this.dClose = dClose;
@@ -64,14 +78,11 @@ public class Program {
         this.state = state;
     }
 
-    public Program() {
-    }
-
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -83,19 +94,19 @@ public class Program {
         this.name = name;
     }
 
-    public Date getdCreate() {
+    public LocalDateTime getdCreate() {
         return dCreate;
     }
 
-    public void setdCreate(Date dCreate) {
+    public void setdCreate(LocalDateTime dCreate) {
         this.dCreate = dCreate;
     }
 
-    public Date getdClose() {
+    public LocalDateTime getdClose() {
         return dClose;
     }
 
-    public void setdClose(Date dClose) {
+    public void setdClose(LocalDateTime dClose) {
         this.dClose = dClose;
     }
 
