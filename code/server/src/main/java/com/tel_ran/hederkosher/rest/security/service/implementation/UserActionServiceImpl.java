@@ -17,10 +17,10 @@ import org.springframework.stereotype.Service;
 @Service("userActionService")
 public class UserActionServiceImpl implements UserActionsService{
     @Autowired
-    UserDAO userDAO;
+    private UserDAO userDAO;
 
     @Autowired
-    TokenDAO tokenDAO;
+    private TokenDAO tokenDAO;
 
     @Override
     public ServiceResult login(String login, String pass) {

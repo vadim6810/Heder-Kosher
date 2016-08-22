@@ -80,9 +80,4 @@ public class UserDAOImpl implements UserDAO {
         }
         return result;
     }
-
-    @Override
-    public boolean isUserExist(User user) {
-        return false;
-    }
 }

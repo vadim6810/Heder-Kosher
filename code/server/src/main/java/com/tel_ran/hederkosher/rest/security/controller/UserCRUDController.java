@@ -19,9 +19,9 @@ import java.util.Date;
 public class UserCRUDController {
 
     @Autowired
-    UserCRUDService userCRUDService;
+    private UserCRUDService userCRUDService;
 
-    Logger logger = LoggerFactory.getLogger(UserCRUDService.class);
+    private Logger logger = LoggerFactory.getLogger(UserCRUDService.class);
 
     //------------------Get all users------------------------
     @RequestMapping(value = "/user/", method = RequestMethod.GET)

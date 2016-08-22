@@ -14,7 +14,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 public class StateCRUDController {
 
     @Autowired
-    StateCRUDService stateCRUDService;
+    private StateCRUDService stateCRUDService;
 
     //------------------Get all states------------------------
     @RequestMapping(value = "/state/", method = RequestMethod.GET)

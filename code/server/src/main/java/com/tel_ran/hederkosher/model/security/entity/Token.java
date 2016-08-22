@@ -4,7 +4,6 @@ import org.hibernate.annotations.NaturalId;
 import org.springframework.context.annotation.Lazy;
 
 import javax.persistence.*;
-import java.math.BigInteger;
 import java.util.Date;
 
 /**

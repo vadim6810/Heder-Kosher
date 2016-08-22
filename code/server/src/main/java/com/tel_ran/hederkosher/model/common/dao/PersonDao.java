@@ -9,10 +9,10 @@ import java.sql.SQLException;
 import java.util.List;
 
 public interface PersonDao {
-    public boolean add(Person obj) throws SQLException;
-    public boolean delete(Person obj) throws SQLException;
-    public Person getById(long id) throws SQLException;
-    public List<Person>  gets() throws SQLException;
+    boolean add(Person obj) throws SQLException;
+    boolean delete(Person obj) throws SQLException;
+    Person getById(long id) throws SQLException;
+    List<Person>  gets() throws SQLException;
 }
 
 

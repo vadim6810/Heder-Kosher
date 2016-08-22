@@ -1,7 +1,6 @@
 package com.tel_ran.hederkosher.rest.security.service.implementation;
 
 import com.tel_ran.hederkosher.model.security.dao.UserDAO;
-import com.tel_ran.hederkosher.model.security.entity.Role;
 import com.tel_ran.hederkosher.model.security.entity.User;
 import com.tel_ran.hederkosher.rest.ServiceResult;
 import com.tel_ran.hederkosher.rest.ServiceResultFactory;
@@ -9,8 +8,6 @@ import com.tel_ran.hederkosher.rest.security.service.UserCRUDService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.Set;
 
 /**
  * Created by Igor on 05.08.2016.
@@ -60,15 +57,9 @@ public class UserCRUDServiceImpl implements UserCRUDService {
     }
 
     @Override
-    public ServiceResult isUserExist(User user) {
-        result = ServiceResultFactory.OK;
-        result.setData(userDao.isUserExist(user));
-        return result;
-    }
-
-    @Override
     public ServiceResult createUser(User user) {
-        if (userDao.isUserExist(user)) {
+        User oldUser = userDao.findByID(user.getId());
+        if (oldUser != null) {
             result = ServiceResultFactory.ENTITY_CONFLICT;
         } else {
             if (userDao.createUser(user)) {

@@ -1,5 +1,3 @@
-CREATE DATABASE  IF NOT EXISTS `heder-kosher` /*!40100 DEFAULT CHARACTER SET utf8 */;
-USE `heder-kosher`;
 -- MySQL dump 10.13  Distrib 5.7.12, for Win64 (x86_64)
 --
 -- Host: 192.168.1.58    Database: heder-kosher
@@ -134,6 +132,57 @@ LOCK TABLES `personroom` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `role`
+--
+
+DROP TABLE IF EXISTS `role`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `role` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) NOT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `role_name_uindex` (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `role`
+--
+
+LOCK TABLES `role` WRITE;
+/*!40000 ALTER TABLE `role` DISABLE KEYS */;
+/*!40000 ALTER TABLE `role` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `role_authority`
+--
+
+DROP TABLE IF EXISTS `role_authority`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `role_authority` (
+  `role_id` bigint(20) NOT NULL,
+  `auth_id` bigint(20) NOT NULL,
+  KEY `role_authority_role_id_fk` (`role_id`),
+  KEY `role_authority_auth_fk` (`auth_id`),
+  CONSTRAINT `role_authority_auth_fk` FOREIGN KEY (`auth_id`) REFERENCES `authority` (`id`),
+  CONSTRAINT `role_authority_role_id_fk` FOREIGN KEY (`role_id`) REFERENCES `role` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `role_authority`
+--
+
+LOCK TABLES `role_authority` WRITE;
+/*!40000 ALTER TABLE `role_authority` DISABLE KEYS */;
+/*!40000 ALTER TABLE `role_authority` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `room`
 --
 
@@ -250,4 +299,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-08-22  9:32:53
+-- Dump completed on 2016-08-22 19:41:36

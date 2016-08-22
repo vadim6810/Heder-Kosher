@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Created by Igor on 20.08.2016.
  */
-public class ClassFinder {
+public final class ClassFinder {
 
     private static final char PKG_SEPARATOR = '.';
 
@@ -50,4 +50,6 @@ public class ClassFinder {
         return classes;
     }
 
+    private ClassFinder() {
+    }
 }

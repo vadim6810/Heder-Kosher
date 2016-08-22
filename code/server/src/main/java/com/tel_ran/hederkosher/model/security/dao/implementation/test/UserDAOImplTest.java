@@ -1,16 +1,17 @@
 package com.tel_ran.hederkosher.model.security.dao.implementation.test;
 
 import com.tel_ran.hederkosher.model.common.entity.Room;
-import com.tel_ran.hederkosher.model.security.entity.Role;
-import com.tel_ran.hederkosher.model.security.entity.User;
 import com.tel_ran.hederkosher.model.security.dao.RoleDAO;
 import com.tel_ran.hederkosher.model.security.dao.UserDAO;
-import com.tel_ran.hederkosher.model.security.entity.UserGrantedAuthority;
+import com.tel_ran.hederkosher.model.security.entity.Role;
+import com.tel_ran.hederkosher.model.security.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
 /**
@@ -19,12 +20,12 @@ import java.util.concurrent.atomic.AtomicLong;
 
 public class UserDAOImplTest implements UserDAO {
 
-    private static final AtomicLong counter = new AtomicLong();
+    private static final AtomicLong COUNTER = new AtomicLong();
 
     private static List<User> users;
 
     @Autowired
-    RoleDAO roleDAO;
+    private RoleDAO roleDAO;
 
     @Override
     public User findByID(long id) {
@@ -51,14 +52,13 @@ public class UserDAOImplTest implements UserDAO {
         return users;
     }
 
-    @Override
     public boolean isUserExist(User user) {
         return users.contains(user);
     }
 
     @Override
     public boolean createUser(User user) {
-        user.setId(counter.incrementAndGet());
+        user.setId(COUNTER.incrementAndGet());
         users.add(user);
         return true;
     }
@@ -96,21 +96,21 @@ public class UserDAOImplTest implements UserDAO {
         Room pool = new Room(); pool.setName("Pool");
         Room sauna = new Room(); sauna.setName("Sauna");
 
-        User sam = new User(counter.incrementAndGet(),"Sam@hk.co.il", "123qwe", new Date());
+        User sam = new User(COUNTER.incrementAndGet(),"Sam@hk.co.il", "123qwe", new Date());
         sam.setRole(gym, roleAdmin);
         users.add(sam);
 
-        User tom = new User(counter.incrementAndGet(),"Tom@hk.co.il", "qweasd", new Date());
+        User tom = new User(COUNTER.incrementAndGet(),"Tom@hk.co.il", "qweasd", new Date());
         tom.setRole(gym, roleManager);
         tom.setRole(pool, roleTrainer);
         users.add(tom);
 
-        User jerome = new User(counter.incrementAndGet(),"Jerome@hk.co.il", "asdzxc", new Date());
+        User jerome = new User(COUNTER.incrementAndGet(),"Jerome@hk.co.il", "asdzxc", new Date());
         jerome.setRole(sauna, roleManager);
         jerome.setRole(pool, roleTrainer);
         users.add(jerome);
 
-        User silvia = new User(counter.incrementAndGet(),"Silvia@hk.co.il", "zxc123", new Date());
+        User silvia = new User(COUNTER.incrementAndGet(),"Silvia@hk.co.il", "zxc123", new Date());
         silvia.setRole(gym, roleClient);
         silvia.setRole(pool, roleClient);
         silvia.setRole(sauna, roleClient);

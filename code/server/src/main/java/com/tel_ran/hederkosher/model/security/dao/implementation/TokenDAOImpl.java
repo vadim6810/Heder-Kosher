@@ -7,7 +7,6 @@ import com.tel_ran.hederkosher.service.HibUtil;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
 
@@ -23,7 +22,7 @@ public class TokenDAOImpl implements TokenDAO {
     private HibUtil hibernateUtil;
 
     @Override
-    public User getUser(String token) throws UsernameNotFoundException {
+    public User getUser(String token) { // throws UsernameNotFoundException {
         if (token == null || "".equals(token)) return null;
         try(Session session = hibernateUtil.getSessionFactory().openSession()){
             User user = (User) session.

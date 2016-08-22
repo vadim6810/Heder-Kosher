@@ -13,8 +13,6 @@ public interface UserCRUDService {
 
     ServiceResult findAllUser();
 
-    ServiceResult isUserExist(User user);
-
     ServiceResult createUser(User user);
     ServiceResult updateUser(User user);
     ServiceResult deleteUser(long id);

@@ -6,11 +6,6 @@ import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.model.naming.ImplicitNamingStrategyJpaCompliantImpl;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import org.hibernate.cfg.Configuration;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.slf4j.Marker;
-import org.slf4j.MarkerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -38,7 +33,7 @@ public class HibUtilImpl implements HibUtil{
             sessionFactory = metadata.getSessionFactoryBuilder().build();
             //sessionFactory = new Configuration().configure().buildSessionFactory();
         } catch (Throwable e) {
-            e.printStackTrace(); //throw new ExceptionInInitializerError(e);
+            throw new ExceptionInInitializerError(e);
         }
     }
 

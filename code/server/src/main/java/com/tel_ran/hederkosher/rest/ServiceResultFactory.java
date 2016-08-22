@@ -3,7 +3,7 @@ package com.tel_ran.hederkosher.rest;
 /**
  * Created by Igor on 05.08.2016.
  */
-public class ServiceResultFactory {
+public final class ServiceResultFactory {
     public static ServiceResult OK;
     public static ServiceResult INVALID_REQUEST;
     public static ServiceResult NOT_FOUND;
@@ -24,6 +24,9 @@ public class ServiceResultFactory {
         ENTITY_CONFLICT = new ServiceResult(-6, "Object already exist");
         CREDENTIALS_NOT_FOUND = new ServiceResult(-7, "Username or password are invalid.");
         INVALID_REQUEST = new ServiceResult(-8, "Request is invalid");
+    }
+
+    private ServiceResultFactory() {
     }
 }
 

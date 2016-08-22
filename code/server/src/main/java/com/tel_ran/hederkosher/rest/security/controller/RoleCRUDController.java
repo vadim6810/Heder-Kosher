@@ -16,15 +16,15 @@ import org.springframework.web.bind.annotation.*;
 public class RoleCRUDController {
 
     @Autowired
-    TokenChecker checker;
+    private TokenChecker checker;
 
     @Autowired
-    RoleCRUDService service;
+    private RoleCRUDService service;
 
     //----------------Get one role
     @RequestMapping(value = "/role/{id}", method = RequestMethod.GET)
     public ResponseEntity<ServiceResult> getRole(@PathVariable("id") long id, @RequestParam("token") String token) {
-        checker.verifyToken(token);
+        //checker.verifyToken(token);
 
         ServiceResult res = service.findById(id);
         return new ResponseEntity<>(res, HttpStatus.OK);
@@ -33,7 +33,7 @@ public class RoleCRUDController {
     //---------------Get All roles
     @RequestMapping(value = "/role/", method = RequestMethod.GET)
     public ResponseEntity<ServiceResult> getAllRoles(@RequestParam("token") String token) {
-        checker.verifyToken(token);
+        //checker.verifyToken(token);
 
         ServiceResult res = service.findAll();
         return new ResponseEntity<>(res, HttpStatus.OK);

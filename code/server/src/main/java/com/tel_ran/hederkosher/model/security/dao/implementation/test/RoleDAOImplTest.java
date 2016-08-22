@@ -1,23 +1,23 @@
-package com.tel_ran.hederkosher.model.security.dao.implementation;
+package com.tel_ran.hederkosher.model.security.dao.implementation.test;
 
 import com.tel_ran.hederkosher.model.security.dao.AuthorityDAO;
 import com.tel_ran.hederkosher.model.security.dao.RoleDAO;
 import com.tel_ran.hederkosher.model.security.entity.Authority;
 import com.tel_ran.hederkosher.model.security.entity.Role;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
 /**
  * Created by Igor on 07.08.2016.
  */
 
-@Service("roleDAOService")
 public class RoleDAOImplTest implements RoleDAO {
-    private static final AtomicLong counter = new AtomicLong();
+    private static final AtomicLong COUNTER = new AtomicLong();
     private static List<Role> roles;
 
     @Autowired
@@ -126,14 +126,13 @@ public class RoleDAOImplTest implements RoleDAO {
         return roles;
     }
 
-    @Override
     public boolean isRoleExist(Role role) {
         return roles.contains(role);
     }
 
     @Override
     public boolean createRole(Role role) {
-        role.setId(counter.addAndGet(1));
+        role.setId(COUNTER.addAndGet(1));
         roles.add(role);
         return true;
     }

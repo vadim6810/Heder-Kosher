@@ -10,8 +10,6 @@ public interface RoleCRUDService {
     ServiceResult findById(long id);
     ServiceResult findAll();
 
-    ServiceResult isRoleExist(Role role);
-
     ServiceResult createRole(Role role);
     ServiceResult updateRole(Role role);
     ServiceResult deleteRole(long id);

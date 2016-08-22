@@ -1,15 +1,12 @@
 package com.tel_ran.hederkosher.model.security.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.tel_ran.hederkosher.model.common.entity.Room;
-import com.tel_ran.hederkosher.model.security.dao.RoleDAO;
 import org.hibernate.annotations.NaturalId;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
 
 import javax.persistence.*;
-import java.util.*;
+import java.util.Date;
+import java.util.Set;
 
 /**
  * Created by Igor on 05.08.2016.

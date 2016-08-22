@@ -13,7 +13,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 public class HKConfig {
 
     @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+    public void configureGlobal(AuthenticationManagerBuilder auth) {
 
     }
 
@@ -22,8 +22,12 @@ public class HKConfig {
     @EnableGlobalMethodSecurity(prePostEnabled = true)
     class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         @Override
-        protected void configure(HttpSecurity http) throws Exception {
-            http.antMatcher("/**").authorizeRequests().anyRequest().permitAll();
+        protected void configure(HttpSecurity http) {
+            try {
+                http.antMatcher("/**").authorizeRequests().anyRequest().permitAll();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 

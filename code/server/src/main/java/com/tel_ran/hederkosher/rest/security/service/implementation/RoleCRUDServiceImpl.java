@@ -16,9 +16,9 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class RoleCRUDServiceImpl implements RoleCRUDService {
     @Autowired
-    RoleDAO roleDao;
+    private RoleDAO roleDao;
 
-    ServiceResult result;
+    private ServiceResult result;
 
     @Override
     public ServiceResult findById(long id) {
@@ -54,15 +54,9 @@ public class RoleCRUDServiceImpl implements RoleCRUDService {
     }
 
     @Override
-    public ServiceResult isRoleExist(Role role) {
-        result = ServiceResultFactory.OK;
-        result.setData(roleDao.isRoleExist(role));
-        return result;
-    }
-
-    @Override
     public ServiceResult createRole(Role role) {
-        if (roleDao.isRoleExist(role)) {
+        Role oldRole = roleDao.findById(role.getId());
+        if (oldRole != null) {
             result = ServiceResultFactory.ENTITY_CONFLICT;
         } else {
             if (roleDao.createRole(role)) {

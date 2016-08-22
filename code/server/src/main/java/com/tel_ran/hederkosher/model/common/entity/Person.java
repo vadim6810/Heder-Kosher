@@ -99,8 +99,8 @@ public class Person {
     }
 
 
-    @Basic
-    @Column(name = "user")
+//    @Basic
+//    @Column(name = "user")
 //    public User getUser() {
 //        return user;
 //    }

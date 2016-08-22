@@ -1,10 +1,11 @@
 package com.tel_ran.hederkosher.model.security.dao.implementation.test;
 
-import com.tel_ran.hederkosher.model.security.entity.Authority;
 import com.tel_ran.hederkosher.model.security.dao.AuthorityDAO;
-import org.springframework.stereotype.Service;
+import com.tel_ran.hederkosher.model.security.entity.Authority;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 /**
  * Created by Igor on 07.08.2016.

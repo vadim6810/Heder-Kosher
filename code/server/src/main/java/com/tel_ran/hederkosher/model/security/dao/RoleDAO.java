@@ -1,7 +1,6 @@
 package com.tel_ran.hederkosher.model.security.dao;
 
 import com.tel_ran.hederkosher.model.security.entity.Role;
-import org.springframework.security.access.prepost.PreAuthorize;
 
 import java.util.List;
 
@@ -16,7 +15,6 @@ public interface RoleDAO {
     Role findByName(String name);
 
     List<Role> getAll();
-    boolean isRoleExist(Role role);
 
     boolean createRole(Role role);
     boolean updateRole(Role role);

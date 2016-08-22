@@ -1,26 +1,23 @@
 package com.tel_ran.hederkosher.model.security.dao.implementation.test;
 
+import com.tel_ran.hederkosher.model.security.dao.TokenDAO;
 import com.tel_ran.hederkosher.model.security.entity.Token;
 import com.tel_ran.hederkosher.model.security.entity.User;
-import com.tel_ran.hederkosher.model.security.dao.TokenDAO;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicLong;
 
 
 
 public class TokenDAOImplTest implements TokenDAO {
-    private static final AtomicLong counter = new AtomicLong();
     private List<Token> tokens = new ArrayList<>();
 
     @Override
-    public User getUser(String stToken) throws UsernameNotFoundException {
+    public User getUser(String stToken) {//} throws UsernameNotFoundException {
         for (Iterator<Token> it = tokens.iterator(); it.hasNext();) {
             Token token = it.next();
             if (stToken.equals(token.getToken())) {

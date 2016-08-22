@@ -18,7 +18,8 @@ import org.springframework.stereotype.Component;
 @Component("Verifier")
 public class VerifierComponent implements VerifierService {
 
-    Logger logger = LoggerFactory.getLogger(VerifierComponent.class);
+    private Logger logger = LoggerFactory.getLogger(VerifierComponent.class);
+
     @Override
     public boolean checkAuthority(String authName) {
         logger.info("Auth name = "+authName);

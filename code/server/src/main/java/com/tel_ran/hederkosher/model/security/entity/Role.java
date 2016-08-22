@@ -1,17 +1,36 @@
 package com.tel_ran.hederkosher.model.security.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import java.util.*;
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by Igor on 07.08.2016.
  */
+@Entity
+@Table(name = "role")
 public class Role {
+    @Id
+    @Column(name = "id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
+    @Column(name = "name", nullable = false)
     private String name;
+
+    @Column(name = "description")
     private String description;
-    private HashSet<Authority> authorities;
+
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(name = "role_authority",
+               joinColumns = {
+                    @JoinColumn(name = "role_id", nullable = false, updatable = false)
+               },
+               inverseJoinColumns = {
+                   @JoinColumn(name = "auth_id", nullable = false, updatable = false)
+               }
+    )
+    private Set<Authority> authorities;
 
     public Role(long id, String name, String description) {
         this.id = id;
@@ -57,7 +76,7 @@ public class Role {
                 '}';
     }
 
-    public HashSet<Authority> getAuthorities() {
+    public Set<Authority> getAuthorities() {
         return authorities;
     }
 
