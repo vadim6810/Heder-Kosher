@@ -1,68 +1,79 @@
+/**
+ * Created by Ruslan on 12.08.2016.
+ */
+
 package com.tel_ran.hederkosher.model.common.entity;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.util.Date;
 
-/**
- * Created by user on 12.08.2016.
- */
 @Entity
-@Table(name = "room", schema = "heder-kosher", catalog = "")
+@Table(name = "room") //, schema = "heder-kosher", catalog = ""
 public class Room {
-    private int idRoom;
-    private String name;
-    private String adress;
-    private Timestamp dcreate;
-    private Timestamp dclose;
 
     @Id
-    @Column(name = "idRoom")
-    public int getIdRoom() {
-        return idRoom;
+    @Column(name = "ID", nullable = false, unique = true)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+
+    @Column(name = "NAME", nullable = false)
+    private String name;
+
+    @Column(name = "ADDRESS", nullable = false, columnDefinition = "TEXT")
+    private String address;
+
+    @Column(name = "DATE_CREATE", nullable = false)
+    private LocalDateTime dCreate;
+
+    @Column(name = "DATE_CLOSE")
+    private LocalDateTime dClose;
+
+
+
+    public Room(String name, String address, LocalDateTime dCreate) {
+        this.name = name;
+        this.address = address;
+        this.dCreate = dCreate;
+    }
+    public Room() {
     }
 
-    public void setIdRoom(int idRoom) {
-        this.idRoom = idRoom;
-    }
 
-    @Basic
-    @Column(name = "name")
-    public String getName() {
-        return name;
+//    public void setId(long id) {
+//        this.id = id;
+//    }
+    public long getId() {
+        return id;
     }
 
     public void setName(String name) {
         this.name = name;
     }
-
-    @Basic
-    @Column(name = "adress")
-    public String getAdress() {
-        return adress;
+    public String getName() {
+        return name;
     }
 
-    public void setAdress(String adress) {
-        this.adress = adress;
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+    public String getAddress() {
+        return address;
     }
 
-    @Basic
-    @Column(name = "dcreate")
-    public Timestamp getDcreate() {
-        return dcreate;
+    public LocalDateTime getDcreate() {
+        return dCreate;
+    }
+    public void setDcreate(LocalDateTime dCreate) {
+        this.dCreate = dCreate;
     }
 
-    public void setDcreate(Timestamp dcreate) {
-        this.dcreate = dcreate;
+    public LocalDateTime getDclose() {
+        return dClose;
     }
-
-    @Basic
-    @Column(name = "dclose")
-    public Timestamp getDclose() {
-        return dclose;
-    }
-
-    public void setDclose(Timestamp dclose) {
-        this.dclose = dclose;
+    public void setDclose(LocalDateTime dClose) {
+        this.dClose = dClose;
     }
 
     @Override
@@ -72,22 +83,22 @@ public class Room {
 
         Room that = (Room) o;
 
-        if (idRoom != that.idRoom) return false;
+        if (id != that.id) return false;
         if (name != null ? !name.equals(that.name) : that.name != null) return false;
-        if (adress != null ? !adress.equals(that.adress) : that.adress != null) return false;
-        if (dcreate != null ? !dcreate.equals(that.dcreate) : that.dcreate != null) return false;
-        if (dclose != null ? !dclose.equals(that.dclose) : that.dclose != null) return false;
+        if (address != null ? !address.equals(that.address) : that.address != null) return false;
+        if (dCreate != null ? !dCreate.equals(that.dCreate) : that.dCreate != null) return false;
+        if (dClose != null ? !dClose.equals(that.dClose) : that.dClose != null) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        int result = idRoom;
+        int result = (int)id;
         result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + (adress != null ? adress.hashCode() : 0);
-        result = 31 * result + (dcreate != null ? dcreate.hashCode() : 0);
-        result = 31 * result + (dclose != null ? dclose.hashCode() : 0);
+        result = 31 * result + (address != null ? address.hashCode() : 0);
+        result = 31 * result + (dCreate != null ? dCreate.hashCode() : 0);
+        result = 31 * result + (dClose != null ? dClose.hashCode() : 0);
         return result;
     }
 }

@@ -7,14 +7,14 @@ import java.sql.Timestamp;
  * Created by user on 12.08.2016.
  */
 @Entity
-@Table(name = "personroom", schema = "heder-kosher", catalog = "")
-public class PersonRoomEntity {
+@Table(name = "person_room") //, schema = "heder-kosher", catalog = ""
+public class PersonRoom {
     private int id;
     private int person;
     private int role;
     private int room;
     private Timestamp date;
-    private byte enabled;
+    private boolean enabled;
 
     @Id
     @Column(name = "id")
@@ -68,11 +68,11 @@ public class PersonRoomEntity {
 
     @Basic
     @Column(name = "enabled")
-    public byte getEnabled() {
+    public boolean getEnabled() {
         return enabled;
     }
 
-    public void setEnabled(byte enabled) {
+    public void setEnabled(boolean enabled) {
         this.enabled = enabled;
     }
 
@@ -81,7 +81,7 @@ public class PersonRoomEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        PersonRoomEntity that = (PersonRoomEntity) o;
+        PersonRoom that = (PersonRoom) o;
 
         if (id != that.id) return false;
         if (person != that.person) return false;
@@ -100,7 +100,7 @@ public class PersonRoomEntity {
         result = 31 * result + role;
         result = 31 * result + room;
         result = 31 * result + (date != null ? date.hashCode() : 0);
-        result = 31 * result + (int) enabled;
+        result = 31 * result + Boolean.compare(enabled, false);
         return result;
     }
 }
