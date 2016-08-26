@@ -13,15 +13,15 @@ import java.util.Date;
 @Table(name = "token")
 public class Token {
     @Id
-    @Column(name = "id", nullable = false)
+    @Column(name = "ID", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "token", nullable = false)
+    @Column(name = "TOKEN", nullable = false)
     @NaturalId
     private String token;
 
-    @Column(name = "tsCreate", nullable = false)
+    @Column(name = "TSCREATE", nullable = false)
     private Date tsCreate;
 
     @Lazy

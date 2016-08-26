@@ -11,23 +11,23 @@ import java.util.Set;
 @Table(name = "role")
 public class Role {
     @Id
-    @Column(name = "id", nullable = false)
+    @Column(name = "ID", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "name", nullable = false)
+    @Column(name = "NAME", nullable = false)
     private String name;
 
-    @Column(name = "description")
+    @Column(name = "DESCRIPTION")
     private String description;
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name = "role_authority",
                joinColumns = {
-                    @JoinColumn(name = "role_id", nullable = false, updatable = false)
+                    @JoinColumn(name = "ROLE_ID", nullable = false, updatable = false)
                },
                inverseJoinColumns = {
-                   @JoinColumn(name = "auth_id", nullable = false, updatable = false)
+                   @JoinColumn(name = "AUTH_ID", nullable = false, updatable = false)
                }
     )
     private Set<Authority> authorities;
