@@ -4,20 +4,21 @@
 
 package com.tel_ran.hederkosher.model.common.dao.implementation;
 
-import com.tel_ran.hederkosher.model.common.entity.Person;
 import com.tel_ran.hederkosher.model.common.dao.PersonDao;
+import com.tel_ran.hederkosher.model.common.entity.Person;
 import com.tel_ran.hederkosher.model.common.entity.Room;
 import com.tel_ran.hederkosher.service.HibUtil;
-//import com.tel_ran.hederkosher.service.HibernateUtil;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.sql.SQLException;
+import javax.persistence.Persistence;
 import java.util.List;
 import java.util.function.Predicate;
+
+//import java.sql.SQLException;
 
 @Service("personDAOService")
 public class PersonDaoImpl implements PersonDao {
@@ -34,8 +35,7 @@ public class PersonDaoImpl implements PersonDao {
             //throw new NullPointerException();
             return false;
         }
-        try {
-            Session session= hibernateUtil.getSessionFactory().openSession();
+        try(Session session= hibernateUtil.getSessionFactory().openSession()){ //.getSessionFactory()
             session.beginTransaction();
             session.save(person);
             session.getTransaction().commit();
@@ -51,7 +51,7 @@ public class PersonDaoImpl implements PersonDao {
             //throw new NullPointerException();
             return false;
         }
-        try(Session session = hibernateUtil.getSessionFactory().openSession()){
+        try(Session session = hibernateUtil.getSessionFactory().openSession()){ //.getSessionFactory()
             session.beginTransaction();
 //            session.saveOrUpdate(person);
             session.update(person);
@@ -69,8 +69,7 @@ public class PersonDaoImpl implements PersonDao {
             //throw new NullPointerException();
             return false;
         }
-        try {
-            Session session= hibernateUtil.getSessionFactory().openSession();
+        try(Session session= hibernateUtil.getSessionFactory().openSession()){ //.getSessionFactory()
             session.beginTransaction();
             session.delete(person);
             session.getTransaction().commit();
@@ -84,8 +83,12 @@ public class PersonDaoImpl implements PersonDao {
     @Override
     public Person getById(long id) { //throws SQLException
         Person result = null;
-        try {
-            Session session= hibernateUtil.getSessionFactory().openSession();
+        try (Session session= hibernateUtil.getSessionFactory().openSession()){ //.getSessionFactory()
+
+            System.out.println("active : "+session.getTransaction().isActive());
+            System.out.println("open : "+session.isOpen());
+            System.out.println("connected : "+session.isConnected());
+
             result = (Person) session.get(Person.class,id);
         } catch (Exception e) {
 //            e.printStackTrace();
@@ -95,21 +98,77 @@ public class PersonDaoImpl implements PersonDao {
 
     @Override
     public Person getByPassport(String passport) {
-        Person result = null;
-        try(Session session = hibernateUtil.getSessionFactory().openSession()){
+        List<Person> results;
+        Person result=null;
+        try(Session session = hibernateUtil.getSessionFactory().openSession()){ //.getSessionFactory()
+
+//            results = (List<Person>)session.createQuery("FROM person").list();
+
+//            results = (List<Person>)session.byNaturalId(Person.class)
+//                    .using("passportNo",passport)
+//                    .load();
+
+
+//            results = (List<Person>)session.load().list();
+//            for (Person person: results){
+//                if (person.getPassportNo()==passport) return person;
+//            }
+            //results = (List<Person>)session.createQuery("FROM person").list();
+
+//            String hql = "select person FROM person WHERE PASSPORT_NO = :pPassportNo";
+//            Query query = session.createQuery(hql);
+//            query.setFirstResult(1);
+//            query.setMaxResults(1);
+//            query.setParameter("pPassportNo", passport);
+//            results = (List <Person>)query.list();
+
+
             result = session.byNaturalId(Person.class)
                     .using("passportNo",passport)
                     .load();
+
+//            session.beginTransaction();
+//            Query query = session.createQuery("select * from person where PASSPORT_NO = :pPassportNo");
+//            query.setFirstResult(1);
+//            query.setMaxResults(1);
+//            query.setParameter("pPassportNo", passport.trim());
+//            results = (List <Person>)query.list();
+//            session.getTransaction().commit();
+//            if (results.size()>0) result=results.get(0);
         }
         return result;
     }
 
     @Override
+    public List<Person> getPersonsByFio(String fistName, String secondName, String lastName) {
+        List<Person> result = null;
+        try(Session session = hibernateUtil.getSessionFactory().openSession()){ //.getSessionFactory()
+//            List<Person> results = (List<Person>)session.byNaturalId(Person.class)
+//                    .using("passportNo","")
+//                    .load();
+//            for (Person person: results){
+//                if (person.getFistName().equals(fistName)
+//                        &&person.getSecondname().equals(secondName)
+//                        &&person.getLastname().equals(lastName)) result.add(person) ;
+//            }
+
+            String hql = "FROM person WHERE FIRST_NAME = :pFIRST_NAME";
+            Query query = session.createQuery(hql);
+            query.setParameter("pFIRST_NAME", fistName);
+            result = (List <Person>)query.list();
+
+
+        }
+
+        return result;
+    }
+
+
+    @Override
     public Person getByEmail(String email) {
         Person result = null;
-        try {
-            Session session= hibernateUtil.getSessionFactory().openSession();
-            Query query = session.createQuery("from person p where id= (select max(person_id) from person_contact where email = :paramEmail)");
+        try(Session session= hibernateUtil.getSessionFactory().openSession()){ //.getSessionFactory()
+            Query query = session.createQuery("from person where id= (select max(person_id) from person_contact where email = :paramEmail)");
             query.setParameter("paramEmail", email);
             result = (Person)query.list();
         } catch (Exception e) {
@@ -128,9 +187,8 @@ public class PersonDaoImpl implements PersonDao {
     @Override
     public List<Person> getAllPersons(){
         List<Person> result = null;
-        try {
-            Session session= hibernateUtil.getSessionFactory().openSession();
-            result = (List<Person>)session.createQuery("FROM person order by FIST_NAME").list();
+        try(Session session= hibernateUtil.getSessionFactory().openSession()){ //.getSessionFactory()
+            result = (List<Person>)session.createQuery("FROM person").list();
 
         } catch (Exception e) {
 //            e.printStackTrace();
@@ -138,18 +196,7 @@ public class PersonDaoImpl implements PersonDao {
         return result;
     }
 
-    @Override
-    public List<Person> getPersonsByFio(String fistName, String secondName, String lastName) {
-        List<Person> result = null;
-        try(Session session = hibernateUtil.getSessionFactory().openSession()){
-            result = (List<Person>)session.byNaturalId(Person.class)
-                    .using("passportNo",fistName)
-                    .using("secondName",secondName)
-                    .using("lastName",lastName)
-                    .load();
-        }
-        return result;
-    }
+
 
     @Override
     public List<Person> getPersonsByRoom(Room room) {
