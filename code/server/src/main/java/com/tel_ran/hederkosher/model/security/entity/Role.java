@@ -1,8 +1,12 @@
 package com.tel_ran.hederkosher.model.security.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.LazyToOne;
+import org.hibernate.annotations.LazyToOneOption;
+
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Igor on 07.08.2016.
@@ -21,6 +25,7 @@ public class Role {
     @Column(name = "DESCRIPTION")
     private String description;
 
+    @JsonIgnore
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name = "role_authority",
                joinColumns = {
@@ -30,13 +35,13 @@ public class Role {
                    @JoinColumn(name = "AUTH_ID", nullable = false, updatable = false)
                }
     )
-    private Set<Authority> authorities;
+    private List<Authority> authorities;
 
     public Role(long id, String name, String description) {
         this.id = id;
         this.name = name;
         this.description = description;
-        authorities = new HashSet<>();
+        authorities = new ArrayList<>();
     }
 
     public Role() {
@@ -76,7 +81,7 @@ public class Role {
                 '}';
     }
 
-    public Set<Authority> getAuthorities() {
+    public List<Authority> getAuthorities() {
         return authorities;
     }
 

@@ -1,13 +1,18 @@
 package com.tel_ran.hederkosher.rest.security.service.implementation;
 
+import com.tel_ran.hederkosher.model.security.dao.RoleDAO;
+import com.tel_ran.hederkosher.model.security.entity.Authority;
 import com.tel_ran.hederkosher.model.security.entity.Role;
-import com.tel_ran.hederkosher.model.security.dao.*;
-import com.tel_ran.hederkosher.rest.*;
+import com.tel_ran.hederkosher.rest.ServiceResult;
+import com.tel_ran.hederkosher.rest.ServiceResultFactory;
 import com.tel_ran.hederkosher.rest.security.service.RoleCRUDService;
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 /**
  * Created by Igor on 07.08.2016.
@@ -50,6 +55,22 @@ public class RoleCRUDServiceImpl implements RoleCRUDService {
             result = ServiceResultFactory.ACCESS_DENIED;
             return result;
         }
+        return result;
+    }
+
+    @Override
+    public ServiceResult getAuthByRole(long id) {
+        Role role = roleDao.findById(id);
+        if (role == null) {
+            result = ServiceResultFactory.NOT_FOUND;
+            result.setData(id);
+            result.setDescription("Role with ID = " + id + " not found");
+            return result;
+        }
+
+        List<Authority> auths = roleDao.getAuthorities(role);
+        result = ServiceResultFactory.OK;
+        result.setData(auths);
         return result;
     }
 

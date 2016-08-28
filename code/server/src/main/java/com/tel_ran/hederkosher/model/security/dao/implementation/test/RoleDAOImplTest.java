@@ -155,4 +155,9 @@ public class RoleDAOImplTest implements RoleDAO {
         }
         return false;
     }
+
+    @Override
+    public List<Authority> getAuthorities(Role role) {
+        return null;
+    }
 }

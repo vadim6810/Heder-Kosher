@@ -13,4 +13,6 @@ public interface RoleCRUDService {
     ServiceResult createRole(Role role);
     ServiceResult updateRole(Role role);
     ServiceResult deleteRole(long id);
+
+    ServiceResult getAuthByRole(long id);
 }

@@ -2,17 +2,20 @@ package com.tel_ran.hederkosher.model.security.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.tel_ran.hederkosher.model.common.entity.Room;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.hibernate.annotations.NaturalId;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
-import java.util.Date;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by Igor on 05.08.2016.
  */
 @Entity
 @Table(name = "user")
+@Transactional
 public class User {
 
     @Id
@@ -34,13 +37,8 @@ public class User {
 
     //TODO Return authorities
     //@JsonIgnore
-    /*@OneToMany(targetEntity = UserGrantedAuthority.class)
-    @Lazy*/
-    //private Set<UserGrantedAuthority> authorities;
-    /*
-    @OneToMany(targetEntity = Task.class, mappedBy = "owner")
-    private List<Task> tasks;
-     */
+    @OneToMany(targetEntity = UserGrantedAuthority.class, mappedBy = "user", fetch = FetchType.EAGER)
+    private List<UserGrantedAuthority> authorities;
 
     public User() {
         this(0, "", "", new Date());
@@ -51,7 +49,7 @@ public class User {
         this.email = email;
         this.password = password;
         this.regDate = regDate;
-        //authorities = new HashSet<>();
+        authorities = new ArrayList<>();
     }
 
     public long getId() {
@@ -95,25 +93,24 @@ public class User {
                 '}';
     }
 
-//    public Set<UserGrantedAuthority> getAuthorities() {
-//        return null;
-//        //return this.authorities;
-//    }
+    public List<UserGrantedAuthority> getAuthorities() {
+        return this.authorities;
+    }
 
-    public void setAuthorities( Set<UserGrantedAuthority> authorities) {
-        //this.authorities = authorities;
+    public void setAuthorities( List<UserGrantedAuthority> authorities) {
+        this.authorities = authorities;
     }
 
     public Role getRole(Room room) {
-        /*for (UserGrantedAuthority ga : this.authorities) {
+        for (UserGrantedAuthority ga : this.authorities) {
             if (ga.getRoom().equals(room))
                 return ga.getRole();
-        }*/
+        }
         return null;
     }
 
     public Role setRole(Room room, Role role) {
-        /*for (UserGrantedAuthority ga : this.authorities) {
+        for (UserGrantedAuthority ga : this.authorities) {
             if (ga.getRoom().equals(room)) {
                 Role oldRole = ga.getRole();
                 ga.setRole(role);
@@ -121,7 +118,7 @@ public class User {
             }
         }
         UserGrantedAuthority uga = new UserGrantedAuthority(new Date(), role, room);
-        this.authorities.add(uga);*/
+        this.authorities.add(uga);
         return null;
     }
 

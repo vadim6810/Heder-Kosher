@@ -1,5 +1,6 @@
 package com.tel_ran.hederkosher.model.security.dao;
 
+import com.tel_ran.hederkosher.model.security.entity.Authority;
 import com.tel_ran.hederkosher.model.security.entity.Role;
 
 import java.util.List;
@@ -19,4 +20,6 @@ public interface RoleDAO {
     boolean createRole(Role role);
     boolean updateRole(Role role);
     boolean deleteRole(long id);
+
+    List<Authority> getAuthorities(Role role);
 }

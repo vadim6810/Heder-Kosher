@@ -1,18 +1,26 @@
 package com.tel_ran.hederkosher.model.security.dao.implementation;
 
 import com.tel_ran.hederkosher.model.security.dao.RoleDAO;
+import com.tel_ran.hederkosher.model.security.entity.Authority;
 import com.tel_ran.hederkosher.model.security.entity.Role;
 import com.tel_ran.hederkosher.service.HibUtil;
+import org.hibernate.Hibernate;
 import org.hibernate.Session;
+import org.hibernate.annotations.Parameter;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by Igor on 22.08.2016.
  */
-@Service("roleDAOService")
+//@Service("roleDAOService")
+@Repository("roleDAOService")
 public class RoleDAOImpl implements RoleDAO {
 
     @Autowired
@@ -23,6 +31,7 @@ public class RoleDAOImpl implements RoleDAO {
         Role role = null;
         try(Session session = hibernateUtil.getSessionFactory().openSession()){
             role = session.byId(Role.class).load(id);
+            //if (role != null) Hibernate.initialize(role.getAuthorities());
         }
         return role;
     }
@@ -79,5 +88,22 @@ public class RoleDAOImpl implements RoleDAO {
             session.getTransaction().commit();
             return true;
         }
+    }
+
+    @Override
+    public List<Authority> getAuthorities(Role role) {
+        List<Authority> res = new ArrayList<>();
+        if (role!=null) {
+            return role.getAuthorities();
+        }
+//        try(Session session = hibernateUtil.getSessionFactory().openSession()) {
+//            if (role != null) {
+//                Hibernate.initialize(role);
+//                res = role.getAuthorities();
+//            } else {
+//                return res;
+//            }
+//        }
+        return res;
     }
 }

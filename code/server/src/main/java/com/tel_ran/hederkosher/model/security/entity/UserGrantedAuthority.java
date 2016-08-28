@@ -1,18 +1,44 @@
 package com.tel_ran.hederkosher.model.security.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.tel_ran.hederkosher.model.common.entity.Room;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.*;
 import java.util.Date;
 
 /**
  * Created by Igor on 17.08.2016.
  */
+@Entity
+@Table(name = "user_granted_authority")
+@Transactional
 public class UserGrantedAuthority implements GrantedAuthority {
+    @Id
+    @Column(name = "ID", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
+    @Column(name = "CREATE_DATE")
     private Date createDate;
+
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "ROLE_ID", foreignKey = @ForeignKey(name = "FK_USER_GRANTED_AUTHORITY$ROLE_ID"))
     private Role role;
+
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "ROOM_ID", foreignKey = @ForeignKey(name = "FK_USER_GRANTED_AUTHORITY$ROOM_ID"))
     private Room room;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "USER_ID", foreignKey = @ForeignKey(name = "FK_USER_GRANTED_AUTHORITY$USER_ID"))
+    @JsonIgnore
+    private User user;
+
+    public UserGrantedAuthority() {
+        this(new Date(), null, null);
+    }
 
     public UserGrantedAuthority(Date createDate, Role role, Room room) {
         this.createDate = createDate;
