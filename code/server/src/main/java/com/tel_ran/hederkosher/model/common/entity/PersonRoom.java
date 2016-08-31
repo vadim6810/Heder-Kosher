@@ -1,11 +1,12 @@
+/**
+ * Created by Ruslan on 12.08.2016.
+ */
+
 package com.tel_ran.hederkosher.model.common.entity;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
 
-/**
- * Created by user on 12.08.2016.
- */
 @Entity
 @Table(name = "person_room") //, schema = "heder-kosher", catalog = ""
 public class PersonRoom {
