@@ -1,19 +1,21 @@
 package com.tel_ran.hederkosher.model.common.dao.implementation;
 
 import com.tel_ran.hederkosher.model.common.dao.TaskDao;
+import com.tel_ran.hederkosher.model.common.entity.Person;
 import com.tel_ran.hederkosher.model.common.entity.Program;
 import com.tel_ran.hederkosher.model.common.entity.Task;
 import com.tel_ran.hederkosher.service.HibUtil;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 /**
  * Created by Egor on 22.08.2016.
  */
-@Service("taskDAOService")
+//@Service("taskDAOService")
+@Repository
 public class TaskDaoImpl implements TaskDao {
 
     @Autowired
@@ -68,11 +70,13 @@ public class TaskDaoImpl implements TaskDao {
 
     @Override
     public Task getById(long id) {
-        Task result = null;
+        Task task = null;
         try(Session session = hibernateUtil.getSessionFactory().openSession()){
-            result = session.get(Task.class,id);
+            task = session.get(Task.class,id);
+            //to fetch Owner Info
+            String passportNo = task.getOwner().getPassportNo();
         }
-        return result;
+        return task;
     }
 
     @Override

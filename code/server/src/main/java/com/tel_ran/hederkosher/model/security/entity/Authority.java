@@ -15,11 +15,11 @@ public class Authority {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "name", insertable = false)
+    @Column(name = "NAME", insertable = false)
     @NaturalId
     private String name;
 
-    @Column(name = "description")
+    @Column(name = "DESCRIPTION")
     private String description;
 
     public Authority(long id, String name, String description) {

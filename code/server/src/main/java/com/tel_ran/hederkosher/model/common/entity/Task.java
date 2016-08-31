@@ -1,5 +1,6 @@
 package com.tel_ran.hederkosher.model.common.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.tel_ran.hederkosher.annotations.Markable;
 
 import javax.persistence.*;
@@ -18,7 +19,7 @@ public class Task implements Serializable {
     @Id
     @Column(name = "ID", nullable = false, unique = true)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @Column(name = "NAME", nullable = false)
     private String name;
@@ -30,22 +31,22 @@ public class Task implements Serializable {
     private boolean isTemplate;
 
     @Column(name = "AMOUNT_ITERATIONS", nullable = false)
-    private int amountIterations;
+    private Integer amountIterations;
 
     @Column(name = "AMOUNT_TRIES", nullable = false)
-    private int amountTries;
+    private Integer amountTries;
 
     @Column(name = "WEIGHT")
-    private int weight;
+    private Integer weight;
 
     @Column(name = "TIME")
-    private int time;
+    private Integer time;
 
-    @ManyToOne//(targetEntity = Person.class, fetch = FetchType.LAZY)
+    //@JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "OWNER_ID", foreignKey = @ForeignKey(name = "FK_TASK$OWNER_ID"))
     private Person owner;
 
-    //@ManyToOne(targetEntity = State.class)
     @Enumerated(EnumType.STRING)
     @Column(name = "STATE", length = 100)
     private State state;
@@ -64,11 +65,11 @@ public class Task implements Serializable {
         this.state = state;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -96,35 +97,35 @@ public class Task implements Serializable {
         isTemplate = template;
     }
 
-    public int getAmountIterations() {
+    public Integer getAmountIterations() {
         return amountIterations;
     }
 
-    public void setAmountIterations(int amountIterations) {
+    public void setAmountIterations(Integer amountIterations) {
         this.amountIterations = amountIterations;
     }
 
-    public int getAmountTries() {
+    public Integer getAmountTries() {
         return amountTries;
     }
 
-    public void setAmountTries(int amountTries) {
+    public void setAmountTries(Integer amountTries) {
         this.amountTries = amountTries;
     }
 
-    public int getWeight() {
+    public Integer getWeight() {
         return weight;
     }
 
-    public void setWeight(int weight) {
+    public void setWeight(Integer weight) {
         this.weight = weight;
     }
 
-    public int getTime() {
+    public Integer getTime() {
         return time;
     }
 
-    public void setTime(int time) {
+    public void setTime(Integer time) {
         this.time = time;
     }
 
@@ -143,4 +144,5 @@ public class Task implements Serializable {
     public void setState(State state) {
         this.state = state;
     }
+
 }
