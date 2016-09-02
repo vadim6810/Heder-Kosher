@@ -110,4 +110,16 @@ public class RoleCRUDServiceImpl implements RoleCRUDService {
         return result;
     }
 
+    @Override
+    public ServiceResult getRoleAuth(long id) {
+        Role role = roleDao.findById(id);
+        if (role==null) {
+            result = ServiceResultFactory.NOT_FOUND;
+            result.setData(id);
+            return result;
+        }
+        result = ServiceResultFactory.OK;
+        result.setData(role.getAuthorities());
+        return result;
+    }
 }

@@ -6,6 +6,7 @@ import org.hibernate.annotations.NaturalId;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -32,15 +33,9 @@ public class User {
     @Column(name = "REG_DATE", nullable = false)
     private Date regDate;
 
-    //TODO Return authorities
-    //@JsonIgnore
-    /*@OneToMany(targetEntity = UserGrantedAuthority.class)
-    @Lazy*/
-    //private Set<UserGrantedAuthority> authorities;
-    /*
-    @OneToMany(targetEntity = Task.class, mappedBy = "owner")
-    private List<Task> tasks;
-     */
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+    private Set<UserGrantedAuthority> authorities;
 
     public User() {
         this(0, "", "", new Date());
@@ -51,7 +46,7 @@ public class User {
         this.email = email;
         this.password = password;
         this.regDate = regDate;
-        //authorities = new HashSet<>();
+        authorities = new HashSet<>();
     }
 
     public long getId() {
@@ -95,33 +90,32 @@ public class User {
                 '}';
     }
 
-//    public Set<UserGrantedAuthority> getAuthorities() {
-//        return null;
-//        //return this.authorities;
-//    }
+    public Set<UserGrantedAuthority> getAuthorities() {
+        return this.authorities;
+    }
 
     public void setAuthorities( Set<UserGrantedAuthority> authorities) {
-        //this.authorities = authorities;
+        this.authorities = authorities;
     }
 
     public Role getRole(Room room) {
-        /*for (UserGrantedAuthority ga : this.authorities) {
+        for (UserGrantedAuthority ga : this.authorities) {
             if (ga.getRoom().equals(room))
                 return ga.getRole();
-        }*/
+        }
         return null;
     }
 
     public Role setRole(Room room, Role role) {
-        /*for (UserGrantedAuthority ga : this.authorities) {
+        for (UserGrantedAuthority ga : this.authorities) {
             if (ga.getRoom().equals(room)) {
                 Role oldRole = ga.getRole();
                 ga.setRole(role);
                 return oldRole;
             }
         }
-        UserGrantedAuthority uga = new UserGrantedAuthority(new Date(), role, room);
-        this.authorities.add(uga);*/
+        UserGrantedAuthority uga = new UserGrantedAuthority(role, room, this);
+        this.authorities.add(uga);
         return null;
     }
 

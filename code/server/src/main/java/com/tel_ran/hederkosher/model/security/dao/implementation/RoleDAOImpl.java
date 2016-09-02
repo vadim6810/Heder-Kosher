@@ -23,6 +23,7 @@ public class RoleDAOImpl implements RoleDAO {
         Role role = null;
         try(Session session = hibernateUtil.getSessionFactory().openSession()){
             role = session.byId(Role.class).load(id);
+            int count = role.getAuthorities().size();
         }
         return role;
     }

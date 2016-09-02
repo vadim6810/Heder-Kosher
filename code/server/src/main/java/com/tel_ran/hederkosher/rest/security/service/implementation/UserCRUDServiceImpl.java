@@ -120,8 +120,7 @@ public class UserCRUDServiceImpl implements UserCRUDService {
             return result;
         }
         result = ServiceResultFactory.OK;
-        //TODO return back
-        //result.setData(user.getAuthorities());
+        result.setData(user.getAuthorities());
         return result;
     }
 }

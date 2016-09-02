@@ -23,7 +23,8 @@ public class RoleCRUDController {
 
     //----------------Get one role
     @RequestMapping(value = "/role/{id}", method = RequestMethod.GET)
-    public ResponseEntity<ServiceResult> getRole(@PathVariable("id") long id, @RequestParam("token") String token) {
+    //public ResponseEntity<ServiceResult> getRole(@PathVariable("id") long id, @RequestParam("token") String token) {
+    public ResponseEntity<ServiceResult> getRole(@PathVariable("id") long id) {
         //checker.verifyToken(token);
 
         ServiceResult res = service.findById(id);
@@ -32,7 +33,8 @@ public class RoleCRUDController {
 
     //---------------Get All roles
     @RequestMapping(value = "/role/", method = RequestMethod.GET)
-    public ResponseEntity<ServiceResult> getAllRoles(@RequestParam("token") String token) {
+    //public ResponseEntity<ServiceResult> getAllRoles(@RequestParam("token") String token) {
+    public ResponseEntity<ServiceResult> getAllRoles() {
         //checker.verifyToken(token);
 
         ServiceResult res = service.findAll();
@@ -60,6 +62,12 @@ public class RoleCRUDController {
     @RequestMapping(value = "role/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<ServiceResult> deleteRole(@PathVariable("id") long id) {
         ServiceResult res = service.deleteRole(id);
+        return new ResponseEntity<>(res, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "role/{id}/auth", method = RequestMethod.GET)
+    public ResponseEntity<ServiceResult> getRoleAuth(@PathVariable("id") long id) {
+        ServiceResult res = service.getRoleAuth(id);
         return new ResponseEntity<>(res, HttpStatus.OK);
     }
 }
