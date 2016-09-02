@@ -15,8 +15,8 @@ public class Contact {
     private long id;
 
 
-    @Column(name = "TELEPHONES", nullable = false)
-    private String telephones;
+    @Column(name = "TELEPHONE", nullable = false)
+    private String telephone;
 
     @Column(name = "EMAIL")
     private String email;
@@ -25,8 +25,8 @@ public class Contact {
     @JoinColumn(name = "PERSON_ID", foreignKey = @ForeignKey(name = "FK_PERSON_CONTACT$PERSON_ID"))
     private Person person;
 
-    public Contact(String telephones, String email, Person person) {
-        this.telephones = telephones;
+    public Contact(String telephone, String email, Person person) {
+        this.telephone = telephone;
         this.email = email;
         this.person = person;
     }
@@ -48,11 +48,11 @@ public class Contact {
         this.person = person;
     }
 
-    public String getTelephones() {
-        return telephones;
+    public String getTelephone() {
+        return telephone;
     }
-    public void setTelephones(String telephones) {
-        this.telephones = telephones;
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
     }
 
     public String getEmail() {
@@ -72,7 +72,7 @@ public class Contact {
 
         if (id != that.id) return false;
         if (person != null ? !person.equals(that.person) : that.person != null) return false;
-        if (telephones != null ? !telephones.equals(that.telephones) : that.telephones != null) return false;
+        if (telephone != null ? !telephone.equals(that.telephone) : that.telephone != null) return false;
         if (email != null ? !email.equals(that.email) : that.email != null) return false;
 
         return true;
@@ -82,7 +82,7 @@ public class Contact {
     public int hashCode() {
         int result = (int)id ;
         result = 31 * result + (person != null ? person.hashCode() : 0);
-        result = 31 * result + (telephones != null ? telephones.hashCode() : 0);
+        result = 31 * result + (telephone != null ? telephone.hashCode() : 0);
         result = 31 * result + (email != null ? email.hashCode() : 0);
         return result;
     }

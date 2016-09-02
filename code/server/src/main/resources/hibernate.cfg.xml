@@ -42,5 +42,6 @@
         <!--<property name="hibernate.connection.username">$username</property>-->
         <!--<property name="hibernate.connection.password">$password</property>-->
 
+
     </session-factory>
 </hibernate-configuration>

@@ -12,12 +12,13 @@ import javax.persistence.*;
 import java.util.Date;
 
 
-@Markable
-@Entity
-@Table(name = "person") //, schema = "heder-kosher", catalog = ""
 //@Table(name = "person", uniqueConstraints = {
 //        @UniqueConstraint(columnNames = "ID"),
 //        @UniqueConstraint(columnNames = "EMAIL") })
+
+@Markable
+@Entity
+@Table(name = "person") //, schema = "heder-kosher", catalog = ""
 public class Person  {
 
     @Id
@@ -25,16 +26,19 @@ public class Person  {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @NaturalId (mutable = false)
+    @NaturalId(mutable = false)
     @Column(name = "PASSPORT_NO", nullable = false) //, length = 50
     private String passportNo;
 
+//    @NaturalId(mutable = false)
     @Column(name = "FIRST_NAME", nullable = false)
     private String fistName;
 
+//    @NaturalId(mutable = false)
     @Column(name = "SECOND_NAME")
     private String secondName;
 
+//    @NaturalId(mutable = false)
     @Column(name = "LAST_NAME")
     private String lastName;
 
@@ -140,4 +144,18 @@ public class Person  {
         result = 31 * result + (birthday != null ? birthday.hashCode() : 0);
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "Person{" +
+                "id=" + id +
+                ", passportNo='" + passportNo + '\'' +
+                ", fistName='" + fistName + '\'' +
+                ", secondName='" + secondName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", birthday=" + birthday +
+                ", user=" + user +
+                '}';
+    }
+
 }
