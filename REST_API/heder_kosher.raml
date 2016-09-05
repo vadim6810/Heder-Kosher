@@ -1,0 +1,165 @@
+#%RAML 1.0
+title: Heder Kosher Server API
+version: v0.1
+baseUri: http://localhost:8080 #http://server/api/{version} #???????
+securitySchemes:
+  oauth_2_0:
+    description: |
+      Server supports OAuth 2.0 for authenticating all API requests.
+    type: OAuth 2.0
+    describedBy:
+      headers:
+        Authorization:
+          description: |
+             Used to send a valid OAuth 2 access token.
+             Do not use the "access_token" query string parameter.
+          type: string
+      responses:
+        401:
+          description: |
+              Bad or expired token. This can happen if the user or Server
+              revoked or expired an access token. To fix, re-authenticate
+              the user.
+        403:
+          description: |
+              Bad OAuth request (wrong consumer key, bad nonce, expired
+              timestamp...). Unfortunately, re-authenticating the user won't help here.
+    settings:
+      authorizationUri: https://server/api/{version}/oauth2/authorize
+      accessTokenUri: https://server/api/{version}/oauth2/token
+      authorizationGrants: [ password, client_credentials, authorization_code, implicit ] #???????????????????
+securedBy: [ oauth_2_0 ]
+traits:
+  roomSpecified:
+      usage: Apply this to any method that needs a room id to be specified
+      description: Some requests require room
+      headers:
+        X-HK-Room:
+          description: Room identification number
+          type: number
+          example: 123
+          required: true
+/rooms:
+  displayName: Gym rooms
+  get:
+    description: Get collecion of gym rooms
+    responses:
+      200:
+        body:
+          application/json:
+            example: |
+              {}
+  post:
+    description: Add a new room
+  delete:
+    description: Delete all gym rooms
+  /{roomId}:
+    displayName: Gym room information
+    get:
+      description: Get gym room with roomId = {roomId}
+    put:
+      description: Update gym room with roomId = {roomId}
+    delete:
+      description: Delete gym room with roomId = {roomId}
+/users:
+  displayName: Application users
+  get:
+    description: Get collection of application users
+    queryParameters:
+      role:
+        displayName: Role
+        type: string
+        description: User role code
+        required: false
+        example: LIST_ROLE
+      room:
+        displayName: Room
+        type: number
+        description: Room id
+        required: false
+        example: 123
+      name:
+        displayName: Name
+        type: string
+        description: User name (substring in name, family name)
+        required: false
+        minLength: 3
+        example: Smith
+  post:
+    description: Add a new user (User and Person info must be specified)
+    body:
+      application/json:
+        example: |
+          {}
+  /{userId}:
+    get:
+      description: Get user information (login, isLocked)
+    put:
+      description: Change user password (hash)
+    delete:
+      description: Delete user
+    /person:
+      get:
+        description: Get user person information (name, passportNo, sex, age, etc.)
+      /contacts:
+        get:
+          description: Get collection of person contacts
+          queryParameters:
+            type:
+              displayName: Type
+              description: Contact type (e-mail, mobile phone, fax)
+              type: string
+              required: false
+              example: EMAIL
+    /roles:
+      get:
+        description: Get collection of user roles (Role-Room)
+      post:
+        description: Add a role to user
+        body:
+          application/json:
+            example: |
+              {roomId, roleId}
+/programs:
+  get:
+    is: [ roomSpecified ]
+    description: Get collection of programs
+  post:
+    description: Add a new program
+  delete:
+    description: Delete all programs
+  /{programId}:
+    get:
+      description: Get program with programId = {programId}
+    put:
+      description: Update program with programId = {programId}
+    delete:
+      description: Delete program with programId = {programId}
+    /tasks:
+      get:
+        description: Get collection of tasks from program with programId = {programId}
+      post:
+        description: Add task to program with programId = {programId}
+      delete:
+        description: Delete all tasks from program with programId = {programId}
+      /{taskId}:
+        get:
+          description: Get task with taskId = {taskId}
+        put:
+          description: Update task with taskId = {taskId}
+        delete:
+          description: Delete task with taskId = {taskId}
+/tasks:
+  get:
+    description: Get collection of task patterns
+  post:
+    description: Add a new task pattern
+  delete:
+    description: Delete all task patterns
+  /{taskId}:
+    get:
+      description: Get task with taskId = {taskId} (pattern and not)
+    put:
+      description: Update task with taskId = {taskId}
+    delete:
+      description: Delete task with taskId = {taskId}
