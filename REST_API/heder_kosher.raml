@@ -2,6 +2,7 @@
 title: Heder Kosher Server API
 version: v0.1
 baseUri: http://localhost:8080 #http://server/api/{version} #???????
+mediaType: application/json
 securitySchemes:
   oauth_2_0:
     description: |
@@ -39,28 +40,71 @@ traits:
           type: number
           example: 123
           required: true
-/rooms:
-  displayName: Gym rooms
-  get:
-    description: Get collecion of gym rooms
-    responses:
-      200:
-        body:
-          application/json:
-            example: |
-              {}
-  post:
-    description: Add a new room
-  delete:
-    description: Delete all gym rooms
-  /{roomId}:
-    displayName: Gym room information
+  roleSpecified:
+      usage: Apply this to any method that needs a roleAccessId to be specified
+      description: Results of some request will be different depend on role
+      headers:
+        X-HK-RoleAccessId:
+          description: Access role id
+          type: string
+          example: LIST_ROLE
+          required: true
+resourceTypes:
+  collection:
+    description: Collection of available <<resourcePathName>>
     get:
-      description: Get gym room with roomId = {roomId}
-    put:
-      description: Update gym room with roomId = {roomId}
+        description: Get lisf of <<resourcePathName>>
+        responses:
+          200:
+            body:
+    post:
+        description: Add a new <<resourcePathName|!singularize>>
+        body:
+            #schema: <<resourcePathName|!singularize>>
+        responses:
+          200:
+            body:
+              example: |
+                { "message": "The <<resourcePathName|!singularize>> has been properly added" }
     delete:
-      description: Delete gym room with roomId = {roomId}
+        description: Delete all <<resourcePathName>>
+        responses:
+          200:
+            body:
+              example: |
+                 { "message": "All <<resourcePathName>> has been deleted" }
+  collection-item:
+    description: Entity representing a <<resourcePathName|!singularize>>
+    get:
+        description: Get the <<resourcePathName|!singularize>> with <<resourcePathName|!singularize>>Id = {<<resourcePathName|!singularize>>Id}
+        responses:
+          200:
+            body:
+          404:
+            body:
+              example: |
+                {"message": "<<resourcePathName|!singularize>> not found" }
+    put:
+      description: Update the <<resourcePathName|!singularize>> with <<resourcePathName|!singularize>>Id = {<<resourcePathName|!singularize>>Id}
+      body:
+      responses:
+        200:
+          body:
+            example: |
+              { "message": "The <<resourcePathName|!singularize>> has been properly updated" }
+    delete:
+      description: Delete the <<resourcePathName|!singularize>> with <<resourcePathName|!singularize>>Id = {<<resourcePathName|!singularize>>Id}
+      responses:
+          200:
+            body:
+              example: |
+                { "message": "The <<resourcePathName|!singularize>> has been deleted" }
+/rooms:
+  type:
+    collection:
+  /{roomId}:
+    type:
+      collection-item:
 /users:
   displayName: Application users
   get:
@@ -88,8 +132,7 @@ traits:
   post:
     description: Add a new user (User and Person info must be specified)
     body:
-      application/json:
-        example: |
+      example: |
           {}
   /{userId}:
     get:
@@ -117,24 +160,18 @@ traits:
       post:
         description: Add a role to user
         body:
-          application/json:
-            example: |
+          example: |
               {roomId, roleId}
 /programs:
+  type:
+    collection:
   get:
     is: [ roomSpecified ]
-    description: Get collection of programs
-  post:
-    description: Add a new program
-  delete:
-    description: Delete all programs
   /{programId}:
+    type:
+      collection-item:
     get:
-      description: Get program with programId = {programId}
-    put:
-      description: Update program with programId = {programId}
-    delete:
-      description: Delete program with programId = {programId}
+      description: Get program info with all tasks #????????????????????
     /tasks:
       get:
         description: Get collection of tasks from program with programId = {programId}
@@ -142,24 +179,29 @@ traits:
         description: Add task to program with programId = {programId}
       delete:
         description: Delete all tasks from program with programId = {programId}
-      /{taskId}:
-        get:
-          description: Get task with taskId = {taskId}
-        put:
-          description: Update task with taskId = {taskId}
-        delete:
-          description: Delete task with taskId = {taskId}
+    /assignees:
+      type:
+        collection:
+      get:
+        description: Get list of program assignees
+      post:
+        description: Assign the program with programId = {programId} to user
+        body:
+      delete:
+        description: Unassign the program with programId = {programId} from all users
 /tasks:
   get:
-    description: Get collection of task patterns
+    description: Get collection of task patterns #??????????????????????????
   post:
     description: Add a new task pattern
   delete:
     description: Delete all task patterns
   /{taskId}:
-    get:
-      description: Get task with taskId = {taskId} (pattern and not)
-    put:
-      description: Update task with taskId = {taskId}
-    delete:
-      description: Delete task with taskId = {taskId}
+    type:
+      collection-item:
+#    get:
+#      description: Get task with taskId = {taskId} (pattern and not)
+#    put:
+#      description: Update task with taskId = {taskId}
+#    delete:
+#      description: Delete task with taskId = {taskId}
