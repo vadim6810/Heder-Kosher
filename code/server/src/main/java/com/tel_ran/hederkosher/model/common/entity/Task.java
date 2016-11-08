@@ -1,15 +1,9 @@
 package com.tel_ran.hederkosher.model.common.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.tel_ran.hederkosher.annotations.Markable;
 
 import javax.persistence.*;
 import java.io.Serializable;
-
-/**
- * Created by Egor on 05.08.2016.
- * Entity class for excercise
- */
 
 @Markable
 @Entity
@@ -30,11 +24,11 @@ public class Task implements Serializable {
     @Column(name = "IS_TEMPLATE", nullable = false)
     private boolean isTemplate;
 
-    @Column(name = "AMOUNT_ITERATIONS", nullable = false)
-    private Integer amountIterations;
+    @Column(name = "N_ITERATIONS", nullable = false)
+    private Integer nIterations;
 
-    @Column(name = "AMOUNT_TRIES", nullable = false)
-    private Integer amountTries;
+    @Column(name = "N_TRIES", nullable = false)
+    private Integer nTries;
 
     @Column(name = "WEIGHT")
     private Integer weight;
@@ -53,12 +47,12 @@ public class Task implements Serializable {
 
     public Task() {}
 
-    public Task(String name, String description, boolean isTemplate, int amountIterations, int amountTries, int weight, int time, Person owner, State state) {
+    public Task(String name, String description, boolean isTemplate, int nIterations, int nTries, int weight, int time, Person owner, State state) {
         this.name = name;
         this.description = description;
         this.isTemplate = isTemplate;
-        this.amountIterations = amountIterations;
-        this.amountTries = amountTries;
+        this.nIterations = nIterations;
+        this.nTries = nTries;
         this.weight = weight;
         this.time = time;
         this.owner = owner;
@@ -97,20 +91,20 @@ public class Task implements Serializable {
         isTemplate = template;
     }
 
-    public Integer getAmountIterations() {
-        return amountIterations;
+    public Integer getnIterations() {
+        return nIterations;
     }
 
-    public void setAmountIterations(Integer amountIterations) {
-        this.amountIterations = amountIterations;
+    public void setnIterations(Integer nIterations) {
+        this.nIterations = nIterations;
     }
 
-    public Integer getAmountTries() {
-        return amountTries;
+    public Integer getnTries() {
+        return nTries;
     }
 
-    public void setAmountTries(Integer amountTries) {
-        this.amountTries = amountTries;
+    public void setnTries(Integer nTries) {
+        this.nTries = nTries;
     }
 
     public Integer getWeight() {

@@ -12,7 +12,7 @@ import java.util.List;
 
 @Service
 public class HibUtilImpl implements HibUtil{
-    private static SessionFactory sessionFactory;
+    /*private static SessionFactory sessionFactory;
 
     static {
         try {
@@ -47,5 +47,9 @@ public class HibUtilImpl implements HibUtil{
             ms.addAnnotatedClassName(clazz.getCanonicalName());
         }
         return ms;
+    }*/
+
+    public SessionFactory getSessionFactory() {
+        return null;
     }
 }

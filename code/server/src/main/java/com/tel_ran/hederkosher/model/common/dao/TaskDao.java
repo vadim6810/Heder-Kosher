@@ -9,7 +9,8 @@ public interface TaskDao {
     boolean addTask(Task task);
     boolean updateTask(Task task);
     boolean deleteTask(long id);
-    Task getById(long id);
+
+    Task getTaskById(long id);
     List<Task> getAllTasks();
-    List<Task> getProgramTasks(Program program);
+    List<Task> getTasksByProgram(Program program);
 }

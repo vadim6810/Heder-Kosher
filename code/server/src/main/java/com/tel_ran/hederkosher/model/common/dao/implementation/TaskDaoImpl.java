@@ -4,98 +4,76 @@ import com.tel_ran.hederkosher.model.common.dao.TaskDao;
 import com.tel_ran.hederkosher.model.common.entity.Person;
 import com.tel_ran.hederkosher.model.common.entity.Program;
 import com.tel_ran.hederkosher.model.common.entity.Task;
-import com.tel_ran.hederkosher.service.HibUtil;
-import org.hibernate.Session;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
+import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceContextType;
 import java.util.List;
 
-/**
- * Created by Egor on 22.08.2016.
- */
-//@Service("taskDAOService")
 @Repository
 public class TaskDaoImpl implements TaskDao {
 
-    @Autowired
-    private HibUtil hibernateUtil;
-
-    public void setHibernateUtil(HibUtil hibernateUtil) {
-        this.hibernateUtil = hibernateUtil;
-    }
+    @PersistenceContext
+    private EntityManager em;
 
     @Override
+    @Transactional
     public boolean addTask(Task task) {
-        if (task == null){
-            //throw new NullPointerException();
+        if (task == null) {
             return false;
         }
-        try(Session session = hibernateUtil.getSessionFactory().openSession()){
-            session.beginTransaction();
-            session.save(task);
-            session.getTransaction().commit();
-            return true;
-        }
+        em.persist(task);
+        return true;
     }
 
     @Override
+    @Transactional
     public boolean updateTask(Task task) {
-        if (task == null){
-            //throw new NullPointerException();
+        if (task == null) {
             return false;
         }
-        try(Session session = hibernateUtil.getSessionFactory().openSession()){
-            session.beginTransaction();
-            session.saveOrUpdate(task);
-            session.getTransaction().commit();
-            return true;
+        Task oldTask = em.find(Task.class, task.getId());
+        if (oldTask == null) {
+            return false;
         }
+        Task newTask = em.merge(task);
+        return true;
     }
 
     @Override
     public boolean deleteTask(long id) {
-        try(Session session = hibernateUtil.getSessionFactory().openSession()){
-            Task task = session.get(Task.class,id);
-            if (task == null){
-                //throw new NullPointerException();
-                return false;
-            }
-            session.beginTransaction();
-            session.delete(task);
-            session.getTransaction().commit();
-            return true;
+        Task task = em.find(Task.class, id);
+        if (task == null) {
+            return false;
         }
+        em.remove(task);
+        return true;
     }
 
     @Override
-    public Task getById(long id) {
+    public Task getTaskById(long id) {
         Task task = null;
-        try(Session session = hibernateUtil.getSessionFactory().openSession()){
-            task = session.get(Task.class,id);
-            //to fetch Owner Info
-            String passportNo = task.getOwner().getPassportNo();
+        try {
+            task = (Task) em.createQuery("SELECT t FROM Task t join t.owner WHERE t.id = :id")
+                    .setParameter("id", id)
+                    .getSingleResult();
+        } catch (NoResultException e) {
         }
         return task;
     }
 
     @Override
     public List<Task> getAllTasks() {
-        List<Task> result = null;
-        try(Session session = hibernateUtil.getSessionFactory().openSession()){
-            result = (List<Task>)session.createQuery("FROM Task").list();
-        }
-        return result;
+        return (List<Task>) em.createQuery("SELECT t FROM Task t").getResultList();
     }
 
     @Override
-    public List<Task> getProgramTasks(Program program) {
-        List<Task> result = null;
-        try(Session session = hibernateUtil.getSessionFactory().openSession()){
-            result = (List<Task>)session.createQuery("FROM Task t WHERE t.program = :program")
-                    .setParameter("program",program)
-                    .list();
-        }
-        return result;
+    public List<Task> getTasksByProgram(Program program) {
+        return (List<Task>) em.createQuery("SELECT t FROM Task t WHERE t.program = :program")
+                .setParameter("program", program)
+                .getResultList();
     }
 }
