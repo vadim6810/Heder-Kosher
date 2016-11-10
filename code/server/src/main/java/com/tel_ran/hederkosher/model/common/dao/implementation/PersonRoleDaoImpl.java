@@ -19,7 +19,7 @@ import java.util.function.Predicate;
 
 //import java.sql.SQLException;
 
-@Service("personRoleDAOService")
+//@Service("personRoleDAOService")
 public class PersonRoleDaoImpl implements PersonRoleDao {
 
     @Autowired

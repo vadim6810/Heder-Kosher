@@ -20,9 +20,11 @@ import java.util.function.Predicate;
 
 //import java.sql.SQLException;
 
-@Service("contactDAOService")
+//@Service("contactDAOService")
 public class ContactDaoImpl implements ContactDao {
 
+    @Autowired
+    PersonDaoImpl personDao;
     @Autowired
     private HibUtil hibernateUtil;
     public void setHibernateUtil(HibUtil hibernateUtil) {

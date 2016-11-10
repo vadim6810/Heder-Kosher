@@ -6,7 +6,7 @@ package com.tel_ran.hederkosher.model.common.entity;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.Date;
+import java.util.Set;
 
 @Entity
 @Table(name = "room") //, schema = "heder-kosher", catalog = ""
@@ -28,6 +28,9 @@ public class Room {
 
     @Column(name = "DATE_CLOSE")
     private LocalDateTime dClose;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Office office;
 
 
 

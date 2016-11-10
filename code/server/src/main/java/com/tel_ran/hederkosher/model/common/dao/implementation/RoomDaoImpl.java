@@ -20,7 +20,7 @@ import java.util.function.Predicate;
 
 //import java.sql.SQLException;
 
-@Service("roomDAOService")
+//@Service("roomDAOService")
 public class RoomDaoImpl implements RoomDao {
 
     @Autowired

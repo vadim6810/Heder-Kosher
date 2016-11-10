@@ -6,10 +6,10 @@ package com.tel_ran.hederkosher.model.common.entity;
 
 import com.tel_ran.hederkosher.annotations.Markable;
 import com.tel_ran.hederkosher.model.security.entity.User;
-import org.hibernate.annotations.NaturalId;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Set;
 
 
 //@Table(name = "person", uniqueConstraints = {
@@ -26,7 +26,7 @@ public class Person  {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @NaturalId(mutable = false)
+//    @NaturalId(mutable = false)
     @Column(name = "PASSPORT_NO", nullable = false) //, length = 50
     private String passportNo;
 
@@ -45,14 +45,19 @@ public class Person  {
     @Column(name = "BIRTHDAY", nullable = false)
     private Date birthday;
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "person")
+//    @JoinTable(name = "person_contact")
+    private Set<Contact> contacts;
+
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "USER_ID", foreignKey = @ForeignKey(name = "FK_PERSON$USER_ID"))
+//    @JoinColumn(name = "USER_ID", foreignKey = @ForeignKey(name = "FK_PERSON$USER_ID"))
 //    @JoinTable(name = "user",
 //               joinColumns = @JoinColumn(name = "ID"),
 //               inverseJoinColumns = @JoinColumn(name = "USER_ID"))
     private User user;
 
-    public Person(String passportNo, String firstName, String secondName, String lastName, Date birthday, User user) {
+    public Person(String passportNo, String firstName, String secondName, String lastName
+            , Date birthday, User user) {
         //this.id = id;
         this.passportNo = passportNo;
         this.fistName = firstName;
@@ -115,6 +120,12 @@ public class Person  {
         this.user = user;
     }
 
+    public Set<Contact> getContacts() {
+        return contacts;
+    }
+    public void setContacts(Set<Contact> contacts) {
+        this.contacts = contacts;
+    }
 
 
     @Override

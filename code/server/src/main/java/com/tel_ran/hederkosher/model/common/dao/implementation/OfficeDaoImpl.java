@@ -5,21 +5,18 @@
 package com.tel_ran.hederkosher.model.common.dao.implementation;
 
 import com.tel_ran.hederkosher.model.common.dao.OfficeDao;
-import com.tel_ran.hederkosher.model.common.dao.RoomDao;
 import com.tel_ran.hederkosher.model.common.entity.Office;
-import com.tel_ran.hederkosher.model.common.entity.Room;
 import com.tel_ran.hederkosher.service.HibUtil;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 //import java.sql.SQLException;
 
-@Service("officeDAOService")
+//@Service("officeDAOService")
 public class OfficeDaoImpl implements OfficeDao {
 
     @Autowired
