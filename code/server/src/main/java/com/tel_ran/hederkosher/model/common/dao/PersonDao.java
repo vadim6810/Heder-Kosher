@@ -21,7 +21,7 @@ public interface PersonDao {
     List<Person>  getAllPersons();
     List<Person>  getPersonsByFio(String fistName,String secondName,String lastName);
     List<Person>  getPersons(String jpql);
-//    List<Person>  getPersonsByRoom(Room room);
+    List<Person>  getPersonsByRoom(long idRoom);
 //    List<Person> getPersons(Predicate predicate);
 }
 

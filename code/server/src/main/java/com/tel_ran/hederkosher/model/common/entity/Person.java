@@ -26,7 +26,7 @@ public class Person  {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-//    @NaturalId(mutable = false)
+    //    @NaturalId(mutable = false)
     @Column(name = "PASSPORT_NO", nullable = false) //, length = 50
     private String passportNo;
 
@@ -73,8 +73,12 @@ public class Person  {
     //    public void setIdPerson(long id) {
 //        this.id = id;
 //    }
-    public long getIdPerson() {
+    public long getId() {
         return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
 

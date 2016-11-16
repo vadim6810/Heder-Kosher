@@ -32,7 +32,7 @@ public class PersonDaoImpl extends AnyJpqlDao<Person> implements PersonDao {
     @Override
     @Transactional
     public boolean addPerson(Person person) {
-        if ((person==null) || (em.find(Person.class,person.getIdPerson())!=null))
+        if ((person==null) || (em.find(Person.class,person.getId())!=null))
             return false;
         em.persist(person);
         return true;
@@ -41,7 +41,7 @@ public class PersonDaoImpl extends AnyJpqlDao<Person> implements PersonDao {
     @Override
     @Transactional
     public boolean updatePerson(Person person) {
-        if ((person==null) || (em.find(Person.class,person.getIdPerson())==null))
+        if ((person==null) || (em.find(Person.class,person.getId())==null))
             return false;
 
         em.persist(person);
@@ -68,48 +68,98 @@ public class PersonDaoImpl extends AnyJpqlDao<Person> implements PersonDao {
 
     @Override
     public Person getByPassport(String passport) {
-        return AnyJpqlQueryOne(String.format("SELECT p FROM PERSON p WHERE p.passport = %s", passport));
+        Person person=null;
+
+        if (passport!=null)
+            try{
+//                person=AnyJpqlQueryOne(String.format("SELECT p FROM Person p WHERE p.passportNo = '%s'", passport));
+                person = (Person) em.createQuery("SELECT p FROM Person p WHERE passportNo = :passportNo")
+                        .setParameter("passportNo", passport)
+                        .getSingleResult();
+            } catch (Exception e){
+            }
+
+        return person;
     }
 
     @Override
     public List<Person> getPersonsByFio(String fistName, String secondName, String lastName) {
-        return  AnyJpqlQuery(String.format("SELECT p FROM PERSON p " +
-                " WHERE p.fistName = %s" +
-                " AND p.secondName = %s" +
-                " AND p.lastName = %s", fistName, secondName, lastName));
+        List<Person> persons=null;
+
+        if (fistName!=null && secondName!=null && lastName!=null)
+            try{
+                persons = (List<Person>) em.createQuery("SELECT p FROM Person p " +
+                        " WHERE fistName = :fistName AND secondName = :secondName AND lastName = :lastName")
+                        .setParameter("fistName", fistName)
+                        .setParameter("secondName", secondName)
+                        .setParameter("lastName", lastName);
+            } catch (Exception e){
+            }
+
+        return persons;
     }
 
     @Override
     public Person getByEmail(String email) {
-        return AnyJpqlQueryOne(String.format("SELECT p FROM person p JOIN contact c WHERE c.email = %s", email));
+        Person person=null;
+
+        if (email!=null)
+            try{
+                person = (Person) em.createQuery("SELECT DISTINCT p FROM Person p JOIN p.contacts c WHERE c.email = :email")
+                        .setParameter("email", email)
+                        .getSingleResult();
+            } catch (Exception e){
+            }
+
+        return person;
     }
 
     @Override
     public Person getByTelephone(String telephone) {
-        return AnyJpqlQueryOne(String.format("SELECT p FROM person p JOIN contact c WHERE c.telephone = %s", telephone));
+        Person person=null;
+
+        if (telephone!=null)
+            try{
+                person = (Person) em.createQuery("SELECT DISTINCT p FROM Person p JOIN p.contacts c WHERE c.telephone = :telephone")
+                        .setParameter("telephone", telephone)
+                        .getSingleResult();
+            } catch (Exception e){
+            }
+
+        return person;
     }
 
     @Override
     public List<Person> getAllPersons(){
-        return  AnyJpqlQuery("SELECT p FROM PERSON p ");
+        return  AnyJpqlQuery("SELECT p FROM Person p ");
     }
 
     @Override
     public List<Person> getPersons(String jpql) {
         return  AnyJpqlQuery(jpql);
+    }
 
+    //    @Override
+    //    public List<Person> getPersons(Predicate predicate) {
+    //        return  AnyJpqlQuery(String.format("SELECT p FROM PERSON p "));
+    //    }
 
-//    @Override
-//    public List<Person> getPersonsByRoom(Room room) {
-//        return AnyJpqlQueryOne(String.format("SELECT p FROM person p JOIN contact c WHERE c.email = %s", email));
-//    }
-//    @Override
-//    public List<Person> getPersons(Predicate predicate) {
-//        return  AnyJpqlQuery(String.format("SELECT p FROM PERSON p "));
-//    }
+    @Override
+    public List<Person> getPersonsByRoom(long idRoom) {
+        List<Person> persons=null;
 
-}
-
+        try{
+            persons = (List<Person>) em.createQuery("SELECT DISTINCT p FROM Person p " +
+                    " Join p.user u1 " +
+                    ", UserGrantedAuthority a " +
+                    " Join a.user u2 " +
+                    " Join a.room r " +
+                    " WHERE u1.id=u2.id and r.id = :idRoom")
+                    .setParameter("idRoom", idRoom);
+        } catch (Exception e){
+        }
+        return persons;
+    }
 
 }
 

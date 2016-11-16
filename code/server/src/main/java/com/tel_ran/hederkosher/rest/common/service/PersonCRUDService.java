@@ -11,6 +11,7 @@ public interface PersonCRUDService {
     ServiceResult getByEmail(String email);
     ServiceResult getByTelephone(String telephone);
     ServiceResult getAllPersons();
+    ServiceResult getByRoom(long idRoom);
 
     ServiceResult createPerson(Person person);
     ServiceResult updatePerson(Person person);

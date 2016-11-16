@@ -69,6 +69,13 @@ public class PersonCRUDServiceImpl implements PersonCRUDService {
     }
 
     @Override
+    public ServiceResult getByRoom(long idRoom) {
+        result = ServiceResultFactory.OK;
+        result.setData(personDao.getPersonsByRoom(idRoom));
+        return result;
+    }
+
+    @Override
     public ServiceResult createPerson(Person person) {
         if (personDao.addPerson(person)) {
             result = ServiceResultFactory.OK;
