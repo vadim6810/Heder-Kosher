@@ -6,14 +6,13 @@ import javax.persistence.*;
  * Created by Ruslan on 12.08.2016.
  */
 @Entity
-@Table(name = "contact") //, schema = "heder-kosher", catalog = ""
+@Table(name = "contact")
 public class Contact {
 
     @Id
     @Column(name = "ID", nullable = false, unique = true)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-
 
     @Column(name = "TELEPHONE", nullable = false)
     private String telephone;
@@ -22,7 +21,6 @@ public class Contact {
     private String email;
 
     @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "PERSON_ID", foreignKey = @ForeignKey(name = "FK_PERSON_CONTACT$PERSON_ID"))
     private Person person;
 
     public Contact(String telephone, String email, Person person) {

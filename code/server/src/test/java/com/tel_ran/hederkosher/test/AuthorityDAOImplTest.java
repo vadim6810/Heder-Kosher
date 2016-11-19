@@ -1,4 +1,4 @@
-package com.tel_ran.hederkosher.model.security.dao.implementation.test;
+package com.tel_ran.hederkosher.test;
 
 import com.tel_ran.hederkosher.model.security.dao.AuthorityDAO;
 import com.tel_ran.hederkosher.model.security.entity.Authority;
@@ -11,7 +11,8 @@ import java.util.List;
  * Created by Igor on 07.08.2016.
  */
 
-public class AuthorityDAOImplTest implements AuthorityDAO {
+public class AuthorityDAOImplTest  implements AuthorityDAO {
+
     private static List<Authority> authorities;
     static {
         authorities = fillActions();

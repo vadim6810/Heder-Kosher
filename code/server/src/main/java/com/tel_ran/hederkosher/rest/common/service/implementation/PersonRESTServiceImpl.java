@@ -1,19 +1,19 @@
 package com.tel_ran.hederkosher.rest.common.service.implementation;
 
-import com.tel_ran.hederkosher.exception.PersonNotFoundException;
-import com.tel_ran.hederkosher.model.common.dao.PersonDao;
+import com.tel_ran.hederkosher.exception.TemplateNotFoundException;
+import com.tel_ran.hederkosher.model.common.dao.IPersonDao;
 import com.tel_ran.hederkosher.model.common.entity.Person;
 import com.tel_ran.hederkosher.rest.ServiceResult;
 import com.tel_ran.hederkosher.rest.ServiceResultFactory;
-import com.tel_ran.hederkosher.rest.common.service.PersonCRUDService;
+import com.tel_ran.hederkosher.rest.common.service.IPersonRESTService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service("personCRUDService")
-public class PersonCRUDServiceImpl implements PersonCRUDService {
+public class PersonRESTServiceImpl implements IPersonRESTService {
 
     @Autowired
-    private PersonDao personDao;
+    private IPersonDao personDao;
 
     private ServiceResult result;
 
@@ -22,7 +22,7 @@ public class PersonCRUDServiceImpl implements PersonCRUDService {
         Person person=null;
         try {
             person= personDao.getById(id);
-        } catch (PersonNotFoundException e) {
+        } catch (TemplateNotFoundException e) {
             result = ServiceResultFactory.NOT_FOUND;
             result.setData(id);
             result.setDescription(e.getMessage());
@@ -68,12 +68,12 @@ public class PersonCRUDServiceImpl implements PersonCRUDService {
         return result;
     }
 
-    @Override
-    public ServiceResult getByRoom(long idRoom) {
-        result = ServiceResultFactory.OK;
-        result.setData(personDao.getPersonsByRoom(idRoom));
-        return result;
-    }
+//    @Override
+//    public ServiceResult getByRoom(long idRoom) {
+//        result = ServiceResultFactory.OK;
+//        result.setData(personDao.getPersonsByRoom(idRoom));
+//        return result;
+//    }
 
     @Override
     public ServiceResult createPerson(Person person) {

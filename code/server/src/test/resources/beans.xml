@@ -1,0 +1,61 @@
+<!--<?xml version="1.0" encoding="UTF-8"?>-->
+<!--&lt;!&ndash;suppress SpringFacetInspection &ndash;&gt;-->
+<!--<beans  xmlns="http://www.springframework.org/schema/beans"-->
+		<!--xmlns:context="http://www.springframework.org/schema/context"-->
+		<!--xmlns:tx="http://www.springframework.org/schema/tx"-->
+		<!--xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"-->
+		<!--xsi:schemaLocation="-->
+	   <!--http://www.springframework.org/schema/beans-->
+	   <!--http://www.springframework.org/schema/beans/spring-beans-4.0.xsd-->
+	   <!--http://www.springframework.org/schema/context-->
+	   <!--http://www.springframework.org/schema/context/spring-context-3.0.xsd-->
+	   <!--http://www.springframework.org/schema/tx-->
+	   <!--http://www.springframework.org/schema/tx/spring-tx-3.0.xsd" >-->
+
+	<!--&lt;!&ndash;&lt;!&ndash; Spring Annotations &ndash;&gt;&ndash;&gt;-->
+	<!--&lt;!&ndash;<context:annotation-config/>&ndash;&gt;-->
+	<!--&lt;!&ndash;<context:component-scan base-package="com.tel_ran.hederkosher.*"/>&ndash;&gt;-->
+	<!--&lt;!&ndash;&lt;!&ndash;entityManagerFactoryBean&ndash;&gt;&ndash;&gt;-->
+
+	<!--&lt;!&ndash;<context:component-scan base-package="pl.com.radzikowski.webmail">&ndash;&gt;-->
+	<!--&lt;!&ndash;<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller" />&ndash;&gt;-->
+	<!--&lt;!&ndash;</context:component-scan>&ndash;&gt;-->
+
+
+	<!--&lt;!&ndash; Entity Manager Factory for creating/updating DB schema based on persistence files and entity classes &ndash;&gt;-->
+	<!--<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalEntityManagerFactoryBean">-->
+		<!--&lt;!&ndash;<property name="persistenceUnitName" value="HederKosherSpringHibernate" />&ndash;&gt;-->
+		<!--<property name="persistenceUnitName" value="HKSpringHibernate" />-->
+	<!--</bean>-->
+	<!--<bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />-->
+
+
+	<!--&lt;!&ndash; Activates annotation based transaction management &ndash;&gt;-->
+	<!--<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">-->
+		<!--<property name="entityManagerFactory" ref="entityManagerFactory" />-->
+	<!--</bean>-->
+	<!--<tx:annotation-driven transaction-manager="transactionManager" />-->
+
+
+	 <!--&lt;!&ndash;&lt;!&ndash;Persistance Unit Manager for persistance options managing&ndash;&gt;&ndash;&gt;-->
+	<!--&lt;!&ndash;<bean id="persistenceUnitManager" class="org.springframework.orm.jpa.persistenceunit.DefaultPersistenceUnitManager">&ndash;&gt;-->
+		<!--&lt;!&ndash;<property name="defaultDataSource" ref="dataSource"/>&ndash;&gt;-->
+	<!--&lt;!&ndash;</bean>&ndash;&gt;-->
+
+
+	<!--&lt;!&ndash;&lt;!&ndash; Database &ndash;&gt;&ndash;&gt;-->
+	<!--&lt;!&ndash;<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">&ndash;&gt;-->
+		<!--&lt;!&ndash;<property name="driverClassName" value="com.mysql.jdbc.Driver" />&ndash;&gt;-->
+		<!--&lt;!&ndash;<property name="url" value="jdbc:mysql://localhost/civilforsvaret11" />&ndash;&gt;-->
+		<!--&lt;!&ndash;<property name="username" value="bla" />&ndash;&gt;-->
+		<!--&lt;!&ndash;<property name="password" value="bla" />&ndash;&gt;-->
+	<!--&lt;!&ndash;</bean>&ndash;&gt;-->
+
+
+
+	<!--&lt;!&ndash;&lt;!&ndash;<bean class="com.tel_ran.hederkosher.model.common.dao.implementation.PersonDaoImpl" />&ndash;&gt;&ndash;&gt;-->
+
+<!--</beans>-->
+
+
+

@@ -4,112 +4,99 @@
 
 package com.tel_ran.hederkosher.model.common.dao.implementation;
 
-import com.tel_ran.hederkosher.model.common.dao.OfficeDao;
+import com.tel_ran.hederkosher.exception.TemplateNotFoundException;
+import com.tel_ran.hederkosher.model.common.dao.IOfficeDao;
 import com.tel_ran.hederkosher.model.common.entity.Office;
-import com.tel_ran.hederkosher.service.HibUtil;
-import org.hibernate.HibernateException;
-import org.hibernate.Session;
-import org.hibernate.query.Query;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.List;
 
-//import java.sql.SQLException;
 
-//@Service("officeDAOService")
-public class OfficeDaoImpl implements OfficeDao {
+@Repository
+public class OfficeDaoImpl implements IOfficeDao {
 
-    @Autowired
-    private HibUtil hibernateUtil;
-    public void setHibernateUtil(HibUtil hibernateUtil) {
-        this.hibernateUtil = hibernateUtil;
+    @PersistenceContext(name = "HKSpringHibernate")    //@PersistenceContext
+    EntityManager em;
+
+    public OfficeDaoImpl() {
     }
 
     @Override
-    public boolean addOffice(Office office) { //throws SQLException
-        if (office == null){
-            //throw new NullPointerException();
+    @Transactional
+    public boolean addOffice(Office office) {
+        if ((office==null) || (em.find(Office.class,office.getId())!=null))
             return false;
-        }
-        try(Session session= hibernateUtil.getSessionFactory().openSession()){ //.getSessionFactory()
-            session.beginTransaction();
-            session.save(office);
-            session.getTransaction().commit();
-        } catch (HibernateException e) {
-//            e.printStackTrace();
-            return false;
-        }
+        em.persist(office);
         return true;
     }
+
     @Override
+    @Transactional
     public boolean updateOffice(Office office) {
-        if (office == null){
-            //throw new NullPointerException();
+        if ((office==null) || (em.find(Office.class,office.getId())==null))
             return false;
-        }
-        try(Session session = hibernateUtil.getSessionFactory().openSession()){ //.getSessionFactory()
-            session.beginTransaction();
-//            session.saveOrUpdate(person);
-            session.update(office);
-            session.getTransaction().commit();
-        } catch (HibernateException e) {
-    //            e.printStackTrace();
-            return false;
-        }
+
+        em.persist(office);
         return true;
     }
 
     @Override
-    public boolean deleteOffice(Office office)  { //throws SQLException
-        if (office == null){
-            //throw new NullPointerException();
+    @Transactional
+    public boolean deleteOffice(long id)  {
+        Office office =em.find(Office.class,id);
+        if (office==null)
             return false;
-        }
-        try(Session session= hibernateUtil.getSessionFactory().openSession()){ //.getSessionFactory()
-            session.beginTransaction();
-            session.delete(office);
-            session.getTransaction().commit();
-        } catch (HibernateException e) {
-            e.printStackTrace();
-            return false;
-        }
+        em.remove(office);
         return true;
     }
 
     @Override
-    public Office getById(long id) { //throws SQLException
-        Office result = null;
-        try (Session session= hibernateUtil.getSessionFactory().openSession()){ //.getSessionFactory()
-            result = (Office) session.get(Office.class,id);
-        } catch (Exception e) {
-//            e.printStackTrace();
-        }
-        return result;
+    public Office getById(long id) throws TemplateNotFoundException {
+        Office office = em.find(Office.class,id);
+        if (office==null)
+            throw new TemplateNotFoundException("Office",id);
+        return office;
     }
 
     @Override
-    public Office getByName(String name) {
-        Office result = null;
-        try(Session session= hibernateUtil.getSessionFactory().openSession()){ //.getSessionFactory()
-            Query query = session.createQuery("from Office where name = :paramName");
-            query.setParameter("paramName", name);
-            result = (Office)query.list();
-        } catch (Exception e) {
-//            e.printStackTrace();
-        }
-        return result;
+    public List<Office> getByName(String name) {
+        List<Office> office=null;
+
+        if (name!=null)
+            try{
+                office = (List<Office>) em.createQuery("SELECT p FROM Office p WHERE name = :name")
+                        .setParameter("name", name);
+            } catch (Exception e){
+            }
+
+        return office;
     }
 
     @Override
     public List<Office> getAllOffices(){
-        List<Office> result = null;
-        try(Session session= hibernateUtil.getSessionFactory().openSession()){ //.getSessionFactory()
-            result = (List<Office>)session.createQuery("FROM Office").list();
+        List<Office> office=null;
 
-        } catch (Exception e) {
-//            e.printStackTrace();
+        try{
+            office = (List<Office>) em.createQuery("SELECT p FROM Office p");
+        } catch (Exception e){
         }
-        return result;
+
+        return office;
+    }
+
+    @Override
+    public List<Office> getAllOfficesActives() {
+        List<Office> office=null;
+
+        try{
+            office = (List<Office>) em.createQuery("SELECT p FROM Office p where isEnable is true ");
+        } catch (Exception e){
+        }
+
+        return office;
     }
 
 

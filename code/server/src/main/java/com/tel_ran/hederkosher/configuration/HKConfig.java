@@ -2,29 +2,29 @@ package com.tel_ran.hederkosher.configuration;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.hibernate5.Hibernate5Module;
-import com.tel_ran.hederkosher.service.HibUtil;
-import org.hibernate.internal.SessionFactoryImpl;
 import org.hibernate.jpa.HibernatePersistenceProvider;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.*;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
-import org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.method.configuration.*;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+import org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.*;
-import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import javax.annotation.Resource;
-import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 import java.util.List;
 import java.util.Properties;
@@ -127,6 +127,8 @@ public class HKConfig {
 
             entityManagerFactoryBean.setJpaProperties(hibProperties());
 
+            entityManagerFactoryBean.setPersistenceUnitName("HKSpringHibernate");
+
             return entityManagerFactoryBean;
         }
 
@@ -145,6 +147,17 @@ public class HKConfig {
             transactionManager.setEntityManagerFactory(entityManagerFactory().getObject());
             return transactionManager;
         }
+
+
+//        @Bean
+//        public LocalPersistenceManagerFactoryBean persistensManagerFactory() {
+//            LocalPersistenceManagerFactoryBean persistensManagerFactoryBean = new LocalPersistenceManagerFactoryBean();
+//            persistensManagerFactoryBean.setConfigLocation("hibernate.properties");
+//
+//            return persistensManagerFactoryBean;
+//        }
+//
+
 
     }
 

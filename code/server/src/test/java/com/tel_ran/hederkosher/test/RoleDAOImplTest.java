@@ -1,4 +1,4 @@
-package com.tel_ran.hederkosher.model.security.dao.implementation.test;
+package com.tel_ran.hederkosher.test;
 
 import com.tel_ran.hederkosher.model.security.dao.AuthorityDAO;
 import com.tel_ran.hederkosher.model.security.dao.RoleDAO;

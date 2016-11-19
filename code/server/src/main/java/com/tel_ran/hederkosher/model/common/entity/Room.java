@@ -6,10 +6,11 @@ package com.tel_ran.hederkosher.model.common.entity;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.Set;
 
 @Entity
-@Table(name = "room") //, schema = "heder-kosher", catalog = ""
+@Table(name = "room")
 public class Room {
 
     @Id
@@ -20,32 +21,34 @@ public class Room {
     @Column(name = "NAME", nullable = false)
     private String name;
 
-    @Column(name = "ADDRESS", nullable = false, columnDefinition = "TEXT")
-    private String address;
-
     @Column(name = "DATE_CREATE", nullable = false)
-    private LocalDateTime dCreate;
+    private Date dCreate;
 
     @Column(name = "DATE_CLOSE")
-    private LocalDateTime dClose;
+    private Date dClose;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Office office;
 
+    @OneToMany(fetch = FetchType.LAZY)
+    private Set<Address> address;
 
+    @Column(name = "IS_ENABLE", nullable = false)
+    private boolean isEnable;
 
-    public Room(String name, String address, LocalDateTime dCreate) {
+    public Room(String name, Set<Address> address, Date dCreate, boolean isEnable) {
         this.name = name;
         this.address = address;
         this.dCreate = dCreate;
+        this.isEnable = isEnable;
     }
     public Room() {
     }
 
 
-//    public void setId(long id) {
-//        this.id = id;
-//    }
+    public void setId(long id) {
+        this.id = id;
+    }
     public long getId() {
         return id;
     }
@@ -57,26 +60,32 @@ public class Room {
         return name;
     }
 
-
-    public void setAddress(String address) {
+    public void setAddress(Set<Address> address) {
         this.address = address;
     }
-    public String getAddress() {
+    public Set<Address> getAddress() {
         return address;
     }
 
-    public LocalDateTime getDcreate() {
+    public Date getDcreate() {
         return dCreate;
     }
-    public void setDcreate(LocalDateTime dCreate) {
+    public void setDcreate(Date dCreate) {
         this.dCreate = dCreate;
     }
 
-    public LocalDateTime getDclose() {
+    public Date getDclose() {
         return dClose;
     }
-    public void setDclose(LocalDateTime dClose) {
+    public void setDclose(Date dClose) {
         this.dClose = dClose;
+    }
+
+    public boolean isEnable() {
+        return isEnable;
+    }
+    public void setEnable(boolean enable) {
+        isEnable = enable;
     }
 
     @Override
@@ -87,10 +96,10 @@ public class Room {
         Room that = (Room) o;
 
         if (id != that.id) return false;
-        if (name != null ? !name.equals(that.name) : that.name != null) return false;
-        if (address != null ? !address.equals(that.address) : that.address != null) return false;
-        if (dCreate != null ? !dCreate.equals(that.dCreate) : that.dCreate != null) return false;
-        if (dClose != null ? !dClose.equals(that.dClose) : that.dClose != null) return false;
+//        if (name != null ? !name.equals(that.name) : that.name != null) return false;
+//        if (address != null ? !address.equals(that.address) : that.address != null) return false;
+//        if (dCreate != null ? !dCreate.equals(that.dCreate) : that.dCreate != null) return false;
+//        if (dClose != null ? !dClose.equals(that.dClose) : that.dClose != null) return false;
 
         return true;
     }
@@ -98,10 +107,10 @@ public class Room {
     @Override
     public int hashCode() {
         int result = (int)id;
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + (address != null ? address.hashCode() : 0);
-        result = 31 * result + (dCreate != null ? dCreate.hashCode() : 0);
-        result = 31 * result + (dClose != null ? dClose.hashCode() : 0);
+//        result = 31 * result + (name != null ? name.hashCode() : 0);
+//        result = 31 * result + (address != null ? address.hashCode() : 0);
+//        result = 31 * result + (dCreate != null ? dCreate.hashCode() : 0);
+//        result = 31 * result + (dClose != null ? dClose.hashCode() : 0);
         return result;
     }
 }

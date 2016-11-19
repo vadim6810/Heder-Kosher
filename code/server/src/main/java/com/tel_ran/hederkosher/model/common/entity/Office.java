@@ -6,7 +6,7 @@ package com.tel_ran.hederkosher.model.common.entity;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.Set;
+//import java.util.Set;
 
 @Entity
 @Table(name = "office") //, schema = "heder-kosher", catalog = ""
@@ -20,24 +20,27 @@ public class Office {
     @Column(name = "NAME", nullable = false)
     private String name;
 
-    @Column(name = "ADDRESS", nullable = false, columnDefinition = "TEXT")
-    private String address;
-
     @Column(name = "DATE_CREATE", nullable = false)
     private LocalDateTime dCreate;
 
     @Column(name = "DATE_CLOSE")
     private LocalDateTime dClose;
 
+    @Column(name = "IS_ENABLE", nullable = false)
+    private boolean isEnable;
+
+
 //    @Column(name = "ROOM")
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "office")
-    private Set<Room> rooms;
+//    @OneToMany(fetch = FetchType.LAZY, mappedBy = "office")
+//    private Set<Room> rooms;
 
+//    @Column(name = "ADDRESS", nullable = false, columnDefinition = "TEXT")
+//    private String address;
 
-    public Office(String name, String address, LocalDateTime dCreate) {
+    public Office(String name, LocalDateTime dCreate,boolean isEnable) {
         this.name = name;
-        this.address = address;
         this.dCreate = dCreate;
+        this.isEnable = isEnable;
     }
     public Office() {
     }
@@ -58,12 +61,12 @@ public class Office {
     }
 
 
-    public void setAddress(String address) {
-        this.address = address;
-    }
-    public String getAddress() {
-        return address;
-    }
+//    public void setAddress(String address) {
+//        this.address = address;
+//    }
+//    public String getAddress() {
+//        return address;
+//    }
 
     public LocalDateTime getDcreate() {
         return dCreate;
@@ -79,6 +82,14 @@ public class Office {
         this.dClose = dClose;
     }
 
+    public boolean isEnable() {
+        return isEnable;
+    }
+    public void setEnable(boolean enable) {
+        isEnable = enable;
+    }
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -87,10 +98,10 @@ public class Office {
         Office that = (Office) o;
 
         if (id != that.id) return false;
-        if (name != null ? !name.equals(that.name) : that.name != null) return false;
-        if (address != null ? !address.equals(that.address) : that.address != null) return false;
-        if (dCreate != null ? !dCreate.equals(that.dCreate) : that.dCreate != null) return false;
-        if (dClose != null ? !dClose.equals(that.dClose) : that.dClose != null) return false;
+//        if (name != null ? !name.equals(that.name) : that.name != null) return false;
+//        if (address != null ? !address.equals(that.address) : that.address != null) return false;
+//        if (dCreate != null ? !dCreate.equals(that.dCreate) : that.dCreate != null) return false;
+//        if (dClose != null ? !dClose.equals(that.dClose) : that.dClose != null) return false;
 
         return true;
     }
@@ -98,10 +109,10 @@ public class Office {
     @Override
     public int hashCode() {
         int result = (int)id;
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + (address != null ? address.hashCode() : 0);
-        result = 31 * result + (dCreate != null ? dCreate.hashCode() : 0);
-        result = 31 * result + (dClose != null ? dClose.hashCode() : 0);
+//        result = 31 * result + (name != null ? name.hashCode() : 0);
+//        result = 31 * result + (address != null ? address.hashCode() : 0);
+//        result = 31 * result + (dCreate != null ? dCreate.hashCode() : 0);
+//        result = 31 * result + (dClose != null ? dClose.hashCode() : 0);
         return result;
     }
 }

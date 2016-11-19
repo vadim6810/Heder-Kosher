@@ -12,13 +12,9 @@ import java.util.Date;
 import java.util.Set;
 
 
-//@Table(name = "person", uniqueConstraints = {
-//        @UniqueConstraint(columnNames = "ID"),
-//        @UniqueConstraint(columnNames = "EMAIL") })
-
-@Markable
+//@Markable
 @Entity
-@Table(name = "person") //, schema = "heder-kosher", catalog = ""
+@Table(name = "person")
 public class Person  {
 
     @Id
@@ -26,57 +22,66 @@ public class Person  {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    //    @NaturalId(mutable = false)
     @Column(name = "PASSPORT_NO", nullable = false) //, length = 50
     private String passportNo;
 
-//    @NaturalId(mutable = false)
     @Column(name = "FIRST_NAME", nullable = false)
     private String fistName;
 
-//    @NaturalId(mutable = false)
     @Column(name = "SECOND_NAME")
     private String secondName;
 
-//    @NaturalId(mutable = false)
     @Column(name = "LAST_NAME")
     private String lastName;
 
     @Column(name = "BIRTHDAY", nullable = false)
     private Date birthday;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "person")
-//    @JoinTable(name = "person_contact")
-    private Set<Contact> contacts;
+//    @Column(name = "AGE", nullable = false)
+//    private boolean age ;
+
+    @Column(name = "SEX", nullable = false)
+    private boolean sex ;
+
+    @Column(name = "HEIGHT", nullable = false)
+    private int height ;
+
+    @Column(name = "WEIGHT", nullable = false)
+    private int weight ;
 
     @OneToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "USER_ID", foreignKey = @ForeignKey(name = "FK_PERSON$USER_ID"))
-//    @JoinTable(name = "user",
-//               joinColumns = @JoinColumn(name = "ID"),
-//               inverseJoinColumns = @JoinColumn(name = "USER_ID"))
-    private User user;
+    private Gym gym ;
+
+
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "person")
+    private Set<Contact> contacts;
+
+//    @OneToOne(fetch = FetchType.LAZY)
+//    private User user;
+
+    @OneToMany(fetch = FetchType.LAZY)
+    private Set<Address> address;
+
 
     public Person(String passportNo, String firstName, String secondName, String lastName
-            , Date birthday, User user) {
+            , Date birthday,  Set<Address> address) { //User user,
         //this.id = id;
         this.passportNo = passportNo;
         this.fistName = firstName;
         this.secondName = secondName;
         this.lastName = lastName;
         this.birthday = birthday;
-        this.user = user;
+//        this.user = user;
+        this.address = address;
     }
 
     public Person(){    }
 
 
-    //    public void setIdPerson(long id) {
-//        this.id = id;
-//    }
     public long getId() {
         return id;
     }
-
     public void setId(long id) {
         this.id = id;
     }
@@ -117,12 +122,20 @@ public class Person  {
         this.birthday = birthday;
     }
 
-    public User getUser() {
-        return user;
+    public void setAddress(Set<Address> address) {
+        this.address = address;
     }
-    public void setUser(User user) {
-        this.user = user;
+    public Set<Address> getAddress() {
+        return address;
     }
+
+//    public User getUser() {
+//        return user;
+//    }
+//    public void setUser(User user) {
+//        this.user = user;
+//    }
+
 
     public Set<Contact> getContacts() {
         return contacts;
@@ -145,6 +158,7 @@ public class Person  {
         if (lastName != null ? !lastName.equals(that.lastName) : that.lastName != null) return false;
         if (secondName != null ? !secondName.equals(that.secondName) : that.secondName != null) return false;
         if (birthday != null ? !birthday.equals(that.birthday) : that.birthday != null) return false;
+        if (address != null ? !address.equals(that.address) : that.address != null) return false;
 
         return true;
     }
@@ -157,7 +171,8 @@ public class Person  {
         result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
         result = 31 * result + (secondName != null ? secondName.hashCode() : 0);
         result = 31 * result + (birthday != null ? birthday.hashCode() : 0);
-        return result;
+        result = 31 * result + (address != null ? address.hashCode() : 0);
+       return result;
     }
 
     @Override
@@ -169,7 +184,7 @@ public class Person  {
                 ", secondName='" + secondName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", birthday=" + birthday +
-                ", user=" + user +
+//                ", user=" + user +
                 '}';
     }
 

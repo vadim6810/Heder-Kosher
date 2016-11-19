@@ -1,8 +1,7 @@
-package com.tel_ran.hederkosher.model.common.dao.implementation;
+package com.tel_ran.hederkosher.test.old;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.PersistenceContextType;
 import javax.persistence.Query;
 import java.util.Arrays;
 import java.util.List;
@@ -12,8 +11,10 @@ import java.util.List;
  */
 public class AnyJpqlDao<T> {
 
-    @PersistenceContext(name = "HederKosherSpringHibernate",type = PersistenceContextType.EXTENDED)
+//    @PersistenceContext(name = "HederKosherSpringHibernate",type = PersistenceContextType.EXTENDED)
 //    @PersistenceContext
+//@PersistenceContext(name = "HKSpringHibernate")
+    @PersistenceContext
     EntityManager em;
 
     public AnyJpqlDao() {

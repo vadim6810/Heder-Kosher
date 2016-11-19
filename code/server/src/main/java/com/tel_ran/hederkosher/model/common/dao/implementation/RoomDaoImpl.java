@@ -4,116 +4,100 @@
 
 package com.tel_ran.hederkosher.model.common.dao.implementation;
 
-import com.tel_ran.hederkosher.model.common.dao.RoomDao;
-import com.tel_ran.hederkosher.model.common.entity.Contact;
-import com.tel_ran.hederkosher.model.common.entity.Person;
+import com.tel_ran.hederkosher.exception.TemplateNotFoundException;
+import com.tel_ran.hederkosher.model.common.dao.IRoomDao;
 import com.tel_ran.hederkosher.model.common.entity.Room;
-import com.tel_ran.hederkosher.service.HibUtil;
-import org.hibernate.HibernateException;
-import org.hibernate.Session;
-import org.hibernate.query.Query;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.List;
-import java.util.function.Predicate;
 
-//import java.sql.SQLException;
+@Repository
+public class RoomDaoImpl implements IRoomDao {
 
-//@Service("roomDAOService")
-public class RoomDaoImpl implements RoomDao {
+    @PersistenceContext(name = "HKSpringHibernate")    //@PersistenceContext
+    EntityManager em;
 
-    @Autowired
-    private HibUtil hibernateUtil;
-    public void setHibernateUtil(HibUtil hibernateUtil) {
-        this.hibernateUtil = hibernateUtil;
+    public RoomDaoImpl() {
     }
 
     @Override
-    public boolean addRoom(Room room) { //throws SQLException
-        if (room == null){
-            //throw new NullPointerException();
+    @Transactional
+    public boolean addRoom(Room room) {
+        if ((room==null) || (em.find(Room.class,room.getId())!=null))
             return false;
-        }
-        try(Session session= hibernateUtil.getSessionFactory().openSession()){ //.getSessionFactory()
-            session.beginTransaction();
-            session.save(room);
-            session.getTransaction().commit();
-        } catch (HibernateException e) {
-//            e.printStackTrace();
-            return false;
-        }
+        em.persist(room);
         return true;
     }
+
     @Override
+    @Transactional
     public boolean updateRoom(Room room) {
-        if (room == null){
-            //throw new NullPointerException();
+        if ((room==null) || (em.find(Room.class,room.getId())==null))
             return false;
-        }
-        try(Session session = hibernateUtil.getSessionFactory().openSession()){ //.getSessionFactory()
-            session.beginTransaction();
-//            session.saveOrUpdate(person);
-            session.update(room);
-            session.getTransaction().commit();
-        } catch (HibernateException e) {
-    //            e.printStackTrace();
-            return false;
-        }
+
+        em.persist(room);
         return true;
     }
 
     @Override
-    public boolean deleteRoom(Room room)  { //throws SQLException
-        if (room == null){
-            //throw new NullPointerException();
-            return false;
+    @Transactional
+    public boolean deleteRoom(long id)  {
+        Room room =em.find(Room.class,id);
+            if (room==null)
+                return false;
+            em.remove(room);
+            return true;
         }
-        try(Session session= hibernateUtil.getSessionFactory().openSession()){ //.getSessionFactory()
-            session.beginTransaction();
-            session.delete(room);
-            session.getTransaction().commit();
-        } catch (HibernateException e) {
-            e.printStackTrace();
-            return false;
-        }
-        return true;
+
+    @Override
+    public Room getById(long id) throws TemplateNotFoundException {
+        Room room = em.find(Room.class,id);
+        if (room==null)
+            throw new TemplateNotFoundException("Room",id);
+        return room;
     }
 
     @Override
-    public Room getById(long id) { //throws SQLException
-        Room result = null;
-        try (Session session= hibernateUtil.getSessionFactory().openSession()){ //.getSessionFactory()
-            result = (Room) session.get(Room.class,id);
-        } catch (Exception e) {
-//            e.printStackTrace();
-        }
-        return result;
-    }
+    public List<Room> getByName(String name) {
+        List<Room> rooms=null;
 
-    @Override
-    public Room getByName(String name) {
-        Room result = null;
-        try(Session session= hibernateUtil.getSessionFactory().openSession()){ //.getSessionFactory()
-            Query query = session.createQuery("from room where name = :paramName");
-            query.setParameter("paramName", name);
-            result = (Room)query.list();
-        } catch (Exception e) {
-//            e.printStackTrace();
-        }
-        return result;
+        if (name!=null)
+            try{
+                rooms = (List<Room>) em.createQuery("SELECT p FROM Room p WHERE name = :name")
+                        .setParameter("name", name)
+                        .getResultList();
+            } catch (Exception e){
+            }
+        return rooms;
     }
 
     @Override
     public List<Room> getAllRooms(){
-        List<Room> result = null;
-        try(Session session= hibernateUtil.getSessionFactory().openSession()){ //.getSessionFactory()
-            result = (List<Room>)session.createQuery("FROM room").list();
+        List<Room> rooms=null;
 
-        } catch (Exception e) {
-//            e.printStackTrace();
+        try{
+            rooms = (List<Room>) em.createQuery("SELECT p FROM Room p")
+                    .getResultList();
+        } catch (Exception e){
         }
-        return result;
+
+        return rooms;
+    }
+
+    @Override
+    public List<Room> getAllRoomsActives() {
+        List<Room> rooms=null;
+
+        try{
+            rooms = (List<Room>) em.createQuery("SELECT p FROM Room p where isEnable = true ")
+                    .getResultList();
+        } catch (Exception e){
+        }
+
+        return rooms;
     }
 
 

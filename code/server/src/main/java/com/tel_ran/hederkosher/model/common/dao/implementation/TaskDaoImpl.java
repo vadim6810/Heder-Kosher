@@ -4,6 +4,7 @@ import com.tel_ran.hederkosher.model.common.dao.TaskDao;
 import com.tel_ran.hederkosher.model.common.entity.Person;
 import com.tel_ran.hederkosher.model.common.entity.Program;
 import com.tel_ran.hederkosher.model.common.entity.Task;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,7 +17,7 @@ import java.util.List;
 @Repository
 public class TaskDaoImpl implements TaskDao {
 
-    @PersistenceContext
+    @PersistenceContext(name = "HKSpringHibernate")
     private EntityManager em;
 
     @Override

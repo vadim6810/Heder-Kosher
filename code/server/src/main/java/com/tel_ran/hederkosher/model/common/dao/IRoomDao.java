@@ -4,15 +4,17 @@
 
 package com.tel_ran.hederkosher.model.common.dao;
 
+import com.tel_ran.hederkosher.exception.TemplateNotFoundException;
 import com.tel_ran.hederkosher.model.common.entity.Room;
 
 import java.util.List;
 
-public interface RoomDao {
+public interface IRoomDao {
         boolean addRoom(Room obj);
         boolean updateRoom(Room obj);
-        boolean deleteRoom(Room obj);
-        Room getById(long id);
-        Room getByName(String name);
+        boolean deleteRoom(long id);
+        Room getById(long id) throws TemplateNotFoundException;
+        List<Room>  getByName(String name);
         List<Room> getAllRooms();
+        List<Room> getAllRoomsActives();
 }
