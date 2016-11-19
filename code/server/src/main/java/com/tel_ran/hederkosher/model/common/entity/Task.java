@@ -1,6 +1,7 @@
 package com.tel_ran.hederkosher.model.common.entity;
 
 import com.tel_ran.hederkosher.annotations.Markable;
+import com.tel_ran.hederkosher.model.security.entity.User;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -36,18 +37,23 @@ public class Task implements Serializable {
     @Column(name = "TIME")
     private Integer time;
 
-    //@JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "OWNER_ID", foreignKey = @ForeignKey(name = "FK_TASK$OWNER_ID"))
-    private Person owner;
+    private User creator;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "STATE", length = 100)
-    private State state;
+    @Column(name = "STATE", length = 50, nullable = false)
+    private TaskState state;
 
-    public Task() {}
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "PROGRAM_ID", foreignKey = @ForeignKey(name = "FK_TASK$PROGRAM_ID"))
+    private Program program;
 
-    public Task(String name, String description, boolean isTemplate, int nIterations, int nTries, int weight, int time, Person owner, State state) {
+    public Task() {
+
+    }
+
+    public Task(String name, String description, boolean isTemplate, Integer nIterations, Integer nTries, Integer weight, Integer time, User creator, Program program) {
         this.name = name;
         this.description = description;
         this.isTemplate = isTemplate;
@@ -55,8 +61,11 @@ public class Task implements Serializable {
         this.nTries = nTries;
         this.weight = weight;
         this.time = time;
-        this.owner = owner;
-        this.state = state;
+        this.creator = creator;
+        this.program = program;
+
+        //Default state
+        this.state = TaskState.DRAFT;
     }
 
     public Long getId() {
@@ -123,20 +132,27 @@ public class Task implements Serializable {
         this.time = time;
     }
 
-    public Person getOwner() {
-        return owner;
+    public User getCreator() {
+        return creator;
     }
 
-    public void setOwner(Person owner) {
-        this.owner = owner;
+    public void setCreator(User creator) {
+        this.creator = creator;
     }
 
-    public State getState() {
+    public TaskState getState() {
         return state;
     }
 
-    public void setState(State state) {
+    public void setState(TaskState state) {
         this.state = state;
     }
 
+    public Program getProgram() {
+        return program;
+    }
+
+    public void setProgram(Program program) {
+        this.program = program;
+    }
 }

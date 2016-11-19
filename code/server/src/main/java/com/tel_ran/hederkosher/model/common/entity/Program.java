@@ -1,17 +1,16 @@
 package com.tel_ran.hederkosher.model.common.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import com.tel_ran.hederkosher.annotations.Markable;
+import com.tel_ran.hederkosher.model.security.entity.User;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
-
-/**
- * Created by Egor on 07.08.2016.
- * Entity class for program of excercises
- */
 
 @Markable
 @Entity
@@ -26,56 +25,51 @@ public class Program {
     @Column(name = "NAME", nullable = false)
     private String name;
 
+    @Column(name = "DESCRIPTION", columnDefinition = "TEXT")
+    private String description;
+
     @Column(name = "DATE_CREATE", nullable = false)
-    private LocalDateTime dCreate;
+    private LocalDateTime dateCreate;
 
     @Column(name = "DATE_CLOSE")
-    private LocalDateTime dClose;
+    private LocalDateTime dateClose;
 
     @Column(name = "IS_TEMPLATE", nullable = false)
     private boolean isTemplate;
 
-    //@ManyToOne(targetEntity = Person.class, fetch = FetchType.LAZY)
-    @ManyToOne
-    @JoinColumn(name = "OWNER_ID", foreignKey = @ForeignKey(name = "FK_PROGRAM$OWNER_ID"))
-    private Person owner;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CREATOR_ID", foreignKey = @ForeignKey(name = "FK_PROGRAM$CREATOR_ID"))
+    private User creator;
 
-    //@ManyToOne(targetEntity = Person.class, fetch = FetchType.LAZY)
-    @ManyToOne
-    @JoinColumn(name = "PRODUCER_ID", foreignKey = @ForeignKey(name = "FK_PROGRAM$PRODUCER_ID"))
-    private Person producer;
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "program_clients")
+    private List<User> clients;
 
-    //@ManyToOne(targetEntity = Person.class, fetch = FetchType.LAZY)
-    @ManyToOne
-    @JoinColumn(name = "CLIENT_ID", foreignKey = @ForeignKey(name = "FK_PROGRAM$CLIENT_ID"))
-    private Person client;
-
-    //@ManyToOne(targetEntity = Room.class, fetch = FetchType.LAZY)
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ROOM_ID", foreignKey = @ForeignKey(name = "FK_PROGRAM$ROOM_ID"))
     private Room room;
 
-    //@ManyToOne(targetEntity = State.class)
     @Enumerated(EnumType.STRING)
-    @Column(name = "STATE", length = 100)
-    private State state;
+    @Column(name = "STATE", length = 50, nullable = false)
+    private ProgramState state;
 
-    @OneToMany(targetEntity = Task.class, mappedBy = "owner")
+    @OneToMany(mappedBy = "program", fetch = FetchType.LAZY)
     private List<Task> tasks;
 
     public Program() {
     }
 
-    public Program(String name, LocalDateTime dCreate, LocalDateTime dClose, boolean isTemplate, Person owner, Person producer, Person client, Room room, State state) {
+    public Program(String name, String description, LocalDateTime dateCreate, LocalDateTime dateClose, boolean isTemplate, User creator, Room room) {
         this.name = name;
-        this.dCreate = dCreate;
-        this.dClose = dClose;
+        this.description = description;
+        this.dateCreate = dateCreate;
+        this.dateClose = dateClose;
         this.isTemplate = isTemplate;
-        this.owner = owner;
-        this.producer = producer;
-        this.client = client;
+        this.creator = creator;
         this.room = room;
-        this.state = state;
+
+        //Default programState
+        this.state = ProgramState.DRAFT;
     }
 
     public long getId() {
@@ -94,20 +88,28 @@ public class Program {
         this.name = name;
     }
 
-    public LocalDateTime getdCreate() {
-        return dCreate;
+    public String getDescription() {
+        return description;
     }
 
-    public void setdCreate(LocalDateTime dCreate) {
-        this.dCreate = dCreate;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public LocalDateTime getdClose() {
-        return dClose;
+    public LocalDateTime getDateCreate() {
+        return dateCreate;
     }
 
-    public void setdClose(LocalDateTime dClose) {
-        this.dClose = dClose;
+    public void setDateCreate(LocalDateTime dateCreate) {
+        this.dateCreate = dateCreate;
+    }
+
+    public LocalDateTime getDateClose() {
+        return dateClose;
+    }
+
+    public void setDateClose(LocalDateTime dateClose) {
+        this.dateClose = dateClose;
     }
 
     public boolean isTemplate() {
@@ -118,28 +120,20 @@ public class Program {
         isTemplate = template;
     }
 
-    public Person getOwner() {
-        return owner;
+    public User getCreator() {
+        return creator;
     }
 
-    public void setOwner(Person owner) {
-        this.owner = owner;
+    public void setCreator(User creator) {
+        this.creator = creator;
     }
 
-    public Person getProducer() {
-        return producer;
+    public List<User> getClients() {
+        return clients;
     }
 
-    public void setProducer(Person producer) {
-        this.producer = producer;
-    }
-
-    public Person getClient() {
-        return client;
-    }
-
-    public void setClient(Person client) {
-        this.client = client;
+    public void setClients(List<User> clients) {
+        this.clients = clients;
     }
 
     public Room getRoom() {
@@ -150,12 +144,19 @@ public class Program {
         this.room = room;
     }
 
-    public State getState() {
+    public ProgramState getState() {
         return state;
     }
 
-    public void setState(State state) {
+    public void setState(ProgramState state) {
         this.state = state;
     }
 
+    public List<Task> getTasks() {
+        return tasks;
+    }
+
+    public void setTasks(List<Task> tasks) {
+        this.tasks = tasks;
+    }
 }

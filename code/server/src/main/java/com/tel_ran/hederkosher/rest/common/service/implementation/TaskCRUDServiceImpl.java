@@ -4,44 +4,47 @@ import com.tel_ran.hederkosher.model.common.dao.TaskDao;
 import com.tel_ran.hederkosher.model.common.entity.Program;
 import com.tel_ran.hederkosher.model.common.entity.Task;
 import com.tel_ran.hederkosher.rest.ServiceResult;
-import com.tel_ran.hederkosher.rest.ServiceResultFactory;
 import com.tel_ran.hederkosher.rest.common.service.TaskCRUDService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-@Service("taskCRUDService")
+import static com.tel_ran.hederkosher.rest.ServiceResultFactory.*;
+
+@Service
 public class TaskCRUDServiceImpl implements TaskCRUDService {
 
-    @Autowired
+    //@Autowired
     private TaskDao taskDao;
 
-    private ServiceResult result;
+    public TaskCRUDServiceImpl(TaskDao aTaskDao) {
+        this.taskDao = aTaskDao;
+    }
 
     @Override
     public ServiceResult findTaskByID(long id) {
-        Task task = taskDao.getTaskById(id);
+        final Task task = taskDao.getTaskById(id);
+        final ServiceResult result;
         if (task == null) {
-            result = ServiceResultFactory.NOT_FOUND;
+            result = getResultObject(Type.NOT_FOUND);
             result.setData(id);
             result.setDescription("task with id = " + id + " not found");
             return result;
         }
-        result = ServiceResultFactory.OK;
+        result = getResultObject(Type.OK);
         result.setData(task);
         return result;
     }
 
     @Override
     public ServiceResult findAllTasks() {
-        result = ServiceResultFactory.OK;
+        final ServiceResult result = getResultObject(Type.OK); //ServiceResultFactory.OK;
         result.setData(taskDao.getAllTasks());
         return result;
     }
 
     @Override
     public ServiceResult findTasksByProgram(Program program) {
-        result = ServiceResultFactory.OK;
+        final ServiceResult result = getResultObject(Type.OK);
         result.setData(taskDao.getTasksByProgram(program));
         return result;
     }
@@ -49,10 +52,11 @@ public class TaskCRUDServiceImpl implements TaskCRUDService {
     @Override
     @Transactional
     public ServiceResult createTask(Task task) {
+        final ServiceResult result;
         if (taskDao.addTask(task)) {
-            result = ServiceResultFactory.OK;
+            result = getResultObject(Type.OK);
         } else {
-            result = ServiceResultFactory.CREATING_ERROR;
+            result = getResultObject(Type.CREATING_ERROR);
         }
         result.setData(task);
         return result;
@@ -61,7 +65,7 @@ public class TaskCRUDServiceImpl implements TaskCRUDService {
     @Override
     @Transactional
     public ServiceResult updateTask(Task task) {
-//        State currentState = stateDao.getById(state.getId());
+//        ProgramState currentState = stateDao.getById(state.getId());
 //        if (currentState == null) {
 //            result = ServiceResultFactory.NOT_FOUND;
 //            result.setData(state);
@@ -74,7 +78,7 @@ public class TaskCRUDServiceImpl implements TaskCRUDService {
         //if (stateDao.updateState(currentState)) {
         //    result = ServiceResultFactory.OK;
         //} else {
-            result = ServiceResultFactory.UPDATING_ERROR;
+        final ServiceResult result = getResultObject(Type.UPDATING_ERROR);
         //}
         //result.setData(currentState);
         return result;
@@ -83,10 +87,11 @@ public class TaskCRUDServiceImpl implements TaskCRUDService {
     @Override
     @Transactional
     public ServiceResult deleteTask(long id) {
+        final ServiceResult result;
         if (taskDao.deleteTask(id)) {
-            result = ServiceResultFactory.OK;
+            result = getResultObject(Type.OK);
         } else {
-            result = ServiceResultFactory.DELETING_ERROR;
+            result = getResultObject(Type.DELETING_ERROR);
         }
         result.setData(id);
         return result;
