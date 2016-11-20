@@ -36,7 +36,7 @@ public class PersonTestMain {
 //
 //
 //        logger.info("End ");
-////        List<Person> persons = session.IPersonDao.gets();
+////        List<Person> persons = session.PersonDao.gets();
 //
 ////        for (Person person  :persons) {
 ////            System.out.println(person.getFistName());

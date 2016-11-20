@@ -4,7 +4,7 @@
 package com.tel_ran.hederkosher.test;
 
 
-import com.tel_ran.hederkosher.model.common.dao.IPersonDao;
+import com.tel_ran.hederkosher.model.common.dao.PersonDao;
 import com.tel_ran.hederkosher.model.common.entity.Person;
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
@@ -22,8 +22,8 @@ public class PersonDaoTestMain {
             try(AbstractApplicationContext ctx = new FileSystemXmlApplicationContext("classpath:beans.xml")) {
 
 //            System.out.println(Arrays.deepToString(ctx.getBeanDefinitionNames()));
-//                IPersonDao personDao = (IPersonDao) ctx.getBean("personDaoImpl");
-                IPersonDao personDao = ctx.getBean(IPersonDao.class);
+//                PersonDao personDao = (PersonDao) ctx.getBean("personDaoImpl");
+                PersonDao personDao = ctx.getBean(PersonDao.class);
 
                 Person person = new Person("12312312312","Sidorov", "Ivan", "Petrovich", new Date(), null);
                 boolean res= personDao.addPerson(person);
@@ -39,7 +39,7 @@ public class PersonDaoTestMain {
     }
 
 //        logger.info("End ");
-//        List<Person> persons = session.IPersonDao.gets();
+//        List<Person> persons = session.PersonDao.gets();
 
 //        for (Person person  :persons) {
 //            System.out.println(person.getFistName());
