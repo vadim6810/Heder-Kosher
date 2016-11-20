@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Created by Ruslan on 18/11/16.
  */
-public interface IStateMessageDao {
+public interface StateMessageDao {
     StateMessage getByCode(String code);
     List<StateMessage> getAll();
 }

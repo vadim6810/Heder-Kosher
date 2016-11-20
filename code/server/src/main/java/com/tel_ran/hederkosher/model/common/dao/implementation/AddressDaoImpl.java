@@ -5,7 +5,7 @@
 package com.tel_ran.hederkosher.model.common.dao.implementation;
 
 import com.tel_ran.hederkosher.exception.TemplateNotFoundException;
-import com.tel_ran.hederkosher.model.common.dao.IAddressDao;
+import com.tel_ran.hederkosher.model.common.dao.AddressDao;
 import com.tel_ran.hederkosher.model.common.entity.Address;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,7 +15,7 @@ import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Repository
-public class AddressDaoImpl implements IAddressDao {
+public class AddressDaoImpl implements AddressDao {
 
     @PersistenceContext(name = "HKSpringHibernate")    //@PersistenceContext
     EntityManager em;

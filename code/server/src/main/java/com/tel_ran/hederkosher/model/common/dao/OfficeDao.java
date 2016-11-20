@@ -9,7 +9,7 @@ import com.tel_ran.hederkosher.model.common.entity.Office;
 
 import java.util.List;
 
-public interface IOfficeDao {
+public interface OfficeDao {
         boolean addOffice(Office obj);
         boolean updateOffice(Office obj);
         boolean deleteOffice(long id);

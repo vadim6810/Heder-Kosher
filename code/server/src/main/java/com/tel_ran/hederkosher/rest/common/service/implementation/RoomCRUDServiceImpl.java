@@ -1,7 +1,7 @@
 package com.tel_ran.hederkosher.rest.common.service.implementation;
 
 import com.tel_ran.hederkosher.exception.TemplateNotFoundException;
-import com.tel_ran.hederkosher.model.common.dao.IRoomDao;
+import com.tel_ran.hederkosher.model.common.dao.RoomDao;
 import com.tel_ran.hederkosher.model.common.entity.Room;
 import com.tel_ran.hederkosher.rest.ServiceResult;
 import com.tel_ran.hederkosher.rest.ServiceResultFactory;
@@ -9,11 +9,13 @@ import com.tel_ran.hederkosher.rest.common.service.IRoomRESTService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import static com.tel_ran.hederkosher.rest.ServiceResultFactory.*;
+
 @Service("roomCRUDService")
-public class RoomRSETServiceImpl implements IRoomRESTService {
+public class RoomCRUDServiceImpl implements IRoomRESTService {
 
     @Autowired
-    private IRoomDao roomDao;
+    private RoomDao roomDao;
 
     private ServiceResult result;
 
@@ -23,7 +25,7 @@ public class RoomRSETServiceImpl implements IRoomRESTService {
         try {
             room= roomDao.getById(id);
         } catch (TemplateNotFoundException e) {
-            result = ServiceResultFactory.NOT_FOUND;
+            result = getResultObject(Type.NOT_FOUND);
             result.setData(id);
             result.setDescription(e.getMessage());
             return result;
@@ -35,21 +37,21 @@ public class RoomRSETServiceImpl implements IRoomRESTService {
 
     @Override
     public ServiceResult getByName(String name) {
-        result = ServiceResultFactory.OK;
+        result = getResultObject(Type.OK);
         result.setData(roomDao.getByName(name));
         return result;
     }
 
     @Override
     public ServiceResult getAllRooms() {
-        result = ServiceResultFactory.OK;
+        result = getResultObject(Type.OK);
         result.setData(roomDao.getAllRooms());
         return result;
     }
 
     @Override
     public ServiceResult getAllRoomsActives() {
-        result = ServiceResultFactory.OK;
+        result = getResultObject(Type.OK);
         result.setData(roomDao.getAllRoomsActives());
         return result;
     }
@@ -58,9 +60,9 @@ public class RoomRSETServiceImpl implements IRoomRESTService {
     @Override
     public ServiceResult createRoom(Room room) {
         if (roomDao.addRoom(room)) {
-            result = ServiceResultFactory.OK;
+            result = getResultObject(Type.OK);
         } else {
-            result = ServiceResultFactory.CREATING_ERROR;
+            result = getResultObject(Type.CREATING_ERROR);
         }
         result.setData(room);
         return result;
@@ -69,9 +71,9 @@ public class RoomRSETServiceImpl implements IRoomRESTService {
     @Override
     public ServiceResult updateRoom(Room room) {
         if (roomDao.updateRoom(room)) {
-            result = ServiceResultFactory.OK;
+            result = getResultObject(Type.OK);
         } else {
-            result = ServiceResultFactory.UPDATING_ERROR;
+            result = getResultObject(Type.UPDATING_ERROR);
         }
         result.setData(room);
         return result;
@@ -80,9 +82,9 @@ public class RoomRSETServiceImpl implements IRoomRESTService {
     @Override
     public ServiceResult deleteRoom(long id) {
         if (roomDao.deleteRoom(id)) {
-            result = ServiceResultFactory.OK;
+            result = getResultObject(Type.OK);
         } else {
-            result = ServiceResultFactory.DELETING_ERROR;
+            result = getResultObject(Type.DELETING_ERROR);
         }
         result.setData(id);
         return result;

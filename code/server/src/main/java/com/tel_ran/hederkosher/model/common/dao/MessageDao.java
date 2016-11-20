@@ -9,7 +9,7 @@ import com.tel_ran.hederkosher.model.common.entity.Message;
 
 import java.util.List;
 
-public interface IMessageDao {
+public interface MessageDao {
         boolean addMessage(Message obj);
         boolean updateMessage(Message obj);
         boolean deleteMessage(long id);

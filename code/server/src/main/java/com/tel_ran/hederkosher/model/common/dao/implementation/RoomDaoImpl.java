@@ -5,7 +5,7 @@
 package com.tel_ran.hederkosher.model.common.dao.implementation;
 
 import com.tel_ran.hederkosher.exception.TemplateNotFoundException;
-import com.tel_ran.hederkosher.model.common.dao.IRoomDao;
+import com.tel_ran.hederkosher.model.common.dao.RoomDao;
 import com.tel_ran.hederkosher.model.common.entity.Room;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,7 +15,7 @@ import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Repository
-public class RoomDaoImpl implements IRoomDao {
+public class RoomDaoImpl implements RoomDao {
 
     @PersistenceContext(name = "HKSpringHibernate")    //@PersistenceContext
     EntityManager em;

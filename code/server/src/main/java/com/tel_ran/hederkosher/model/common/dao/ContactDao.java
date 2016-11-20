@@ -10,7 +10,7 @@ import java.util.List;
 
 //import java.sql.SQLException;
 
-public interface IContactDao {
+public interface ContactDao {
     boolean addContact(Contact obj);
     boolean updateContact(Contact obj);
     boolean deleteContact(long id);

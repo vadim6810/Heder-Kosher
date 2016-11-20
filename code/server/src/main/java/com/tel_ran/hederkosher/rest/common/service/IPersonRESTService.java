@@ -16,4 +16,5 @@ public interface IPersonRESTService {
     ServiceResult createPerson(Person person);
     ServiceResult updatePerson(Person person);
     ServiceResult deletePerson(long id);
+    ServiceResult deleteAllPersons();
 }

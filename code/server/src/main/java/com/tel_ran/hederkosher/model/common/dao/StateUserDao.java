@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Created by Ruslan on 18/11/16.
  */
-public interface IStateUserDao {
+public interface StateUserDao {
     StateUser getByCode(String code);
     List<StateUser> getAll();
 }

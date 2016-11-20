@@ -9,7 +9,7 @@ import com.tel_ran.hederkosher.model.common.entity.Room;
 
 import java.util.List;
 
-public interface IRoomDao {
+public interface RoomDao {
         boolean addRoom(Room obj);
         boolean updateRoom(Room obj);
         boolean deleteRoom(long id);

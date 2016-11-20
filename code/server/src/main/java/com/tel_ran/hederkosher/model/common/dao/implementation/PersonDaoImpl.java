@@ -5,7 +5,7 @@
 package com.tel_ran.hederkosher.model.common.dao.implementation;
 
 import com.tel_ran.hederkosher.exception.TemplateNotFoundException;
-import com.tel_ran.hederkosher.model.common.dao.IPersonDao;
+import com.tel_ran.hederkosher.model.common.dao.PersonDao;
 import com.tel_ran.hederkosher.model.common.entity.Person;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,7 +15,7 @@ import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Repository
-public class PersonDaoImpl implements IPersonDao { // extends AnyJpqlDao<Person>
+public class PersonDaoImpl implements PersonDao {
 
 //    @PersistenceContext(name = "HederKosherSpringHibernate",type = PersistenceContextType.EXTENDED)
     @PersistenceContext(name = "HKSpringHibernate")    //@PersistenceContext
@@ -50,6 +50,21 @@ public class PersonDaoImpl implements IPersonDao { // extends AnyJpqlDao<Person>
         if (person==null)
             return false;
         em.remove(person);
+        return true;
+    }
+
+    @Override
+    @Transactional
+    public boolean deleteAllPersons()  {
+        try{
+            List<Person> persons = (List<Person>) em.createQuery("SELECT p FROM Person p")
+                    .getResultList();
+            for (Person person : persons) {
+                em.remove(person);
+            }
+        } catch (Exception e){
+            return false;
+        }
         return true;
     }
 
@@ -127,24 +142,6 @@ public class PersonDaoImpl implements IPersonDao { // extends AnyJpqlDao<Person>
             }
         return person;
     }
-
-//
-//    @Override
-//    public List<Person> getPersonsByRoom(long idRoom) {
-//        List<Person> persons=null;
-//
-//        try{
-//            persons = (List<Person>) em.createQuery("SELECT DISTINCT p FROM UserGrantedAuthority u " +
-//                    " Join u.room r " +
-//                    " Join p.user u1 " +
-//                    ", UserGrantedAuthority a " +
-//                    " Join a.user u2 " +
-//                    " WHERE u1.id=u2.id and r.id = :idRoom")
-//                    .setParameter("idRoom", idRoom);
-//        } catch (Exception e){
-//        }
-//        return persons;
-//    }
 
 }
 

@@ -9,7 +9,7 @@ import com.tel_ran.hederkosher.model.common.entity.Address;
 
 import java.util.List;
 
-public interface IAddressDao {
+public interface AddressDao {
         boolean addAddress(Address obj);
         boolean updateAddress(Address obj);
         boolean deleteAddress(long id);

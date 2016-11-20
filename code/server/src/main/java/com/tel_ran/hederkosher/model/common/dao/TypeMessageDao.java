@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Created by Ruslan on 18/11/16.
  */
-public interface ITypeMessageDao {
+public interface TypeMessageDao {
     TypeMessage getByCode(String code);
     List<TypeMessage> getAll();
 }
