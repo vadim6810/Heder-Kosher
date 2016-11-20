@@ -1,25 +1,23 @@
 package com.tel_ran.hederkosher.configuration;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.hibernate5.Hibernate5Module;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.hibernate.jpa.HibernatePersistenceProvider;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.annotation.*;
 import org.springframework.core.env.Environment;
 import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
-import org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration;
+import org.springframework.security.config.annotation.method.configuration.*;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.annotation.web.configuration.*;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
@@ -66,12 +64,17 @@ public class HKConfig {
          * to the MessageConverter and return it to be added to the HttpMessageConverters
          * of our application
          */
-        public MappingJackson2HttpMessageConverter jacksonMessageConverter() {
-            MappingJackson2HttpMessageConverter messageConverter = new MappingJackson2HttpMessageConverter();
+        private MappingJackson2HttpMessageConverter jacksonMessageConverter() {
+            MappingJackson2HttpMessageConverter messageConverter =
+                    new MappingJackson2HttpMessageConverter();
 
             ObjectMapper mapper = new ObjectMapper();
             //Registering Hibernate5Module to support lazy objects
             mapper.registerModule(new Hibernate5Module());
+
+            //Registering JavaTimeModule to support java8 LocalDateTime
+            mapper.registerModule(new JavaTimeModule());
+            mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
 
             messageConverter.setObjectMapper(mapper);
             return messageConverter;
@@ -147,17 +150,6 @@ public class HKConfig {
             transactionManager.setEntityManagerFactory(entityManagerFactory().getObject());
             return transactionManager;
         }
-
-
-//        @Bean
-//        public LocalPersistenceManagerFactoryBean persistensManagerFactory() {
-//            LocalPersistenceManagerFactoryBean persistensManagerFactoryBean = new LocalPersistenceManagerFactoryBean();
-//            persistensManagerFactoryBean.setConfigLocation("hibernate.properties");
-//
-//            return persistensManagerFactoryBean;
-//        }
-//
-
 
     }
 

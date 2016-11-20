@@ -1,6 +1,7 @@
 package com.tel_ran.hederkosher.model.common.entity;
 
-public enum State {
+public enum ProgramState {
     NEW,
-    READY
+    READY,
+    DRAFT,
 }

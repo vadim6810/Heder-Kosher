@@ -12,7 +12,7 @@ public class ServiceResult {
     public ServiceResult(int code, String message) {
         this.code = code;
         this.message = message;
-        this.description = "";
+        this.description = null;
         this.data = null;
     }
 

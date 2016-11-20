@@ -1,7 +1,6 @@
 package com.tel_ran.hederkosher.model.common.dao.implementation;
 
 import com.tel_ran.hederkosher.model.common.dao.TaskDao;
-import com.tel_ran.hederkosher.model.common.entity.Person;
 import com.tel_ran.hederkosher.model.common.entity.Program;
 import com.tel_ran.hederkosher.model.common.entity.Task;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
-import javax.persistence.PersistenceContextType;
 import java.util.List;
 
 @Repository
@@ -36,15 +34,16 @@ public class TaskDaoImpl implements TaskDao {
         if (task == null) {
             return false;
         }
-        Task oldTask = em.find(Task.class, task.getId());
+        final Task oldTask = em.find(Task.class, task.getId());
         if (oldTask == null) {
             return false;
         }
-        Task newTask = em.merge(task);
+        final Task newTask = em.merge(task);
         return true;
     }
 
     @Override
+    @Transactional
     public boolean deleteTask(long id) {
         Task task = em.find(Task.class, id);
         if (task == null) {
