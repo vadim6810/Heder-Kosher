@@ -5,7 +5,7 @@
 package com.tel_ran.hederkosher.model.common.dao.implementation;
 
 import com.tel_ran.hederkosher.exception.TemplateNotFoundException;
-import com.tel_ran.hederkosher.model.common.dao.IOfficeDao;
+import com.tel_ran.hederkosher.model.common.dao.OfficeDao;
 import com.tel_ran.hederkosher.model.common.entity.Office;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,7 +16,7 @@ import java.util.List;
 
 
 @Repository
-public class OfficeDaoImpl implements IOfficeDao {
+public class OfficeDaoImpl implements OfficeDao {
 
     @PersistenceContext(name = "HKSpringHibernate")    //@PersistenceContext
     EntityManager em;
