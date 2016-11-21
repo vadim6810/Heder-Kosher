@@ -4,9 +4,6 @@
 
 package com.tel_ran.hederkosher.model.common.entity;
 
-import com.tel_ran.hederkosher.annotations.Markable;
-import com.tel_ran.hederkosher.model.security.entity.User;
-
 import javax.persistence.*;
 import java.util.Date;
 import java.util.Set;
@@ -44,25 +41,23 @@ public class Person  {
     private boolean sex ;
 
     @Column(name = "HEIGHT", nullable = false)
-    private int height ;
+    double height ;
 
     @Column(name = "WEIGHT", nullable = false)
-    private int weight ;
+    double weight ;
 
     @OneToOne(fetch = FetchType.LAZY)
     private Gym gym ;
 
-
-
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "person")
     private Set<Contact> contacts;
-
-//    @OneToOne(fetch = FetchType.LAZY)
-//    private User user;
 
     @OneToMany(fetch = FetchType.LAZY)
     private Set<Address> address;
 
+
+//    @OneToOne(fetch = FetchType.LAZY)
+//    private User user;
 
     public Person(String passportNo, String firstName, String secondName, String lastName
             , Date birthday,  Set<Address> address) { //User user,
@@ -90,36 +85,52 @@ public class Person  {
     public String getPassportNo() {
         return passportNo;
     }
-    public void setPassportNo(String passportNo) {
-        this.passportNo = passportNo;
-    }
+//    public void setPassportNo(String passportNo) {
+//        this.passportNo = passportNo;
+//    }
 
     public String getFistName() {
         return fistName;
     }
-    public void setFistName(String fistName) {
-        this.fistName = fistName;
-    }
+//    public void setFistName(String fistName) {
+//        this.fistName = fistName;
+//    }
 
-    public String getLastname() {
+    public String getLastName() {
         return lastName;
     }
-    public void setLastname(String lastname) {
-        this.lastName = lastname;
-    }
+//    public void setLastName(String lastname) {
+//        this.lastName = lastname;
+//    }
 
-    public String getSecondname() {
+    public String getSecondName() {
         return secondName;
     }
-    public void setSecondname(String secondname) {
-        this.secondName = secondname;
-    }
+//    public void setSecondName(String secondname) {
+//        this.secondName = secondname;
+//    }
 
     public Date getBirthday() {
         return birthday;
     }
-    public void setBirthday(Date birthday) {
-        this.birthday = birthday;
+//    public void setBirthday(Date birthday) {
+//        this.birthday = birthday;
+//    }
+
+    public boolean isSex() {
+        return sex;
+    }
+
+    public double getHeight() {
+        return height;
+    }
+
+    public double getWeight() {
+        return weight;
+    }
+
+    public Gym getGym() {
+        return gym;
     }
 
     public void setAddress(Set<Address> address) {
@@ -129,7 +140,8 @@ public class Person  {
         return address;
     }
 
-//    public User getUser() {
+
+    //    public User getUser() {
 //        return user;
 //    }
 //    public void setUser(User user) {

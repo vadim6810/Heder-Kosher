@@ -7,6 +7,7 @@ package com.tel_ran.hederkosher.model.common.dao.implementation;
 import com.tel_ran.hederkosher.exception.TemplateNotFoundException;
 import com.tel_ran.hederkosher.model.common.dao.RoomDao;
 import com.tel_ran.hederkosher.model.common.entity.Room;
+import org.hibernate.event.spi.SaveOrUpdateEvent;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -35,10 +36,12 @@ public class RoomDaoImpl implements RoomDao {
     @Override
     @Transactional
     public boolean updateRoom(Room room) {
+//        Room roomCurrent=null;
+//        if ((room==null) || ((roomCurrent=em.find(Room.class,room.getId()))==null))
         if ((room==null) || (em.find(Room.class,room.getId())==null))
             return false;
 
-        em.persist(room);
+        em.merge(room);
         return true;
     }
 
@@ -98,6 +101,21 @@ public class RoomDaoImpl implements RoomDao {
         }
 
         return rooms;
+    }
+
+    @Override
+    @Transactional
+    public boolean deleteAllRooms()  {
+        try{
+            List<Room> rooms = (List<Room>) em.createQuery("SELECT p FROM Room p")
+                    .getResultList();
+            for (Room room: rooms) {
+                em.remove(room);
+            }
+        } catch (Exception e){
+            return false;
+        }
+        return true;
     }
 
 

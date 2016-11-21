@@ -4,7 +4,7 @@ import com.tel_ran.hederkosher.exception.TemplateNotFoundException;
 import com.tel_ran.hederkosher.model.common.dao.PersonDao;
 import com.tel_ran.hederkosher.model.common.entity.Person;
 import com.tel_ran.hederkosher.rest.ServiceResult;
-import com.tel_ran.hederkosher.rest.common.service.IPersonRESTService;
+import com.tel_ran.hederkosher.rest.common.service.PersonRESTService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +12,7 @@ import static com.tel_ran.hederkosher.rest.ServiceResultFactory.Type;
 import static com.tel_ran.hederkosher.rest.ServiceResultFactory.getResultObject;
 
 @Service("personCRUDService")
-public class PersonCRUDServiceImpl implements IPersonRESTService {
+public class PersonCRUDServiceImpl implements PersonRESTService {
 
     @Autowired
     private PersonDao personDao;

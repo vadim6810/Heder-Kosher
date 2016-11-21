@@ -1,0 +1,301 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Heder-Kosher",
+		"_postman_id": "2bb99e04-0fd6-5256-4e4e-c8a956d5cabc",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "PERSONS",
+			"description": "",
+			"item": [
+				{
+					"name": "ADD ONE http://localhost:8080/persons",
+					"request": {
+						"url": "http://localhost:8080/persons",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\n      \"passportNo\": \"passp\",\n      \"birthday\": \"1990-03-28\",\n      \"fistName\": \"Sidor\",\n      \"secondName\": \"Sidorovich\",\n      \"lastName\": \"Sidorov\",\n      \"sex\": \"true\",\n      \"height\": 180.5,\n      \"weight\": 50.7\n    }"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "GET ALL http://localhost:8080/persons",
+					"request": {
+						"url": "http://localhost:8080/persons",
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "--------DEL ALL http://localhost:8080/persons",
+					"request": {
+						"url": "http://localhost:8080/persons",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "GETS http://localhost:8080/persons?email=email 1",
+					"request": {
+						"url": "http://localhost:8080/persons?email=email 1",
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "GETS http://localhost:8080/persons?telephone=12345",
+					"request": {
+						"url": "http://localhost:8080/persons?telephone=12345",
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "GETS http://localhost:8080/persons?passport=passportV",
+					"request": {
+						"url": "http://localhost:8080/persons?passport=passp",
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "GET ONE http://localhost:8080/persons/id",
+					"request": {
+						"url": "http://localhost:8080/persons/1",
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:8080/persons/id",
+					"request": {
+						"url": "http://localhost:8080/persons/3",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n      \"passportNo\": \"passp\",\n      \"birthday\": \"1990-03-28\",\n      \"fistName\": \"Ivan\",\n      \"secondName\": \"Ivanovich\",\n      \"lastName\": \"Ivanov\",\n      \"sex\": \"true\",\n      \"height\": 167.5,\n      \"weight\": 87.7\n    }"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "--------------DEL ONE http://localhost:8080/persons/id",
+					"request": {
+						"url": "http://localhost:8080/persons/2",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ROOMS",
+			"description": "",
+			"item": [
+				{
+					"name": "ADD ONE http://localhost:8080/rooms",
+					"request": {
+						"url": "http://localhost:8080/rooms",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\n    \"name\": \"Room 3\",\n    \"isEnable\": \"true\",\n    \"dateCreate\": \"2001-10-10\"\n      }"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "GET ALL http://localhost:8080/rooms",
+					"request": {
+						"url": "http://localhost:8080/rooms",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\n      \"passportNo\": \"dsfs\",\n      \"birthday\": \"2001-10-28\",\n      \"fistName\": \"sdfsddsf\",\n      \"secondname\": \"sadsad\",\n      \"lastname\": \"fsdfsd\"\n    }"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "DEL ALL http://localhost:8080/rooms",
+					"request": {
+						"url": "http://localhost:8080/rooms",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "GETS http://localhost:8080/rooms?name=",
+					"request": {
+						"url": "http://localhost:8080/rooms/?name=Room 1",
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "GET ONE http://localhost:8080/rooms/id",
+					"request": {
+						"url": "http://localhost:8080/rooms/4",
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "UPD ONE http://localhost:8080/rooms/id",
+					"request": {
+						"url": "http://localhost:8080/rooms/10",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\n    \"name\": \"Room 10\",\n    \"isEnable\": \"false\",\n    \"dateCreate\": \"2001-10-10\"\n      }"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "DEL ONE http://localhost:8080/rooms/id",
+					"request": {
+						"url": "http://localhost:8080/rooms/11",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

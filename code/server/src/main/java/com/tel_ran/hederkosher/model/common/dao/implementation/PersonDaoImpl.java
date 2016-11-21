@@ -39,7 +39,7 @@ public class PersonDaoImpl implements PersonDao {
         if ((person==null) || (em.find(Person.class,person.getId())==null))
             return false;
 
-        em.persist(person);
+        em.merge(person);
         return true;
     }
 

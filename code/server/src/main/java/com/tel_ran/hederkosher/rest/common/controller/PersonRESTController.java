@@ -2,7 +2,7 @@ package com.tel_ran.hederkosher.rest.common.controller;
 
 import com.tel_ran.hederkosher.model.common.entity.Person;
 import com.tel_ran.hederkosher.rest.ServiceResult;
-import com.tel_ran.hederkosher.rest.common.service.IPersonRESTService;
+import com.tel_ran.hederkosher.rest.common.service.PersonRESTService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -16,7 +16,7 @@ public class PersonRESTController {
     private static final String URI_PERSONS = "/persons";
 
     @Autowired
-    private IPersonRESTService personRESTService;
+    private PersonRESTService personRESTService;
 
 
     //------------------Get all persons------------------------ +
@@ -50,7 +50,7 @@ public class PersonRESTController {
     //------------------Update person--------------------------
     @RequestMapping(value = URI_PERSONS + "/{id}", method = RequestMethod.PUT,consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ServiceResult> updatePerson(@PathVariable("id") long id, @RequestBody Person person) {
-        person.setId(id);
+        person.setId(id); //нехорошо, нужно через сервис!!!!
         ServiceResult res = personRESTService.updatePerson(person);
         return new ResponseEntity<>(res, HttpStatus.OK);
     }

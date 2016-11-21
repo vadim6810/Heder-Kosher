@@ -5,7 +5,6 @@
 package com.tel_ran.hederkosher.model.common.entity;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Set;
 
@@ -22,10 +21,10 @@ public class Room {
     private String name;
 
     @Column(name = "DATE_CREATE", nullable = false)
-    private Date dCreate;
+    private Date dateCreate;
 
     @Column(name = "DATE_CLOSE")
-    private Date dClose;
+    private Date dateClose;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Office office;
@@ -34,12 +33,12 @@ public class Room {
     private Set<Address> address;
 
     @Column(name = "IS_ENABLE", nullable = false)
-    private boolean isEnable;
+    private boolean isEnable=true;
 
     public Room(String name, Set<Address> address, Date dCreate, boolean isEnable) {
         this.name = name;
         this.address = address;
-        this.dCreate = dCreate;
+        this.dateCreate = dCreate;
         this.isEnable = isEnable;
     }
     public Room() {
@@ -53,9 +52,9 @@ public class Room {
         return id;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+//    public void setName(String name) {
+//        this.name = name;
+//    }
     public String getName() {
         return name;
     }
@@ -67,25 +66,21 @@ public class Room {
         return address;
     }
 
-    public Date getDcreate() {
-        return dCreate;
-    }
-    public void setDcreate(Date dCreate) {
-        this.dCreate = dCreate;
+
+    public Date getDateCreate() {
+        return dateCreate;
     }
 
-    public Date getDclose() {
-        return dClose;
-    }
-    public void setDclose(Date dClose) {
-        this.dClose = dClose;
+    public Date getDateClose() {
+        return dateClose;
     }
 
-    public boolean isEnable() {
+    public Office getOffice() {
+        return office;
+    }
+
+    public boolean getisEnable() {
         return isEnable;
-    }
-    public void setEnable(boolean enable) {
-        isEnable = enable;
     }
 
     @Override
@@ -98,8 +93,8 @@ public class Room {
         if (id != that.id) return false;
 //        if (name != null ? !name.equals(that.name) : that.name != null) return false;
 //        if (address != null ? !address.equals(that.address) : that.address != null) return false;
-//        if (dCreate != null ? !dCreate.equals(that.dCreate) : that.dCreate != null) return false;
-//        if (dClose != null ? !dClose.equals(that.dClose) : that.dClose != null) return false;
+//        if (dateCreate != null ? !dateCreate.equals(that.dateCreate) : that.dateCreate != null) return false;
+//        if (dateClose != null ? !dateClose.equals(that.dateClose) : that.dateClose != null) return false;
 
         return true;
     }
@@ -109,8 +104,21 @@ public class Room {
         int result = (int)id;
 //        result = 31 * result + (name != null ? name.hashCode() : 0);
 //        result = 31 * result + (address != null ? address.hashCode() : 0);
-//        result = 31 * result + (dCreate != null ? dCreate.hashCode() : 0);
-//        result = 31 * result + (dClose != null ? dClose.hashCode() : 0);
+//        result = 31 * result + (dateCreate != null ? dateCreate.hashCode() : 0);
+//        result = 31 * result + (dateClose != null ? dateClose.hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Room{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", dateCreate=" + dateCreate +
+                ", dateClose=" + dateClose +
+                ", office=" + office +
+                ", address=" + address +
+                ", isEnable=" + isEnable +
+                '}';
     }
 }

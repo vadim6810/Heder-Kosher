@@ -5,14 +5,14 @@ import com.tel_ran.hederkosher.model.common.dao.RoomDao;
 import com.tel_ran.hederkosher.model.common.entity.Room;
 import com.tel_ran.hederkosher.rest.ServiceResult;
 import com.tel_ran.hederkosher.rest.ServiceResultFactory;
-import com.tel_ran.hederkosher.rest.common.service.IRoomRESTService;
+import com.tel_ran.hederkosher.rest.common.service.RoomRESTService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import static com.tel_ran.hederkosher.rest.ServiceResultFactory.*;
 
 @Service("roomCRUDService")
-public class RoomCRUDServiceImpl implements IRoomRESTService {
+public class RoomCRUDServiceImpl implements RoomRESTService {
 
     @Autowired
     private RoomDao roomDao;
@@ -87,6 +87,17 @@ public class RoomCRUDServiceImpl implements IRoomRESTService {
             result = getResultObject(Type.DELETING_ERROR);
         }
         result.setData(id);
+        return result;
+    }
+
+    @Override
+    public ServiceResult deleteAllRooms() {
+        if (roomDao.deleteAllRooms()) {
+            result = getResultObject(Type.OK);
+        } else {
+            result = getResultObject(Type.DELETING_ERROR);
+        }
+//        result.setData();
         return result;
     }
 

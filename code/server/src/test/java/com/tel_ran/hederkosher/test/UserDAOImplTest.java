@@ -92,9 +92,13 @@ public class UserDAOImplTest implements UserDAO {
         Role roleTrainer = roleDAO.findByName("TRAINER");
         Role roleClient = roleDAO.findByName("CLIENT");
 
-        Room gym = new Room(); gym.setName("Gym");
-        Room pool = new Room(); pool.setName("Pool");
-        Room sauna = new Room(); sauna.setName("Sauna");
+//        Room gym = new Room(); gym.setName("Gym");
+//        Room pool = new Room(); pool.setName("Pool");
+//        Room sauna = new Room(); sauna.setName("Sauna");
+        Room gym = new Room("Gym",null,new Date(),true);
+        Room pool = new Room("Pool",null,new Date(),true);
+        Room sauna = new Room("Sauna",null,new Date(),true);
+
 
         User sam = new User(COUNTER.incrementAndGet(),"Sam@hk.co.il", "123qwe", new Date());
         sam.setRole(gym, roleAdmin);

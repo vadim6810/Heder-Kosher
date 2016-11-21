@@ -3,7 +3,7 @@ package com.tel_ran.hederkosher.rest.common.service;
 import com.tel_ran.hederkosher.model.common.entity.Person;
 import com.tel_ran.hederkosher.rest.ServiceResult;
 
-public interface IPersonRESTService {
+public interface PersonRESTService {
     ServiceResult findPersonByID(long id);
 
     ServiceResult getByPassport(String passport);
