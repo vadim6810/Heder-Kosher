@@ -1,6 +1,6 @@
 package com.tel_ran.hederkosher.model.common.entity;
 
-public enum TypeMessage {
+public enum MessageType {
     COMMON,
     CLUB,
     TRAINER,

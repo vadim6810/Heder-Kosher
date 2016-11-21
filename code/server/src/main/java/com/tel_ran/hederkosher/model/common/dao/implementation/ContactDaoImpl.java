@@ -7,6 +7,7 @@ package com.tel_ran.hederkosher.model.common.dao.implementation;
 import com.tel_ran.hederkosher.exception.TemplateNotFoundException;
 import com.tel_ran.hederkosher.model.common.dao.ContactDao;
 import com.tel_ran.hederkosher.model.common.entity.Contact;
+import com.tel_ran.hederkosher.model.common.entity.ContactType;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,6 +25,14 @@ public class ContactDaoImpl implements ContactDao {
     }
 
     @Override
+    public Contact getById(long id) throws TemplateNotFoundException {
+        Contact contact = em.find(Contact.class,id);
+        if (contact==null)
+            throw new TemplateNotFoundException("Contact",id);
+        return contact;
+    }
+
+    @Override
     @Transactional
     public boolean addContact(Contact contact) {
         if ((contact==null) || (em.find(Contact.class,contact.getId())!=null))
@@ -35,74 +44,90 @@ public class ContactDaoImpl implements ContactDao {
     @Override
     @Transactional
     public boolean updateContact(Contact contact) {
-        if ((contact==null) || (em.find(Contact.class,contact.getId())==null))
+        Contact contactCurrent= null;
+        if ((contact==null) || ((contactCurrent=em.find(Contact.class,contact.getId()))==null))
             return false;
-
-        em.persist(contact);
+        em.refresh(contactCurrent);
+        contact.setPerson(contactCurrent.getPerson());
+        em.merge(contact);
         return true;
     }
 
     @Override
     @Transactional
-    public boolean deleteContact(long id)  {
-        Contact contact =em.find(Contact.class,id);
-        if (contact==null)
+    public boolean deleteContact(long id) {
+        Contact contact =null; //em.find(Contact.class,id);
+        try {
+            contact = getById(id);
+            em.remove(contact);
+        }
+        catch (Exception e){
             return false;
-        em.remove(contact);
+        }
         return true;
     }
 
     @Override
-    public Contact getById(long id) throws TemplateNotFoundException {
-        Contact contact = em.find(Contact.class,id);
-        if (contact==null)
-            throw new TemplateNotFoundException("Contact",id);
-        return contact;
-    }
-
-    @Override
-    public List<Contact> getByEmail(String email) {
-        List<Contact> contact=null;
-        if (email!=null)
-            try{
-                contact = (List<Contact>) em.createQuery("SELECT p FROM Contact p WHERE email = :email")
-                        .setParameter("email", email);
-            } catch (Exception e){
-            }
-        return contact;
-    }
-
-    @Override
-    public List<Contact> getByTelephone(String telephone) {
-        List<Contact> contact=null;
-        if (telephone!=null)
-            try{
-                contact = (List<Contact>) em.createQuery("SELECT p FROM Contact p WHERE telephone = :telephone")
-                        .setParameter("telephone", telephone);
-            } catch (Exception e){
-            }
-        return contact;
-    }
-
-    @Override
     public List<Contact> getAllContacts(){
-        List<Contact> contact=null;
+        List<Contact> contacts=null;
         try{
-            contact = (List<Contact>) em.createQuery("SELECT p FROM Contact p");
+            contacts = (List<Contact>) em.createQuery("SELECT p FROM Contact p");
         } catch (Exception e){
         }
-        return contact;
+        return contacts;
     }
+    @Override
+    @Transactional
+    public boolean deleteAllContacts(){
+        List<Contact> contacts = getAllContacts();
+        if (contacts == null) return false;
+        try{
+            for (Contact contact : contacts) {
+                em.remove(contact);
+            }
+        } catch (Exception e){
+            return false;
+        }
+        return true;
+    }
+
 
     @Override
     public List<Contact> getContactsByPerson(long personId) {
-        List<Contact> contact=null;
+        List<Contact> contacts=null;
         try{
-            contact = (List<Contact>) em.createQuery("SELECT c FROM Contact c join c.person p WHERE p.id = :personId")
+            contacts = (List<Contact>) em.createQuery("SELECT c FROM Contact c join c.person p WHERE p.id = :personId")
                     .setParameter("personId", personId);
         } catch (Exception e){
         }
-        return contact;
+        return contacts;
+    }
+    @Override
+    @Transactional
+    public boolean deleteContactsByPerson(long personId) {
+        List<Contact> contacts = getContactsByPerson(personId);
+        if (contacts == null) return false;
+        try{
+            for (Contact contact : contacts) {
+                em.remove(contact);
+            }
+        } catch (Exception e){
+            return false;
+        }
+        return true;
+    }
+
+
+    @Override
+    public List<Contact> getContactsByType(String type) {
+        List<Contact> contacts=null;
+        if (type!=null && ContactType.valueOf(type)!=null)
+            try{
+                contacts = (List<Contact>) em.createQuery("SELECT p FROM Contact p WHERE type = :type")
+                        .setParameter("type", type);
+            } catch (Exception e){
+            }
+        return contacts;
     }
 
 }

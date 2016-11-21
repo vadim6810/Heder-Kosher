@@ -14,11 +14,13 @@ public interface ContactDao {
     boolean addContact(Contact obj);
     boolean updateContact(Contact obj);
     boolean deleteContact(long id);
-    Contact getById(long id) throws TemplateNotFoundException;
-    List<Contact>  getByEmail(String email);
-    List<Contact>  getByTelephone(String telephone);
-    List<Contact>  getAllContacts();
-    List<Contact>  getContactsByPerson(long personId);
+    boolean deleteAllContacts();
+    boolean deleteContactsByPerson(long personId);
 
+    Contact getById(long id) throws TemplateNotFoundException;
+
+    List<Contact>  getContactsByType(String type);
+    List<Contact>  getContactsByPerson(long personId);
+    List<Contact>  getAllContacts();
 }
 

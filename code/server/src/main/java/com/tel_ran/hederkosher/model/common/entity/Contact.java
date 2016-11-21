@@ -8,80 +8,58 @@ import javax.persistence.*;
 @Entity
 @Table(name = "contact")
 public class Contact {
+//    public enum ContactType {EMAIL,TELEPHONE}
 
     @Id
     @Column(name = "ID", nullable = false, unique = true)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "TELEPHONE", nullable = false)
-    private String telephone;
-
-    @Column(name = "EMAIL")
-    private String email;
-
     @ManyToOne(fetch = FetchType.LAZY)
     private Person person;
 
-    public Contact(String telephone, String email, Person person) {
-        this.telephone = telephone;
-        this.email = email;
-        this.person = person;
-    }
+//    @Embedded
+    @Enumerated(EnumType.STRING)
+    @Column(name = "TYPE", length = 20)
+    private ContactType type;
+
+    @Column(name = "VALUE")
+    private String value;
+
     public Contact() {
     }
 
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public long getId() {
         return id;
     }
-//    public void setId(long id) {
-//        this.ID = id;
-//    }
 
     public Person getPerson() {
         return person;
     }
+
+    public ContactType getType() {
+        return type;
+    }
+
+    public String getValue() {
+        return value;
+    }
+
+
     public void setPerson(Person person) {
         this.person = person;
     }
 
-    public String getTelephone() {
-        return telephone;
-    }
-    public void setTelephone(String telephone) {
-        this.telephone = telephone;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Contact that = (Contact) o;
-
-        if (id != that.id) return false;
-        if (person != null ? !person.equals(that.person) : that.person != null) return false;
-        if (telephone != null ? !telephone.equals(that.telephone) : that.telephone != null) return false;
-        if (email != null ? !email.equals(that.email) : that.email != null) return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = (int)id ;
-        result = 31 * result + (person != null ? person.hashCode() : 0);
-        result = 31 * result + (telephone != null ? telephone.hashCode() : 0);
-        result = 31 * result + (email != null ? email.hashCode() : 0);
-        return result;
+    public String toString() {
+        return "Contact{" +
+                "id=" + id +
+                ", type=" + type +
+                ", value='" + value + '\'' +
+                '}';
     }
 }

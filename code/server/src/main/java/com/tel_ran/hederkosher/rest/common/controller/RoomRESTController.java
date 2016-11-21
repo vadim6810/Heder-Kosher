@@ -10,10 +10,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import static com.tel_ran.hederkosher.api.ConstantsApplication.*;
+
 @RestController
 public class RoomRESTController {
 
-    private static final String URI_ROOMS = "/rooms";
+//    private static final String URI_ROOMS = "/rooms";
 
     @Autowired
     private RoomRESTService roomRESTService;

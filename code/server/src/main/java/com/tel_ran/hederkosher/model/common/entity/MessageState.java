@@ -1,6 +1,6 @@
 package com.tel_ran.hederkosher.model.common.entity;
 
-public enum StateMessage {
+public enum MessageState {
     REGISTERED,
     ACTIVE,
     INACTIVE,

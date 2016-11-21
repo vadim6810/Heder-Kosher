@@ -28,11 +28,11 @@ public class Message {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "STATE", length = 100)
-    private StateMessage state;
+    private MessageState state;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "TYPE", length = 100)
-    private TypeMessage type;
+    private MessageType type;
 
     @OneToMany(fetch = FetchType.LAZY)
     private Set<User> usersTo;
@@ -46,7 +46,7 @@ public class Message {
     @ManyToOne(fetch = FetchType.LAZY)
     private Task task;
 
-    public Message(Date date, String text, StateMessage state, TypeMessage type, User userFrom, Program program, Task task) {
+    public Message(Date date, String text, MessageState state, MessageType type, User userFrom, Program program, Task task) {
         this.date = date;
         this.text = text;
         this.state = state;
@@ -83,19 +83,19 @@ public class Message {
         this.text = text;
     }
 
-    public StateMessage getState() {
+    public MessageState getState() {
         return state;
     }
 
-    public void setState(StateMessage state) {
+    public void setState(MessageState state) {
         this.state = state;
     }
 
-    public TypeMessage getType() {
+    public MessageType getType() {
         return type;
     }
 
-    public void setType(TypeMessage type) {
+    public void setType(MessageType type) {
         this.type = type;
     }
 
