@@ -71,7 +71,8 @@ public class ContactDaoImpl implements ContactDao {
     public List<Contact> getAllContacts(){
         List<Contact> contacts=null;
         try{
-            contacts = (List<Contact>) em.createQuery("SELECT p FROM Contact p");
+            contacts = (List<Contact>) em.createQuery("SELECT p FROM Contact p")
+                    .getResultList();
         } catch (Exception e){
         }
         return contacts;
@@ -97,7 +98,8 @@ public class ContactDaoImpl implements ContactDao {
         List<Contact> contacts=null;
         try{
             contacts = (List<Contact>) em.createQuery("SELECT c FROM Contact c join c.person p WHERE p.id = :personId")
-                    .setParameter("personId", personId);
+                    .setParameter("personId", personId)
+                    .getResultList();
         } catch (Exception e){
         }
         return contacts;
@@ -124,7 +126,8 @@ public class ContactDaoImpl implements ContactDao {
         if (type!=null && ContactType.valueOf(type)!=null)
             try{
                 contacts = (List<Contact>) em.createQuery("SELECT p FROM Contact p WHERE type = :type")
-                        .setParameter("type", type);
+                        .setParameter("type", type)
+                        .getResultList();
             } catch (Exception e){
             }
         return contacts;
