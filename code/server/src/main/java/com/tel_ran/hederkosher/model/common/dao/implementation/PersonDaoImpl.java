@@ -6,13 +6,17 @@ package com.tel_ran.hederkosher.model.common.dao.implementation;
 
 import com.tel_ran.hederkosher.exception.TemplateNotFoundException;
 import com.tel_ran.hederkosher.model.common.dao.PersonDao;
+import com.tel_ran.hederkosher.model.common.entity.Address;
 import com.tel_ran.hederkosher.model.common.entity.Person;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 @Repository
 public class PersonDaoImpl implements PersonDao {
@@ -67,6 +71,30 @@ public class PersonDaoImpl implements PersonDao {
         }
         return true;
     }
+
+    @Transactional
+    @Override
+    public boolean addAddressByPerson(long personId, Address address) {
+        Person person;
+
+        try {
+            person = getById(personId);
+        } catch (Exception e){
+            return false;
+        }
+        if (person==null) return false;
+        em.refresh(person);
+        Set<Address> addresses = person.getAddress();
+        if (address==null) addresses= new LinkedHashSet<>();
+        addresses.add(address);
+        person.setAddress(addresses);
+        em.merge(person);
+        return true;
+    }
+
+
+
+
 
     @Override
     public Person getById(long id) throws TemplateNotFoundException{

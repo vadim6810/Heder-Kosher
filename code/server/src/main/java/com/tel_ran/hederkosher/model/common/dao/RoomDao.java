@@ -5,6 +5,7 @@
 package com.tel_ran.hederkosher.model.common.dao;
 
 import com.tel_ran.hederkosher.exception.TemplateNotFoundException;
+import com.tel_ran.hederkosher.model.common.entity.Address;
 import com.tel_ran.hederkosher.model.common.entity.Room;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,4 +23,7 @@ public interface RoomDao {
         List<Room>  getByName(String name);
         List<Room> getAllRooms();
         List<Room> getAllRoomsActives();
+
+        boolean addAddressByRoom(long roomId, Address address);
+
 }

@@ -1,7 +1,6 @@
 package com.tel_ran.hederkosher.model.common.entity;
 
 import javax.persistence.*;
-import java.util.Set;
 
 /**
  * Created by Ruslan on 17/11/16.
@@ -24,9 +23,12 @@ public class Gym {
 
     public Gym() {
     }
-
     public Gym(String name) {
         this.name = name;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public long getId() {
@@ -37,14 +39,13 @@ public class Gym {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+//    public void setName(String name) {
+//        this.name = name;
+//    }
 
     public Address getAddress() {
         return address;
     }
-
     public void setAddress(Address address) {
         this.address = address;
     }
