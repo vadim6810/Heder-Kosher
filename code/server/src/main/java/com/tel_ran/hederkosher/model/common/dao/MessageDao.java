@@ -10,8 +10,8 @@ import com.tel_ran.hederkosher.model.common.entity.Message;
 import java.util.List;
 
 public interface MessageDao {
-        boolean addMessage(Message obj);
-        boolean updateMessage(Message obj);
+        boolean addMessage(Message message,Long idProgram, Long idTask, Long idUser);
+        boolean updateMessage(Message message);
         boolean deleteMessage(long id);
         boolean deleteAllMessages();
 

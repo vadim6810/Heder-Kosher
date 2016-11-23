@@ -6,10 +6,8 @@ package com.tel_ran.hederkosher.model.common.dao.implementation;
 
 import com.tel_ran.hederkosher.exception.TemplateNotFoundException;
 import com.tel_ran.hederkosher.model.common.dao.AddressDao;
-import com.tel_ran.hederkosher.model.common.entity.Address;
-import com.tel_ran.hederkosher.model.common.entity.Gym;
-import com.tel_ran.hederkosher.model.common.entity.Person;
-import com.tel_ran.hederkosher.model.common.entity.Room;
+import com.tel_ran.hederkosher.model.common.entity.*;
+import com.tel_ran.hederkosher.model.security.entity.User;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -34,7 +32,7 @@ public class AddressDaoImpl implements AddressDao {
     public boolean addAddress(Address address) {
         if ((address==null) || (em.find(Address.class,address.getId())!=null))
             return false;
-        em.persist(address);
+         em.persist(address);
         return true;
     }
 

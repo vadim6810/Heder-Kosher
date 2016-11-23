@@ -647,7 +647,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "    {\n      \"date\": \"2013-11-20\",\n      \"text\": \"Hello 1\",\n      \"state\": null,\n      \"type\": \"PROGRAM\",\n      \"usersTo\": null,\n      \"userFrom\": null,\n      \"program\": null,\n      \"task\": null\n    }\n"
+							"raw": "    {\n      \"date\": \"2013-11-20\",\n      \"text\": \"Hello 1\",\n      \"state\": \"ACTIVE\",\n      \"type\": \"PROGRAM\",\n      \"usersTo\": null,\n      \"userFrom\": null,\n      \"program\": null,\n      \"task\": null\n    }\n"
 						},
 						"description": ""
 					},
@@ -708,6 +708,46 @@
 					"response": []
 				},
 				{
+					"name": "GET BY TYPE http://localhost:8080/messages?type=CLIENT",
+					"request": {
+						"url": " http://localhost:8080/messages?type=CLIENT",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\n      \"passportNo\": \"dsfs\",\n      \"birthday\": \"2001-10-28\",\n      \"fistName\": \"sdfsddsf\",\n      \"secondname\": \"sadsad\",\n      \"lastname\": \"fsdfsd\"\n    }"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "GET BY STATE http://localhost:8080/messages?state=ACTIVE",
+					"request": {
+						"url": " http://localhost:8080/messages?state=ACTIVE",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\n      \"passportNo\": \"dsfs\",\n      \"birthday\": \"2001-10-28\",\n      \"fistName\": \"sdfsddsf\",\n      \"secondname\": \"sadsad\",\n      \"lastname\": \"fsdfsd\"\n    }"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
 					"name": "UPD ONE http://localhost:8080/messages/id",
 					"request": {
 						"url": "http://localhost:8080/messages/3",
@@ -721,7 +761,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "    {\n      \"date\": \"2013-11-20\",\n      \"text\": \"Hello 1 UPD\",\n      \"state\": null,\n      \"type\": \"PROGRAM\",\n      \"usersTo\": null,\n      \"userFrom\": null,\n      \"program\": null,\n      \"task\": null\n    }\n\n"
+							"raw": "    {\n      \"date\": \"2013-11-20\",\n      \"text\": \"Hello 1 UPD\",\n      \"state\": \"ACTIVE\",\n      \"type\": \"PROGRAM\",\n      \"usersTo\": null,\n      \"userFrom\": null,\n      \"program\": null,\n      \"task\": null\n    }\n\n"
 						},
 						"description": ""
 					},
@@ -762,9 +802,9 @@
 					"response": []
 				},
 				{
-					"name": "ADD ONE BY PERSON http://localhost:8080/programs/id/messages",
+					"name": "ADD ONE BY PROGRAM http://localhost:8080/programs/id/messages",
 					"request": {
-						"url": "http://localhost:8080/programs/1/messages",
+						"url": "http://localhost:8080/programs/2/messages",
 						"method": "POST",
 						"header": [
 							{
@@ -775,14 +815,14 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "    {\n      \"date\": \"2010-05-20T00:00:00.000+0000\",\n      \"text\": \"Hello - Program 1\",\n      \"state\": null,\n      \"type\": \"PROGRAM\",\n      \"usersTo\": null,\n      \"userFrom\": null,\n      \"program\": null,\n      \"task\": null\n    }\n"
+							"raw": "    {\n      \"date\": \"2010-05-20T00:00:00.000+0000\",\n      \"text\": \"Hello - Program 2\",\n      \"state\": \"ACTIVE\",\n      \"type\": \"PROGRAM\",\n      \"usersTo\": null,\n      \"userFrom\": null,\n      \"program\": null,\n      \"task\": null\n    }\n"
 						},
 						"description": ""
 					},
 					"response": []
 				},
 				{
-					"name": "ADD ONE BY ROOM http://localhost:8080/tasks/id/messages",
+					"name": "ADD ONE BY TASK http://localhost:8080/tasks/id/messages",
 					"request": {
 						"url": "http://localhost:8080/tasks/1/messages",
 						"method": "POST",
@@ -795,14 +835,14 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "    {\n      \"date\": \"2010-05-20T00:00:00.000+0000\",\n      \"text\": \"Hello - Task 1\",\n      \"state\": null,\n      \"type\": \"EXERCISE\",\n      \"usersTo\": null,\n      \"userFrom\": null,\n      \"program\": null,\n      \"task\": null\n    }"
+							"raw": "    {\n      \"date\": \"2010-05-20\",\n      \"text\": \"Hello - Task 2\",\n      \"state\": \"ACTIVE\",\n      \"type\": \"EXERCISE\",\n      \"usersTo\": null,\n      \"userFrom\": null,\n      \"program\": null,\n      \"task\": null\n    }"
 						},
 						"description": ""
 					},
 					"response": []
 				},
 				{
-					"name": "ADD ONE BY GYM http://localhost:8080/users/id/messages",
+					"name": "ADD ONE BY USER http://localhost:8080/users/id/messages",
 					"request": {
 						"url": "http://localhost:8080/users/1/messages",
 						"method": "POST",
@@ -815,16 +855,16 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "    {\n      \"date\": \"2010-05-20T00:00:00.000+0000\",\n      \"text\": \"Hello - User 1\",\n      \"state\": null,\n      \"type\": \"CLIENT\",\n      \"usersTo\": null,\n      \"userFrom\": null,\n      \"program\": null,\n      \"task\": null\n    }"
+							"raw": "    {\n      \"date\": \"2010-05-20T00:00:00.000+0000\",\n      \"text\": \"Hello - User 2\",\n      \"state\": \"ACTIVE\",\n      \"type\": \"CLIENT\",\n      \"usersTo\": null,\n      \"userFrom\": null,\n      \"program\": null,\n      \"task\": null\n    }"
 						},
 						"description": ""
 					},
 					"response": []
 				},
 				{
-					"name": "GET BY PERSON http://localhost:8080/programs/id/messages",
+					"name": "GET BY PROGRAM http://localhost:8080/programs/id/messages",
 					"request": {
-						"url": " http://localhost:8080/programs/1/messages",
+						"url": " http://localhost:8080/programs/2/messages",
 						"method": "GET",
 						"header": [
 							{
@@ -842,9 +882,9 @@
 					"response": []
 				},
 				{
-					"name": "---------GET BY TASKS http://localhost:8080/tasks/id/messages",
+					"name": "GET BY TASKS http://localhost:8080/tasks/id/messages",
 					"request": {
-						"url": "http://localhost:8080/tasks/1/messages",
+						"url": "http://localhost:8080/tasks/2/messages",
 						"method": "GET",
 						"header": [
 							{
@@ -882,7 +922,7 @@
 					"response": []
 				},
 				{
-					"name": "DEL BY PERSON http://localhost:8080/programs/id/messages",
+					"name": "DEL BY PROGRAM http://localhost:8080/programs/id/messages",
 					"request": {
 						"url": "http://localhost:8080/programs/id/messages",
 						"method": "DELETE",
@@ -902,7 +942,7 @@
 					"response": []
 				},
 				{
-					"name": "DEL BY ROOM http://localhost:8080/tasks/id/messages",
+					"name": "DEL BY TASK http://localhost:8080/tasks/id/messages",
 					"request": {
 						"url": "http://localhost:8080/tasks/id/messages",
 						"method": "DELETE",
@@ -922,7 +962,7 @@
 					"response": []
 				},
 				{
-					"name": "DEL BY GYM http://localhost:8080/users/id/messages",
+					"name": "DEL BY USER http://localhost:8080/users/id/messages",
 					"request": {
 						"url": "http://localhost:8080/users/id/messages",
 						"method": "DELETE",

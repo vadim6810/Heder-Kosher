@@ -6,9 +6,8 @@ package com.tel_ran.hederkosher.model.common.dao.implementation;
 
 import com.tel_ran.hederkosher.exception.TemplateNotFoundException;
 import com.tel_ran.hederkosher.model.common.dao.MessageDao;
-import com.tel_ran.hederkosher.model.common.entity.Message;
-import com.tel_ran.hederkosher.model.common.entity.MessageState;
-import com.tel_ran.hederkosher.model.common.entity.Program;
+import com.tel_ran.hederkosher.model.common.entity.*;
+import com.tel_ran.hederkosher.model.security.entity.User;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,9 +26,22 @@ public class MessageDaoImpl implements MessageDao {
 
     @Override
     @Transactional
-    public boolean addMessage(Message message) {
+    public boolean addMessage(Message message,Long idProgram, Long idTask, Long idUser) {
         if ((message==null) || (em.find(Message.class,message.getId())!=null))
             return false;
+        Program program;
+        Task task;
+        User user;
+        if ((idProgram!=null) && ((program=em.find(Program.class,idProgram))!=null)) {
+            message.setProgram(program);
+        }
+        if ((idTask!=null) && ((task=em.find(Task.class,idTask))!=null)) {
+            message.setTask(task);
+        }
+        if ((idUser!=null) && ((user=em.find(User.class,idUser))!=null)) {
+            message.setUserFrom(user);
+        }
+
         em.persist(message);
         return true;
     }
@@ -68,7 +80,7 @@ public class MessageDaoImpl implements MessageDao {
 
         if (name!=null)
             try{
-                message = (List<Message>) em.createQuery("SELECT p FROM Message p WHERE name like :name")
+                message = (List<Message>) em.createQuery("SELECT p FROM Message p WHERE p.text like :name")
                         .setParameter("name", "%"+name+"%")
                         .getResultList();
             } catch (Exception e){
@@ -123,8 +135,8 @@ public class MessageDaoImpl implements MessageDao {
         List<Message> messages=null;
         if (name!=null && MessageState.valueOf(name)!=null)
             try{
-                messages = (List<Message>) em.createQuery("SELECT p FROM Message p WHERE state = :state")
-                        .setParameter("state", name)
+                messages = (List<Message>) em.createQuery("SELECT p FROM Message p WHERE p.state = :name")
+                        .setParameter("name", MessageState.valueOf(name))
                         .getResultList();
             } catch (Exception e){
             }
@@ -134,10 +146,10 @@ public class MessageDaoImpl implements MessageDao {
     @Override
     public List<Message> getMessagesByType(String name) {
         List<Message> messages=null;
-        if (name!=null && MessageState.valueOf(name)!=null)
+        if (name!=null && MessageType.valueOf(name)!=null)
             try{
-                messages = (List<Message>) em.createQuery("SELECT p FROM Message p WHERE type = :type")
-                        .setParameter("type", name)
+                messages = (List<Message>) em.createQuery("SELECT p FROM Message p WHERE p.type = :name")
+                        .setParameter("name", MessageType.valueOf(name))
                         .getResultList();
             } catch (Exception e){
             }
@@ -181,24 +193,56 @@ public class MessageDaoImpl implements MessageDao {
 
     @Override
     public List<Message> getMessagesByTask(long idTask) {
-        return null;
+        List<Message> messages=null;
+        try{
+            messages = (List<Message>) em.createQuery("SELECT m FROM Message m WHERE m.task.id = :idTask")
+                    .setParameter("idTask", idTask)
+                    .getResultList();
+        } catch (Exception e){
+        }
+        return messages;
     }
 
     @Transactional
     @Override
     public boolean deleteMessagesByTask(long idTask) {
-        return false;
+        List<Message> messages = getMessagesByTask(idTask);
+        if (messages == null) return false;
+        try{
+            for (Message message : messages) {
+                em.remove(message);
+            }
+        } catch (Exception e){
+            return false;
+        }
+        return true;
     }
 
     @Override
     public List<Message> getMessagesByUserFrom(long idUser) {
-        return null;
+        List<Message> messages=null;
+        try{
+            messages = (List<Message>) em.createQuery("SELECT m FROM Message m WHERE m.userFrom.id = :idUser")
+                    .setParameter("idUser", idUser)
+                    .getResultList();
+        } catch (Exception e){
+        }
+        return messages;
     }
 
     @Transactional
     @Override
     public boolean deleteMessagesByUserFrom(long idUser) {
-        return false;
+        List<Message> messages = getMessagesByUserFrom(idUser);
+        if (messages == null) return false;
+        try{
+            for (Message message : messages) {
+                em.remove(message);
+            }
+        } catch (Exception e){
+            return false;
+        }
+        return true;
     }
 
 

@@ -1,8 +1,11 @@
 package com.tel_ran.hederkosher.rest.common.service.implementation;
 
 import com.tel_ran.hederkosher.exception.TemplateNotFoundException;
-import com.tel_ran.hederkosher.model.common.dao.*;
+import com.tel_ran.hederkosher.model.common.dao.MessageDao;
+import com.tel_ran.hederkosher.model.common.dao.ProgramDao;
+import com.tel_ran.hederkosher.model.common.dao.TaskDao;
 import com.tel_ran.hederkosher.model.common.entity.Message;
+import com.tel_ran.hederkosher.model.common.entity.Task;
 import com.tel_ran.hederkosher.model.security.dao.UserDAO;
 import com.tel_ran.hederkosher.rest.ServiceResult;
 import com.tel_ran.hederkosher.rest.ServiceResultFactory;
@@ -69,7 +72,7 @@ public class MessageCRUDServiceImpl implements MessageRESTService {
     //CRUD ID
     @Override
     public ServiceResult createMessage(Message message) {
-        if (messageDao.addMessage(message)) {
+        if (messageDao.addMessage(message,null,null,null)) {
             result = getResultObject(Type.OK);
         } else {
             result = getResultObject(Type.CREATING_ERROR);
@@ -118,7 +121,7 @@ public class MessageCRUDServiceImpl implements MessageRESTService {
     //CRUD for PROGRAM
     @Override
     public ServiceResult createMessageByProgram(long idProgram, Message message) {
-        if (messageDao.addMessage(message)) { // && programDao.addMessageByPprogram(idProgram,message)
+        if (messageDao.addMessage(message,idProgram,null,null)) { // && programDao.addMessageByPprogram(idProgram,message)
             result = getResultObject(Type.OK);
         } else {
             result = getResultObject(Type.CREATING_ERROR);
@@ -151,7 +154,9 @@ public class MessageCRUDServiceImpl implements MessageRESTService {
     //CRUD for TASK
     @Override
     public ServiceResult createMessageByTask(long idTask, Message message) {
-        if (messageDao.addMessage(message)) { // && taskDao.addMessageByTask(idTask,message)
+        Task task = taskDao.getTaskById(idTask);
+
+        if (messageDao.addMessage(message,null,idTask,null)) { // && taskDao.addMessageByTask(idTask,message)
             result = getResultObject(Type.OK);
         } else {
             result = getResultObject(Type.CREATING_ERROR);
@@ -184,7 +189,7 @@ public class MessageCRUDServiceImpl implements MessageRESTService {
     //CRUD for USER_FROM
     @Override
     public ServiceResult createMessageByUser(long idUser, Message message) {
-        if (messageDao.addMessage(message))  { //&& userDAO.addMessageByUser(idUser,message)
+        if (messageDao.addMessage(message,null,null,idUser))  { //&& userDAO.addMessageByUser(idUser,message)
             result = getResultObject(Type.OK);
         } else {
             result = getResultObject(Type.CREATING_ERROR);
