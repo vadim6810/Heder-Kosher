@@ -10,9 +10,12 @@ public interface ConstantsApplication {
     static final String URI_GYMS = "/gyms";
     static final String URI_ADDRESSES = "/addresses";
     static final String URI_OFFICES = "/offices";
+    static final String URI_MESSAGES = "/messages";
 
 
 
     static final String URI_USERS = "/users";
+    static final String URI_PROGRAMS = "/programs";
+    static final String URI_TASKS = "/tasks";
 
 }

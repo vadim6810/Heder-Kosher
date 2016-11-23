@@ -13,16 +13,24 @@ public interface MessageDao {
         boolean addMessage(Message obj);
         boolean updateMessage(Message obj);
         boolean deleteMessage(long id);
+        boolean deleteAllMessages();
+
         Message getById(long id) throws TemplateNotFoundException;
-        List<Message> getByLikeName(String name);
         List<Message> getAllMessages();
         List<Message> getAllMessagesActives();
+        List<Message> getMessagesByLikeName(String name);
 
-        List<Message> getByState(String name);
-        List<Message> getByType(String name);
-        List<Message> getByProgram(long id);
-        List<Message> getByTask(long id);
-        List<Message> getByUserFrom(long id);
+        List<Message> getMessagesByState(String name);
+        List<Message> getMessagesByType(String name);
+
+        List<Message> getMessagesByProgram(long idProgram);
+        boolean deleteMessagesByProgram(long idProgram);
+
+        List<Message> getMessagesByTask(long idTask);
+        boolean deleteMessagesByTask(long idTask);
+
+        List<Message> getMessagesByUserFrom(long idUser);
+        boolean deleteMessagesByUserFrom(long idUser);
 
 
 }
