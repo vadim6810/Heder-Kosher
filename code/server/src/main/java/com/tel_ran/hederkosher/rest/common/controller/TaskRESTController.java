@@ -11,14 +11,14 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
-public class TaskCRUDController {
+public class TaskRESTController {
 
     private static final String URI_TASKS = "/tasks";
     @Autowired
     private TaskCRUDService taskCRUDService;
 
     //------------------Get all tasks------------------------
-    @RequestMapping(value = {URI_TASKS, URI_TASKS + "/"}, method = RequestMethod.GET)
+    @RequestMapping(value = {URI_TASKS, URI_TASKS + "/"}, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ServiceResult> listAllTasks() {
         ServiceResult res = taskCRUDService.findAllTasks();
         return new ResponseEntity<>(res, HttpStatus.OK);
@@ -34,15 +34,15 @@ public class TaskCRUDController {
 
 
     //------------------Create task--------------------------
-    @RequestMapping(value = URI_TASKS, method = RequestMethod.POST)
-    public ResponseEntity<ServiceResult> createTask(@RequestBody Task task, UriComponentsBuilder ucBuilder) {
+    @RequestMapping(value = URI_TASKS, method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<ServiceResult> createTask(@RequestBody Task task) {
         ServiceResult res = taskCRUDService.createTask(task);
         return new ResponseEntity<>(res, HttpStatus.CREATED);
     }
 
 
     //------------------Update task--------------------------
-//    @RequestMapping(value = URI_TASKS + "/{id}", method = RequestMethod.PUT)
+//    @RequestMapping(value = URI_TASKS + "/{id}", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
 //    public ResponseEntity<ServiceResult> updateTask(@PathVariable("id") long id, @RequestBody Task task) {
 //        task.setId(id);
 //        ServiceResult res = taskCRUDService.updateTask(task);
@@ -51,7 +51,7 @@ public class TaskCRUDController {
 
 
     //------------------Delete task--------------------------
-    @RequestMapping(value = URI_TASKS + "/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = URI_TASKS + "/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ServiceResult> deleteTask(@PathVariable("id") long id) {
         ServiceResult res = taskCRUDService.deleteTask(id);
         return new ResponseEntity<>(res, HttpStatus.OK);
