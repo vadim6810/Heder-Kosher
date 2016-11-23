@@ -35,7 +35,7 @@ public class Program {
     private LocalDateTime dateClose;
 
     @Column(name = "IS_TEMPLATE", nullable = false)
-    private boolean isTemplate;
+    private boolean template;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "CREATOR_ID", foreignKey = @ForeignKey(name = "FK_PROGRAM$CREATOR_ID"))
@@ -59,12 +59,12 @@ public class Program {
     public Program() {
     }
 
-    public Program(String name, String description, LocalDateTime dateCreate, LocalDateTime dateClose, boolean isTemplate, User creator, Room room) {
+    public Program(String name, String description, LocalDateTime dateCreate, LocalDateTime dateClose, boolean template, User creator, Room room) {
         this.name = name;
         this.description = description;
         this.dateCreate = dateCreate;
         this.dateClose = dateClose;
-        this.isTemplate = isTemplate;
+        this.template = template;
         this.creator = creator;
         this.room = room;
 
@@ -113,11 +113,11 @@ public class Program {
     }
 
     public boolean isTemplate() {
-        return isTemplate;
+        return template;
     }
 
     public void setTemplate(boolean template) {
-        isTemplate = template;
+        this.template = template;
     }
 
     public User getCreator() {
