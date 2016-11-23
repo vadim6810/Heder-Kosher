@@ -6,6 +6,7 @@ package com.tel_ran.hederkosher.model.common.dao.implementation;
 
 import com.tel_ran.hederkosher.exception.TemplateNotFoundException;
 import com.tel_ran.hederkosher.model.common.dao.RoomDao;
+import com.tel_ran.hederkosher.model.common.entity.Address;
 import com.tel_ran.hederkosher.model.common.entity.Room;
 import org.hibernate.event.spi.SaveOrUpdateEvent;
 import org.springframework.stereotype.Repository;
@@ -13,7 +14,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 @Repository
 public class RoomDaoImpl implements RoomDao {
@@ -115,6 +118,26 @@ public class RoomDaoImpl implements RoomDao {
         } catch (Exception e){
             return false;
         }
+        return true;
+    }
+
+    @Transactional
+    @Override
+    public boolean addAddressByRoom(long roomId, Address address) {
+        Room room;
+
+        try {
+            room = getById(roomId);
+        } catch (Exception e){
+            return false;
+        }
+        if (room==null) return false;
+        em.refresh(room);
+        Set<Address> addresses = room.getAddress();
+        if (address==null) addresses= new LinkedHashSet<>();
+        addresses.add(address);
+        room.setAddress(addresses);
+        em.merge(room);
         return true;
     }
 

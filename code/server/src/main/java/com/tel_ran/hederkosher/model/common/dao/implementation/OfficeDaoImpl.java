@@ -39,7 +39,7 @@ public class OfficeDaoImpl implements OfficeDao {
         if ((office==null) || (em.find(Office.class,office.getId())==null))
             return false;
 
-        em.persist(office);
+        em.merge(office);
         return true;
     }
 
@@ -68,7 +68,8 @@ public class OfficeDaoImpl implements OfficeDao {
         if (name!=null)
             try{
                 office = (List<Office>) em.createQuery("SELECT p FROM Office p WHERE name = :name")
-                        .setParameter("name", name);
+                        .setParameter("name", name)
+                        .getResultList();
             } catch (Exception e){
             }
 
@@ -80,7 +81,8 @@ public class OfficeDaoImpl implements OfficeDao {
         List<Office> office=null;
 
         try{
-            office = (List<Office>) em.createQuery("SELECT p FROM Office p");
+            office = (List<Office>) em.createQuery("SELECT p FROM Office p")
+                    .getResultList();
         } catch (Exception e){
         }
 
@@ -92,11 +94,27 @@ public class OfficeDaoImpl implements OfficeDao {
         List<Office> office=null;
 
         try{
-            office = (List<Office>) em.createQuery("SELECT p FROM Office p where isEnable is true ");
+            office = (List<Office>) em.createQuery("SELECT p FROM Office p where enable is true ")
+                    .getResultList();
         } catch (Exception e){
         }
 
         return office;
+    }
+
+    @Override
+    @Transactional
+    public boolean deleteAllOffices()  {
+        try{
+            List<Office> offices = (List<Office>) em.createQuery("SELECT p FROM Office p")
+                    .getResultList();
+            for (Office office: offices) {
+                em.remove(office);
+            }
+        } catch (Exception e){
+            return false;
+        }
+        return true;
     }
 
 

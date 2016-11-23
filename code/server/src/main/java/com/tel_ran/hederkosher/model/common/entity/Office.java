@@ -5,11 +5,10 @@
 package com.tel_ran.hederkosher.model.common.entity;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
-//import java.util.Set;
+import java.util.Date;
 
 @Entity
-@Table(name = "office") //, schema = "heder-kosher", catalog = ""
+@Table(name = "office")
 public class Office {
 
     @Id
@@ -21,74 +20,45 @@ public class Office {
     private String name;
 
     @Column(name = "DATE_CREATE", nullable = false)
-    private LocalDateTime dCreate;
+    private Date dateCreate;
 
     @Column(name = "DATE_CLOSE")
-    private LocalDateTime dClose;
+    private Date dateClose;
 
     @Column(name = "IS_ENABLE", nullable = false)
-    private boolean isEnable;
+    private boolean enable;
 
-
-//    @Column(name = "ROOM")
-//    @OneToMany(fetch = FetchType.LAZY, mappedBy = "office")
-//    private Set<Room> rooms;
-
-//    @Column(name = "ADDRESS", nullable = false, columnDefinition = "TEXT")
-//    private String address;
-
-    public Office(String name, LocalDateTime dCreate,boolean isEnable) {
+    public Office(String name, Date dateCreate,boolean enable) {
         this.name = name;
-        this.dCreate = dCreate;
-        this.isEnable = isEnable;
+        this.dateCreate = dateCreate;
+        this.enable = enable;
     }
     public Office() {
     }
 
 
-//    public void setId(long id) {
-//        this.id = id;
-//    }
+    public void setId(long id) {
+        this.id = id;
+    }
     public long getId() {
         return id;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
     public String getName() {
         return name;
     }
 
-
-//    public void setAddress(String address) {
-//        this.address = address;
-//    }
-//    public String getAddress() {
-//        return address;
-//    }
-
-    public LocalDateTime getDcreate() {
-        return dCreate;
-    }
-    public void setDcreate(LocalDateTime dCreate) {
-        this.dCreate = dCreate;
+    public Date getDateCreate() {
+        return dateCreate;
     }
 
-    public LocalDateTime getDclose() {
-        return dClose;
-    }
-    public void setDclose(LocalDateTime dClose) {
-        this.dClose = dClose;
+    public Date getDateClose() {
+        return dateClose;
     }
 
     public boolean isEnable() {
-        return isEnable;
+        return enable;
     }
-    public void setEnable(boolean enable) {
-        isEnable = enable;
-    }
-
 
     @Override
     public boolean equals(Object o) {
@@ -100,8 +70,8 @@ public class Office {
         if (id != that.id) return false;
 //        if (name != null ? !name.equals(that.name) : that.name != null) return false;
 //        if (address != null ? !address.equals(that.address) : that.address != null) return false;
-//        if (dCreate != null ? !dCreate.equals(that.dCreate) : that.dCreate != null) return false;
-//        if (dClose != null ? !dClose.equals(that.dClose) : that.dClose != null) return false;
+//        if (dateCreate != null ? !dateCreate.equals(that.dateCreate) : that.dateCreate != null) return false;
+//        if (dateClose != null ? !dateClose.equals(that.dateClose) : that.dateClose != null) return false;
 
         return true;
     }
@@ -111,8 +81,8 @@ public class Office {
         int result = (int)id;
 //        result = 31 * result + (name != null ? name.hashCode() : 0);
 //        result = 31 * result + (address != null ? address.hashCode() : 0);
-//        result = 31 * result + (dCreate != null ? dCreate.hashCode() : 0);
-//        result = 31 * result + (dClose != null ? dClose.hashCode() : 0);
+//        result = 31 * result + (dateCreate != null ? dateCreate.hashCode() : 0);
+//        result = 31 * result + (dateClose != null ? dateClose.hashCode() : 0);
         return result;
     }
 }

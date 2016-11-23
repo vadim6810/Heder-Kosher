@@ -1,6 +1,7 @@
 package com.tel_ran.hederkosher.rest.common.service.implementation;
 
 import com.tel_ran.hederkosher.exception.TemplateNotFoundException;
+import com.tel_ran.hederkosher.model.common.dao.ContactDao;
 import com.tel_ran.hederkosher.model.common.dao.PersonDao;
 import com.tel_ran.hederkosher.model.common.entity.Person;
 import com.tel_ran.hederkosher.rest.ServiceResult;
@@ -16,6 +17,9 @@ public class PersonCRUDServiceImpl implements PersonRESTService {
 
     @Autowired
     private PersonDao personDao;
+
+    @Autowired
+    private ContactDao contactDao;
 
     private ServiceResult result;
 
@@ -101,7 +105,7 @@ public class PersonCRUDServiceImpl implements PersonRESTService {
 
     @Override
     public ServiceResult deletePerson(long id) {
-        if (personDao.deletePerson(id)) {
+        if (contactDao.deleteContactsByPerson(id) && personDao.deletePerson(id)) {
             result = getResultObject(Type.OK);
         } else {
             result = getResultObject(Type.DELETING_ERROR);
@@ -112,7 +116,7 @@ public class PersonCRUDServiceImpl implements PersonRESTService {
 
     @Override
     public ServiceResult deleteAllPersons() {
-        if (personDao.deleteAllPersons()) {
+        if (contactDao.deleteAllContacts() && personDao.deleteAllPersons()) {
             result = getResultObject(Type.OK);
         } else {
             result = getResultObject(Type.DELETING_ERROR);
