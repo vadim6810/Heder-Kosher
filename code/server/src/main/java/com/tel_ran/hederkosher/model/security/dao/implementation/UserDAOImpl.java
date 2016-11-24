@@ -2,83 +2,79 @@ package com.tel_ran.hederkosher.model.security.dao.implementation;
 
 import com.tel_ran.hederkosher.model.security.dao.UserDAO;
 import com.tel_ran.hederkosher.model.security.entity.User;
-import com.tel_ran.hederkosher.service.HibUtil;
-import org.hibernate.Session;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
+import javax.persistence.PersistenceContext;
 import java.util.List;
 
 
-/**
- * Created by Igor on 20.08.2016.
- */
 @Service("userDAOService")
 public class UserDAOImpl implements UserDAO {
-    @Autowired
-    private HibUtil hibernateUtil;
 
-    @Override
-    public boolean createUser(User user) {
-        if (user == null) return false;
-        try(Session session = hibernateUtil.getSessionFactory().openSession()){
-            session.beginTransaction();
-            session.save(user);
-            session.getTransaction().commit();
-            return true;
-        }
-    }
-
-    @Override
-    public boolean updateUser(User user) {
-        if (user == null) return false;
-        try(Session session = hibernateUtil.getSessionFactory().openSession()){
-            session.beginTransaction();
-            session.update(user);
-            session.getTransaction().commit();
-            return true;
-        }
-    }
-
-    @Override
-    public boolean deleteUser(long id) {
-        User user = this.findByID(id);
-        if (user == null) return false;
-        try(Session session = hibernateUtil.getSessionFactory().openSession()){
-            session.beginTransaction();
-            session.delete(user);
-            session.getTransaction().commit();
-            return true;
-        }
-    }
+    @PersistenceContext
+    private EntityManager em;
 
     @Override
     public User findByID(long id) {
-        User result = null;
-        try(Session session = hibernateUtil.getSessionFactory().openSession()){
-            result = session.get(User.class, id);
-            long size = result.getAuthorities().size();
+        User user = null;
+        try {
+            user = (User) em.createQuery("SELECT u FROM User u WHERE u.id = :id")
+                    .setParameter("id", id)
+                    .getSingleResult();
+        } catch (NoResultException e) {
         }
-        return result;
+        return user;
     }
 
     @Override
     public User findByMail(String mail) {
-        User result = null;
-        try(Session session = hibernateUtil.getSessionFactory().openSession()){
-            result = session.byNaturalId(User.class)
-                    .using("email",mail)
-                    .load();
+        User user = null;
+        try {
+            user = (User) em.createQuery("SELECT u FROM User u WHERE u.email = :email")
+                    .setParameter("email", mail)
+                    .getSingleResult();
+        } catch (NoResultException e) {
         }
-        return result;
+        return user;
     }
 
     @Override
     public List<User> findAllUser() {
-        List<User> result = null;
-        try(Session session = hibernateUtil.getSessionFactory().openSession()){
-            result = (List<User>)session.createQuery("FROM User").list();
-        }
-        return result;
+        return (List<User>) em.createQuery("SELECT u FROM User u").getResultList();
     }
+
+    @Override
+    public boolean createUser(User user) {
+        if (user == null) {
+            return false;
+        }
+        em.persist(user);
+        return true;
+    }
+
+    @Override
+    public boolean updateUser(User user) {
+        if (user == null) {
+            return false;
+        }
+        final User oldUser = em.find(User.class, user.getId());
+        if (oldUser == null) {
+            return false;
+        }
+        final User newUser = em.merge(user);
+        return true;
+    }
+
+    @Override
+    public boolean deleteUser(long id) {
+        final User user = em.find(User.class, id);
+        if (user == null) {
+            return false;
+        }
+        em.remove(user);
+        return true;
+    }
+
 }

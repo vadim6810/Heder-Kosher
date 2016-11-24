@@ -16,6 +16,7 @@ public final class ServiceResultFactory {
         ENTITY_CONFLICT(-6, "Object already exist"),
         CREDENTIALS_NOT_FOUND(-7, "Username or password are invalid."),
         INVALID_REQUEST(-8, "Request is invalid"),
+        SERVER_ERROR (-9, "Server Error"),
         ;
 
         private int code;

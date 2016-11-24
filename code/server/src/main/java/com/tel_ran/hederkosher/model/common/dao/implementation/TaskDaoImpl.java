@@ -57,7 +57,7 @@ public class TaskDaoImpl implements TaskDao {
     public Task getTaskById(long id) {
         Task task = null;
         try {
-            task = (Task) em.createQuery("SELECT t FROM Task t join t.owner WHERE t.id = :id")
+            task = (Task) em.createQuery("SELECT t FROM Task t WHERE t.id = :id")
                     .setParameter("id", id)
                     .getSingleResult();
         } catch (NoResultException e) {
