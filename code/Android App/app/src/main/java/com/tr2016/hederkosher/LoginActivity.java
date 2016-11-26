@@ -29,9 +29,18 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
@@ -172,7 +181,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         View focusView = null;
 
         // Check for a valid password, if the user entered one.
-        if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
+//        if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
+        if (TextUtils.isEmpty(password) || !isPasswordValid(password)) {
             mPasswordView.setError(getString(R.string.error_invalid_password));
             focusView = mPasswordView;
             cancel = true;
@@ -202,6 +212,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 //            mAuthTask.execute((Void) null);
         }
 
+//        Map<String,Objects> userServer = getValidationEmailOnServer();
+//        if (userServer==null || !userServer.containsKey("validate") || !userServer.get("validate")) return;
 
 //        Intent intent = new Intent(LoginActivity.this, WelcomeActivity.class);
 //        AutoCompleteTextView userFirstName = ((AutoCompleteTextView) findViewById(R.id.));
@@ -211,6 +223,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         Intent intent = new Intent(LoginActivity.this, WelcomeActivity.class);
         intent.putExtra("emailLogin", email);
         LoginActivity.this.startActivity(intent);
+
     }
 
     private boolean isEmailValid(String email) {

@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1015063954248",
+    "firebase_url": "https://heder-kosher.firebaseio.com",
+    "project_id": "heder-kosher",
+    "storage_bucket": "heder-kosher.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1015063954248:android:b0df1ab63a934e27",
+        "android_client_info": {
+          "package_name": "com.tr2016.hederkosher"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1015063954248-2pbc301k1lcpkppkscunjocki1ujo1ae.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.tr2016.hederkosher",
+            "certificate_hash": "3A2403776AA459B401EED40DEE8DEB45E9329AB6"
+          }
+        },
+        {
+          "client_id": "1015063954248-i8826hkl17hf4d8tgicrg9maqpdvpdka.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCHsWAPidgXmMDtb6rDT3SHBhXmQDwtAag"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1015063954248-i8826hkl17hf4d8tgicrg9maqpdvpdka.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

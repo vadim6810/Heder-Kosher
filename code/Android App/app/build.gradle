@@ -1,4 +1,6 @@
 apply plugin: 'com.android.application'
+//23.11.16
+apply plugin: 'com.google.gms.google-services'
 
 // Create a variable called keystorePropertiesFile, and initialize it to your
 // keystore.properties file, in the rootProject folder.
@@ -29,7 +31,7 @@ android {
             storePassword 'Timurchik2007'
         }
     }
-    compileSdkVersion 'Google Inc.:Google APIs:23'
+    compileSdkVersion 'Google Apis:Google Apis:23'
     buildToolsVersion "23.0.1"
     defaultConfig {
         applicationId "com.tr2016.hederkosher"
@@ -58,6 +60,7 @@ android {
         }
         debug {
             applicationIdSuffix ".debug"
+            signingConfig signingConfigs.config
         }
     }
     productFlavors {
@@ -68,19 +71,30 @@ dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
     //23.11.16
-    //    compile 'com.google.firebase:firebase-core:10.0.0'
-    //    compile 'com.google.firebase:firebase-messaging:10.0.0'
+    compile 'com.google.firebase:firebase-core:10.0.0'
+    compile 'com.google.firebase:firebase-messaging:10.0.0'
+    //Cloud Messaging and Notifications
+    compile 'com.google.firebase:firebase-auth:10.0.0'
+    // 	Authentication
+    //com.google.firebase:firebase-config:10.0.0 	Remote Config
+        compile 'com.android.support:support-v4:23.0.1'
+        compile 'com.android.support:support-v4:23.0.1'
+        compile 'com.android.support:appcompat-v7:23.0.1'
+        compile 'com.android.support:design:23.0.1'
 
     //    compile 'com.google.android.gms:play-services:7.5.0'
-
-    compile 'com.android.support:appcompat-v7:23.0.1'
-    compile    'com.android.support:design:23.0.1'
-    compile    'com.google.android.gms:play-services-identity:8.1.0'
-    compile    'com.google.android.gms:play-services-gcm:8.1.0'
-    compile    'com.android.support:support-v4:23.0.1'
-    compile 'com.android.support:support-v4:23.0.1'
+    //    compile 'com.google.android.gms:play-services-identity:8.1.0'
 }
 
-//23.11.16 
-//apply plugin: 'com.google.gms.google-services'
 
+
+//com.google.firebase:firebase-core:10.0.0 	Analytics
+//com.google.firebase:firebase-database:10.0.0 	Realtime Database
+//com.google.firebase:firebase-storage:10.0.0 	Storage
+//com.google.firebase:firebase-crash:10.0.0 	Crash Reporting
+//com.google.firebase:firebase-auth:10.0.0 	Authentication
+//com.google.firebase:firebase-messaging:10.0.0 	Cloud Messaging and Notifications
+//com.google.firebase:firebase-config:10.0.0 	Remote Config
+//com.google.firebase:firebase-invites:10.0.0 	Invites and Dynamic Links
+//com.google.firebase:firebase-ads:10.0.0 	AdMob
+//com.google.firebase:firebase-appindexing:10.0.0 	App Indexing
