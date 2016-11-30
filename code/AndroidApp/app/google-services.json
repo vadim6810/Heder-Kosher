@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "767169051768",
+    "firebase_url": "https://heder-kosher-35cba.firebaseio.com",
+    "project_id": "heder-kosher-35cba",
+    "storage_bucket": "heder-kosher-35cba.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:767169051768:android:b0df1ab63a934e27",
+        "android_client_info": {
+          "package_name": "com.tr2016.hederkosher"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "767169051768-qj6361nsvb76li5jjpdgmspe76iah2vm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCPJhcwXpmo0qeAPfD3mINnfYjE_laHhfY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

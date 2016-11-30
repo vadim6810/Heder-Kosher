@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_about"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.tr2016.hederkosher.AboutActivity">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/nameOfApp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:id="@+id/textViewNameOfAppAbout"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:textAlignment="center"
+        android:textStyle="normal|bold"
+        tools:text="@string/nameOfApp"
+        android:gravity="center_horizontal" />
+
+    <CheckBox
+        android:text="@string/sex"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/checkBoxSex"
+        style="@android:style/Widget.DeviceDefault.Light.CompoundButton.CheckBox" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="date"
+        android:ems="10"
+        android:id="@+id/editTextBirthDay"
+        android:layout_below="@+id/checkBoxSex"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        style="@android:style/Widget.DeviceDefault.EditText"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:hint="@string/birthday" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="phone"
+        android:ems="10"
+        android:id="@+id/editTextTelephone"
+        style="@android:style/Widget.DeviceDefault.EditText"
+        android:hint="@string/telephone"
+        android:layout_below="@+id/editTextPassport"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:ems="10"
+        android:id="@+id/editTextPassport"
+        android:layout_below="@+id/editTextBirthDay"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        style="@android:style/Widget.DeviceDefault.EditText"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:hint="@string/password" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal"
+        android:ems="10"
+        android:id="@+id/editTextHeight"
+        style="@android:style/Widget.DeviceDefault.EditText"
+        android:hint="@string/height"
+        android:layout_below="@+id/editTextTelephone"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal"
+        android:ems="10"
+        android:id="@+id/editTextWeight"
+        style="@android:style/Widget.DeviceDefault.EditText"
+        android:hint="@string/weight"
+        android:layout_below="@+id/editTextHeight"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="text|textPersonName"
+        android:ems="10"
+        android:id="@+id/editTextGym"
+        android:hint="@string/workout_gym"
+        android:layout_below="@+id/editTextWeight"
+        android:layout_toRightOf="@+id/checkBoxWorkoutGym"
+        android:layout_marginLeft="17dp"
+        android:layout_marginStart="17dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/checkBoxWorkoutGym"
+        style="@android:style/Widget.DeviceDefault.Light.CompoundButton.CheckBox"
+        android:checked="true"
+        android:layout_alignBaseline="@+id/editTextGym"
+        android:layout_alignBottom="@+id/editTextGym"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:text="@string/save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttonAboutSave"
+        android:layout_below="@+id/editTextGym"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="31dp" />
+
+</RelativeLayout>

@@ -1,0 +1,33 @@
+<resources>
+    <string name="app_name">Heder Kosher</string>
+    <string name="error_external_storage">Error external value</string>
+    <string name="error_connection_not_present">Error connections, not present</string>
+    <string name="error_connection_status">Error connection status</string>
+    <string name="error_connection">Error connection</string>
+    <string name="firstname">FirstName</string>
+    <string name="lastname">LastName</string>
+    <string name="secondname">SecondName</string>
+    <string name="sign_in">Sign In</string>
+    <string name="e_mail">e-mail:</string>
+    <string name="password">password</string>
+    <string name="registration">Registration</string>
+    <string name="phrase">Heder Kosher for all people</string>
+    <string name="welcome">Welcome user</string>
+    <string name="buttonStart">Get start</string>
+    <string name="buttonAbout">Tell us about yourself</string>
+    <string name="nameOfApp">HederKosher</string>
+    <string name="sex">male/female</string>
+    <string name="Passport">passport</string>
+    <string name="birthday">birthday</string>
+    <string name="height">height</string>
+    <string name="weight">weight</string>
+    <string name="telephone">telephone</string>
+    <string name="workout_gym">workout gym</string>
+    <string name="save">Save</string>
+    <string name="buttonFeed">Feed</string>
+    <string name="buttonActivity_inbox">Activity</string>
+    <string name="buttonProgress_settings">Progress</string>
+    <string name="buttonPhoto">Photo</string>
+    <string name="buttonMyWorkOut">My WorkOut</string>
+    <string name="Coach">Coach</string>
+</resources>

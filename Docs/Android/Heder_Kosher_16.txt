@@ -1,0 +1,40 @@
+email: kosherheder@gmail.com
+pass: Heder_Kosher_16
+
+---------------------------------------------------------------------------------  Project
+App name: HederKosher
+file: E:\TR2016\Projects\Heder-Kosher\code\AndroidApp\hederkosher.jks
+pass: Heder_Kosher_16
+alias: HederKosher
+
+
+c:\Program Files\Java\jdk1.8.0_77\bin\keytool.exe -list -v -keystore E:\TR2016\Projects\Heder-Kosher\code\AndroidApp\hederkosher.jks
+SHA1: 5A:70:C2:09:74:FF:45:DC:BD:65:D9:CD:F0:AB:96:24:AE:74:60:F3
+
+---------------------------------------------------------------------------------  FireBase
+Название: Heder-Kosher
+Название пакета: com.tr2016.hederkosher
+Псевдоним приложения: Heder-Kosher
+
+Идентификатор проекта: heder-kosher-35cba 
+Ключ API для веб-приложения: AIzaSyCHEsYPasb_4Hqn3Sw8jvh2e9632NzG_o4
+Идентификатор приложения:  1:767169051768:android:b0df1ab63a934e27
+Номер проекта: 767169051768
+
+
+
+Токен Firebase Cloud Messaging:  AAAAsp7WvHg:APA91bE0wGtzEdKsiN911LBI40ujX_UFGVUkEWXuhZC5SHiqynIbvbXppKsad4kChwXNZYpjr-nwFBpr3ScFaFYQVRCQJB4N0YlkBd13fLWQI4cRgrNUa0b1b4y5bTR6j3ivSWFDtSj-SyFX7iDcCYresKk7BA6Cbg
+Идентификатор отправителя: 767169051768
+Ключ сервера: AIzaSyCzc5APIS1J4662hxNBMLUzTObQcd2NqeA
+
+
+Сервисный аккаунт Firebase: firebase-adminsdk-b3hqo@heder-kosher-35cba.iam.gserviceaccount.com
+
+Авторизованный домен : 
+localhost  
+heder-kosher-35cba.firebaseapp.com 
+
+
+Facebook: https://heder-kosher-35cba.firebaseapp.com/__/auth/handler
+Идентификатор приложения : HederKosher
+Секретный ключ приложения: 
