@@ -5,7 +5,7 @@ android {
         config {
             keyAlias 'HederKosher'
             keyPassword 'Heder_Kosher_16'
-            storeFile file('E:/TR2016/Projects/Heder-Kosher/code/AndroidApp/hederkosher.jks')
+            storeFile file('../hederkosher.jks')
             storePassword 'Heder_Kosher_16'
         }
     }

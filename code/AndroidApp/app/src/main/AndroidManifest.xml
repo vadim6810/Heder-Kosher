@@ -25,7 +25,10 @@
         <activity android:name=".RegistrationActivity" />
         <activity android:name=".StartActivity" />
         <activity android:name=".WorkActivity" />
-        <activity android:name=".AboutActivity"></activity>
+        <activity android:name=".AboutActivity" />
+        <activity android:name=".CoachActivity" />
+        <activity android:name=".ShareNBurnActivity" />
+        <activity android:name=".WorkoutActivity"></activity>
     </application>
 
 </manifest>
