@@ -12,11 +12,24 @@ public class SignInActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.content_sign_in);
+//        getToken();
     }
 
 
-
-
-
+//    public String getToken(){
+//        FirebaseUser mUser = FirebaseAuth.getInstance().getCurrentUser();
+//        mUser.getToken(true)
+//                .addOnCompleteListener(new OnCompleteListener<GetTokenResult>() {
+//                    public void onComplete(@NonNull Task<GetTokenResult> task) {
+//                        if (task.isSuccessful()) {
+//                            String idToken = task.getResult().getToken();
+//                            // Send token to your backend via HTTPS
+//                            // ...
+//                        } else {
+//                            // Handle error -> task.getException();
+//                        }
+//                    }
+//                });
+//    }
 
 }
