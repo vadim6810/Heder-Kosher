@@ -30,4 +30,6 @@
     <string name="buttonPhoto">Photo</string>
     <string name="buttonMyWorkOut">My WorkOut</string>
     <string name="Coach">Coach</string>
+    <string name="burn">Burn</string>
+    <string name="share">Share</string>
 </resources>

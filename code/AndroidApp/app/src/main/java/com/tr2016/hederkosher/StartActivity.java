@@ -8,13 +8,14 @@ import android.widget.Button;
 
 public class StartActivity extends AppCompatActivity {
     Button btn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
 
         btn = (Button) findViewById(R.id.buttonStart);
-        if (btn!=null) {
+        if (btn != null) {
             btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -24,7 +25,7 @@ public class StartActivity extends AppCompatActivity {
             });
         }
         btn = (Button) findViewById(R.id.buttonAbout);
-        if (btn!=null) {
+        if (btn != null) {
             btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -33,7 +34,5 @@ public class StartActivity extends AppCompatActivity {
                 }
             });
         }
-
-
     }
 }

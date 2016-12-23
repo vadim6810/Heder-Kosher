@@ -99,7 +99,8 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="68dp"
         android:id="@+id/buttonMyWorkOut"
-        android:text="@string/buttonMyWorkOut" />
+        android:text="@string/buttonMyWorkOut"
+        android:onClick="onMyWorkoutClick" />
 
     <Button
         android:text="@string/Coach"
@@ -108,8 +109,7 @@
         android:layout_below="@+id/buttonMyWorkOut"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="96dp"
-        android:id="@+id/buttonCoach"
-        android:onClick="" />
+        android:id="@+id/buttonCoach" />
 
 
 </RelativeLayout>
