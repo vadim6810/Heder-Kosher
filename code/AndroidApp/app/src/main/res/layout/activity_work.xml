@@ -4,6 +4,7 @@
     android:id="@+id/activity_work"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bg"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
@@ -11,105 +12,85 @@
     tools:context="com.tr2016.hederkosher.WorkActivity">
 
     <TextView
+        android:id="@+id/textViewWelcomeWork"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/welcome"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:id="@+id/textViewWelcomeWork"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:textStyle="normal|bold|italic" />
-
-    <TableLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/textViewWelcomeWork"
-        android:layout_above="@+id/buttonFeed"
-        android:id="@+id/TableWork">
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </TableLayout>
+        android:text="@string/welcome"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textStyle="bold|italic" />
 
     <Button
-        android:text="@string/buttonFeed"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/buttonFeed"
-        android:textAppearance="@style/TextAppearance.AppCompat.Button"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        style="@android:style/Widget.Button.Inset" />
-
-
-    <Button
-        android:text="@string/buttonPhoto"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/buttonPhotoWork"
-        android:textAppearance="@style/TextAppearance.AppCompat.Button"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        style="@android:style/Widget.Button.Inset"  />
-
-    <Button
-        android:text="@string/buttonProgress_settings"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/buttonProgressSettings"
-        android:textAppearance="@style/TextAppearance.AppCompat.Button"
-        android:layout_alignBaseline="@+id/buttonPhotoWork"
-        android:layout_alignBottom="@+id/buttonPhotoWork"
-        android:layout_toRightOf="@+id/buttonActivityInbox"
-        android:layout_toEndOf="@+id/buttonActivityInbox"
-        style="@android:style/Widget.Button.Inset"  />
-
-    <Button
-        android:text="@string/buttonActivity_inbox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/buttonActivityInbox"
-        android:textAppearance="@style/TextAppearance.AppCompat.Button"
-        android:layout_alignParentBottom="true"
-        android:layout_toRightOf="@+id/buttonFeed"
-        android:layout_toEndOf="@+id/buttonFeed"
-        style="@android:style/Widget.Button.Inset"  />
-
-    <Button
+        android:id="@+id/buttonMyWorkOut"
+        style="@android:style/Widget.Button.Inset"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/textViewWelcomeWork"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="68dp"
-        android:id="@+id/buttonMyWorkOut"
+        android:layout_marginTop="100dp"
+        android:onClick="openShareNBurnActivity"
         android:text="@string/buttonMyWorkOut"
-        android:onClick="onMyWorkoutClick" />
+        android:textAppearance="@style/TextAppearance.AppCompat.Button" />
 
     <Button
-        android:text="@string/Coach"
+        android:id="@+id/buttonCoach"
+        style="@android:style/Widget.Button.Inset"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/buttonMyWorkOut"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="96dp"
-        android:id="@+id/buttonCoach" />
+        android:text="@string/Coach"
+        android:textAppearance="@style/TextAppearance.AppCompat.Button" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+
+        <Button
+            android:id="@+id/buttonFeed"
+            style="@android:style/Widget.Button.Inset"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_weight="0.8"
+            android:text="@string/buttonFeed"
+            android:textAppearance="@style/TextAppearance.AppCompat.Button" />
+
+        <Button
+            android:id="@+id/buttonActivityInbox"
+            style="@android:style/Widget.Button.Inset"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_weight="1.1"
+            android:text="@string/buttonActivity_inbox"
+            android:textAppearance="@style/TextAppearance.AppCompat.Button" />
+
+        <Button
+            android:id="@+id/buttonProgressSettings"
+            style="@android:style/Widget.Button.Inset"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_weight="1.2"
+            android:text="@string/buttonProgress_settings"
+            android:textAppearance="@style/TextAppearance.AppCompat.Button" />
+
+        <Button
+            android:id="@+id/buttonPhotoWork"
+            style="@android:style/Widget.Button.Inset"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_weight="1"
+            android:text="@string/buttonPhoto"
+            android:textAppearance="@style/TextAppearance.AppCompat.Button" />
+
+    </LinearLayout>
 
 </RelativeLayout>

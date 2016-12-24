@@ -4,6 +4,7 @@
     android:id="@+id/activity_share_nburn"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bg"
     tools:context="com.tr2016.hederkosher.ShareNBurnActivity">
 
     <View
@@ -11,6 +12,24 @@
         android:layout_width="1px"
         android:layout_height="fill_parent"
         android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignRight="@id/dummyview"
+        android:background="#ffcc99"
+        android:onClick="openWorkoutActivity"
+        android:text="@string/workout" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/dummyview"
+        android:layout_alignParentRight="true"
+        android:background="#ffcc99"
+        android:onClick="openCoachActivity"
+        android:text="@string/my_coach" />
 
     <Button
         android:layout_width="75dp"
@@ -26,6 +45,7 @@
         android:layout_centerVertical="true"
         android:layout_toRightOf="@id/dummyview"
         android:background="@drawable/right_half_round"
+        android:onClick="openWorkoutActivity"
         android:text="@string/burn" />
 
 </RelativeLayout>

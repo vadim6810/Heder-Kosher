@@ -34,4 +34,6 @@
     <string name="burn">Burn</string>
     <string name="WorkOutMessage">Worm up - 10 minutes run</string>
     <string name="share">Share</string>
+    <string name="my_coach">My Coach</string>
+    <string name="workout">WorkOut</string>
 </resources>
