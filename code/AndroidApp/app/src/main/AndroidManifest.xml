@@ -28,7 +28,8 @@
         <activity android:name=".AboutActivity" />
         <activity android:name=".CoachActivity" />
         <activity android:name=".ShareNBurnActivity" />
-        <activity android:name=".WorkoutActivity"></activity>
+        <activity android:name=".WorkoutActivity" />
+        <activity android:name=".WorkOutActivity"></activity>
     </application>
 
 </manifest>

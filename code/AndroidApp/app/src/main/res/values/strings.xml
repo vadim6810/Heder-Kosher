@@ -30,4 +30,6 @@
     <string name="buttonPhoto">Photo</string>
     <string name="buttonMyWorkOut">My WorkOut</string>
     <string name="Coach">Coach</string>
+    <string name="Done">Done</string>
+    <string name="WorkOutMessage">Worm up - 10 minutes run</string>
 </resources>

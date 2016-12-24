@@ -6,8 +6,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
-import com.tr2016.hederkosher.utils.SignInActivity;
-
 public class MainActivity extends AppCompatActivity {
     Button btn;
     @Override
@@ -42,13 +40,10 @@ public class MainActivity extends AppCompatActivity {
             btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    MainActivity.this.startActivity(new Intent(MainActivity.this, SignInActivity.class));
-
+                    MainActivity.this.startActivity(new Intent(MainActivity.this, WorkOutActivity.class));
                 }
             });
         }
-
-
 
     }
 }
