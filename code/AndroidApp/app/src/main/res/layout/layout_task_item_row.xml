@@ -26,7 +26,8 @@
                 android:textColor="#000000"
                 android:padding="10dp"
                 android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp" />
+                android:layout_marginBottom="5dp"
+                android:textAppearance="?android:attr/textAppearanceMedium"/>
 
             <TextView
                 android:id="@+id/set"
@@ -40,7 +41,8 @@
                 android:textColor="#000000"
                 android:padding="10dp"
                 android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp" />
+                android:layout_marginBottom="5dp"
+                android:textAppearance="?android:attr/textAppearanceMedium"/>
 
             <TextView
                 android:id="@+id/repeat"
@@ -55,7 +57,7 @@
                 android:padding="10dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
-                />
+                android:textAppearance="?android:attr/textAppearanceMedium"/>
 
             <TextView
                 android:id="@+id/weight"
@@ -69,21 +71,21 @@
                 android:textColor="#000000"
                 android:padding="10dp"
                 android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp" />
+                android:layout_marginBottom="5dp"
+                android:textAppearance="?android:attr/textAppearanceMedium"/>
 
-            <TextView
+            <ImageView
                 android:id="@+id/timer"
-                android:text="TextView"
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
                 android:gravity="center_vertical"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentBottom="true"
-                android:textSize="12dp"
-                android:textColor="#000000"
-                android:padding="10dp"
                 android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp" />
+                android:layout_marginBottom="5dp"
+                android:src="@drawable/stopwatch"
+                />
+
         </TableRow>
 
     </TableLayout>

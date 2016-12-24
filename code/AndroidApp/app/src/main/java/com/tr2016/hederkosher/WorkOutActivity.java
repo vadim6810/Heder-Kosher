@@ -5,24 +5,26 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+import com.tr2016.hederkosher.utils.Message;
+import com.tr2016.hederkosher.utils.MessageAdapter;
 import com.tr2016.hederkosher.utils.Task;
 import com.tr2016.hederkosher.utils.TaskAdapter;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class WorkOutActivity extends AppCompatActivity {
     ListView tasksListView;
-    //    GridView gvCol;
-//    GridView gvTasks;
-//    Object[] cNames = new Object[]{"excerise","sets","reapet","weight",""};
-//    ArrayAdapter<Object> cAdapter;
     ArrayList<Task> tasksList;
-//    ArrayAdapter<Object> tAdapter;
+
+    ListView messagesListView;
+    ArrayList<Message> messagesList;
 
 
     @Override
@@ -31,55 +33,77 @@ public class WorkOutActivity extends AppCompatActivity {
         setContentView(R.layout.activity_work_out);
 
         int idProgram = 0;
-        setTableTasks(idProgram);
+        setTables(idProgram);
 //        setTableTasks(idProgram);
     }
 
 
-    public void setTableTasks(int idProgram) {
+    public void setTables(int idProgram) {
         getTableTasks(idProgram);
+        getTableMessages(idProgram);
 //        createTableLayout();
+        View header;
 
-        TaskAdapter adapter = new TaskAdapter(this, R.layout.layout_task_item_row, tasksList);
+        TaskAdapter taskAdapter = new TaskAdapter(this, R.layout.layout_task_item_row, tasksList);
         tasksListView = (ListView) findViewById(R.id.tasksListView);
-
-        View header = (View)getLayoutInflater().inflate(R.layout.layout_task_header_row, null);
+        header = (View)getLayoutInflater().inflate(R.layout.layout_task_header_row, null);
         tasksListView.addHeaderView(header);
-        tasksListView.setAdapter(adapter);
+        tasksListView.setAdapter(taskAdapter);
 
+        MessageAdapter messageAdapter = new MessageAdapter(this, R.layout.layout_message_item_row, messagesList);
+        messagesListView = (ListView) findViewById(R.id.messagesListView);
+        header = (View)getLayoutInflater().inflate(R.layout.layout_message_header_row, null);
+        messagesListView.addHeaderView(header);
+        messagesListView.setAdapter(messageAdapter);
 
-//        adjustGridView();
+        tasksListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View view,
+                                    int position, long id) {
 
+//                Log.d(LOG_TAG, "itemClick: position = " + position + ", id = "
+//                        + id);
+            }
+        });
+        tasksListView.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> parent, View view,
+                                       int position, long id) {
+//                Log.d(LOG_TAG, "itemSelect: position = " + position + ", id = "
+//                        + id);
+            }
 
-//        cAdapter = new ArrayAdapter<>(this, R.layout.item, R.id.tvText, cNames);
-//        gvCol= (GridView) findViewById(R.id.gv_colls);
-
-//        tAdapter = new ArrayAdapter<Object>(this, R.layout.item, R.id.tvText, tTasks);
-//        gridView = (GridView) findViewById(R.id.grid_tasks);
-//        gridView.setAdapter(adapter);
-//        adjustGridView();
-
-//        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            public void onItemClick(AdapterView<?> parent, View v,
-//                                    int position, long id) {
-//                Toast.makeText(getApplicationContext(),
-//                        ((TextView) v).getText(), Toast.LENGTH_SHORT).show();
-//            }
-//        });
+            public void onNothingSelected(AdapterView<?> parent) {
+//                Log.d(LOG_TAG, "itemSelect: nothing");
+            }
+        });
     }
-
-//    private void adjustGridView() {
-//        tasksListView.setNumColumns(5);
-//        tasksListView.setVerticalSpacing(2);
-//    }
 
     public void getTableTasks(int idProgram) {
         tasksList = new ArrayList<>();
-        tasksList.add(new Task("squat", "4", "10", "10", "E"));
-        tasksList.add(new Task("biesep", "4", "10", "10", "E"));
-        tasksList.add(new Task("squat", "4", "10", "10", "E"));
-        tasksList.add(new Task("squat", "4", "10", "10", "E"));
-        tasksList.add(new Task("biesep", "4", "10", "10", "E"));
+        tasksList.add(new Task("squat", "4", "10", "10", R.drawable.stopwatch));
+        tasksList.add(new Task("biesep", "4", "10", "10", R.drawable.stopwatch));
+        tasksList.add(new Task("squat", "4", "10", "10", R.drawable.stopwatch));
+        tasksList.add(new Task("squat", "4", "10", "10",  R.drawable.stopwatch));
+        tasksList.add(new Task("squat", "4", "10", "10",  R.drawable.stopwatch));
+        tasksList.add(new Task("squat", "4", "10", "10",  R.drawable.stopwatch));
+        tasksList.add(new Task("squat", "4", "10", "10",  R.drawable.stopwatch));
+        tasksList.add(new Task("squat", "4", "10", "10",  R.drawable.stopwatch));
+        tasksList.add(new Task("squat", "4", "10", "10",  R.drawable.stopwatch));
+        tasksList.add(new Task("squat", "4", "10", "10",  R.drawable.stopwatch));
+        tasksList.add(new Task("squat", "4", "10", "10",  R.drawable.stopwatch));
+        tasksList.add(new Task("squat", "4", "10", "10",  R.drawable.stopwatch));
+        tasksList.add(new Task("squat", "4", "10", "10",  R.drawable.stopwatch));
+        tasksList.add(new Task("squat", "4", "10", "10",  R.drawable.stopwatch));
+        tasksList.add(new Task("squat", "4", "10", "10",  R.drawable.stopwatch));
+    }
+
+    public void getTableMessages(int idProgram) {
+        messagesList = new ArrayList<>();
+        messagesList.add(new Message(new Date(),"squatsadmnasdnsa,dsa"));
+        messagesList.add(new Message(new Date(),"squatsadmnasdnsa,dsa"));
+        messagesList.add(new Message(new Date(),"squatsadmnasdnsa,dsa"));
+        messagesList.add(new Message(new Date(),"squatsadmnasdnsa,dsa"));
+        messagesList.add(new Message(new Date(),"squatsadmnasdnsa,dsa"));
+        messagesList.add(new Message(new Date(),"squatsadmnasdnsa,dsa"));
     }
 
     public void createTableLayout() {
@@ -109,7 +133,7 @@ public class WorkOutActivity extends AppCompatActivity {
         tableRow.addView(createTextView(task.getSet()));
         tableRow.addView(createTextView(task.getRepeat()));
         tableRow.addView(createTextView(task.getWeight()));
-        tableRow.addView(createTextView(task.getTimer()));
+//        tableRow.addView(createTextView(task.getTimer()));
         return  tableRow;
     }
     private TextView createTextView(String obj){
