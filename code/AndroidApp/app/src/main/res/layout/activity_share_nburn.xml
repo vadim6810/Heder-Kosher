@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_share_nburn"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.tr2016.hederkosher.ShareNBurnActivity">
+
+    <View
+        android:id="@+id/dummyview"
+        android:layout_width="1px"
+        android:layout_height="fill_parent"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="75dp"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@id/dummyview"
+        android:background="@drawable/left_half_round"
+        android:text="@string/share" />
+
+    <Button
+        android:layout_width="75dp"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@id/dummyview"
+        android:background="@drawable/right_half_round"
+        android:text="@string/burn" />
+
+</RelativeLayout>

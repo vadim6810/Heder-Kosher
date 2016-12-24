@@ -31,5 +31,7 @@
     <string name="buttonMyWorkOut">My WorkOut</string>
     <string name="Coach">Coach</string>
     <string name="Done">Done</string>
+    <string name="burn">Burn</string>
     <string name="WorkOutMessage">Worm up - 10 minutes run</string>
+    <string name="share">Share</string>
 </resources>

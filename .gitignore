@@ -4,3 +4,6 @@
 Heder-Kosher.iml
 target
 *.vpp~*
+
+# Log Files
+*.log
