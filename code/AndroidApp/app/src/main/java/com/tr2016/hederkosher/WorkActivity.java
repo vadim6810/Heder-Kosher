@@ -13,7 +13,7 @@ public class WorkActivity extends AppCompatActivity {
         setContentView(R.layout.activity_work);
     }
 
-    public void onMyWorkoutClick(View view) {
+    public void openShareNBurnActivity(View view) {
         Intent intent = new Intent(WorkActivity.this, ShareNBurnActivity.class);
         startActivity(intent);
     }
