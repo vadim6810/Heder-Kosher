@@ -9,12 +9,12 @@ public class Task {
     private String set;
     private String repeat;
     private String weight;
-    private String timer;
+    private int timer;
 
     public Task() {
     }
 
-    public Task(String task, String set, String repeat, String weight, String timer) {
+    public Task(String task, String set, String repeat, String weight, int timer) {
         this.task = task;
         this.set = set;
         this.repeat = repeat;
@@ -54,11 +54,11 @@ public class Task {
         this.weight = weight;
     }
 
-    public String getTimer() {
+    public int getTimer() {
         return timer;
     }
 
-    public void setTimer(String timer) {
+    public void setTimer(int timer) {
         this.timer = timer;
     }
 }
