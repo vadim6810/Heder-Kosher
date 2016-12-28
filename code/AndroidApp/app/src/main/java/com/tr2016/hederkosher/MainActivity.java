@@ -8,6 +8,7 @@ import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
     Button btn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -18,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
             btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                   MainActivity.this.startActivity(new Intent(MainActivity.this, RegistrationActivity.class));
+                   MainActivity.this.startActivity(new Intent(MainActivity.this, RegisterActivity.class));
 
                 }
             });
@@ -34,7 +35,6 @@ public class MainActivity extends AppCompatActivity {
             });
         }
 
-
         btn = (Button) findViewById(R.id.buttonTest);
         if (btn!=null) {
             btn.setOnClickListener(new View.OnClickListener() {
@@ -44,6 +44,5 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
         }
-
     }
 }

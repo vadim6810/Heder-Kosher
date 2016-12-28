@@ -11,55 +11,77 @@
     tools:context="com.tr2016.hederkosher.LoginActivity">
 
     <EditText
+        android:id="@+id/editTextEmail"
+        style="@android:style/Widget.DeviceDefault.EditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="textEmailAddress"
-        android:ems="10"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="40dp"
-        android:id="@+id/editTextEmail"
-        android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="40dp"
+        android:ems="10"
         android:hint="@string/e_mail"
-        style="@android:style/Widget.DeviceDefault.EditText" />
+        android:inputType="textEmailAddress" />
 
     <EditText
+        android:id="@+id/editTextPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="textPassword"
-        android:ems="10"
-        android:layout_below="@+id/editTextEmail"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="32dp"
-        android:id="@+id/editTextPassword"
-        android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:hint="@string/password" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/editTextEmail"
+        android:layout_marginTop="32dp"
+        android:ems="10"
+        android:hint="@string/password"
+        android:inputType="textPassword" />
 
     <Button
-        android:text="Sign In"
+        android:id="@+id/buttonSignIn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/editTextPassword"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
-        android:id="@+id/buttonSignIn" />
+        android:text="@string/sign_in" />
 
     <TextView
+        android:id="@+id/registerTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/buttonSignIn"
+        android:layout_marginTop="20dp"
+        android:textSize="20sp"
+        android:text="@string/register"
+        android:onClick="openRegisterActivity"
+        android:autoLink="all" />
+
+    <TextView
+        android:id="@+id/forgotPasswordTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/registerTV"
+        android:layout_marginTop="20dp"
+        android:textSize="20sp"
+        android:text="@string/forgot_password"
+        android:onClick="forgotPassword"
+        android:autoLink="all" />
+
+    <TextView
+        android:id="@+id/textViewNameOfAppLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentStart="true"
+        android:gravity="center_horizontal"
         android:text="@string/nameOfApp"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:id="@+id/textViewNameOfAppLogin"
         android:textStyle="normal|bold"
-        tools:text="@string/nameOfApp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:gravity="center_horizontal" />
+        tools:text="@string/nameOfApp" />
 </RelativeLayout>

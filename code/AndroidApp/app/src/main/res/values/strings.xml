@@ -36,4 +36,6 @@
     <string name="share">Share</string>
     <string name="my_coach">My Coach</string>
     <string name="workout">WorkOut</string>
+    <string name="register">Register</string>
+    <string name="forgot_password">Forgot password?</string>
 </resources>
