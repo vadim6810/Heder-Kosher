@@ -6,7 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.tr2016.hederkosher.R;
@@ -42,11 +42,12 @@ public class TaskAdapter extends ArrayAdapter<Task> {
             row = inflater.inflate(layoutResourceId, parent, false);
 
             holder = new TaskHolder();
-            holder.task = (TextView) row.findViewById(R.id.task);
+            holder.name = (TextView) row.findViewById(R.id.name);
             holder.set = (TextView) row.findViewById(R.id.set);
             holder.repeat = (TextView) row.findViewById(R.id.repeat);
             holder.weight = (TextView) row.findViewById(R.id.weight);
-            holder.timer = (ImageView) row.findViewById(R.id.timer);
+            holder.timer = (ProgressBar) row.findViewById(R.id.timer);
+            holder.pause = (TextView) row.findViewById(R.id.pause);
 
             row.setTag(holder);
         }
@@ -57,20 +58,25 @@ public class TaskAdapter extends ArrayAdapter<Task> {
         }
 
         Task task = data.get(position);
-        holder.task.setText(task.getTask());
+        holder.name.setText(task.getName());
         holder.set.setText(task.getSet());
         holder.repeat.setText(task.getRepeat());
         holder.weight.setText(task.getWeight());
-        //holder.timer.setText(task.getTimer());
+//        holder.timer.setText(task.getTimerProcess()+"/"+task.getTimer());
+        holder.timer.setMax(task.getTimer());
+        holder.pause.setText(task.getPauseProcess()+"/"+task.getPause());
+//        holder.pause.setText(String.valueOf(task.getPause()));
         return row;
     }
 
     private class TaskHolder {
-        public TextView task;
+        public TextView name;
         public TextView set;
         public TextView repeat;
         public TextView weight;
-        public ImageView timer;
+        public ProgressBar timer;
+        public TextView pause;
+//        public ImageView timer;
 
     }
 }

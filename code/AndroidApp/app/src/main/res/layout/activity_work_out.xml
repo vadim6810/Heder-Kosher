@@ -8,30 +8,41 @@
     android:background="#FFFFFF"
     android:stretchColumns="*">
 
+    <ProgressBar
+        android:id="@+id/progressBarTasks"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_above="@+id/tasksTableLayout"
+        android:layout_toLeftOf="@+id/button_done_task"
+        android:layout_toStartOf="@+id/button_done_task" />
+
     <TextView
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignBottom="@+id/button"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_toLeftOf="@+id/button"
-        android:layout_toStartOf="@+id/button"
+        android:layout_toLeftOf="@+id/button_done_task"
+        android:layout_toStartOf="@+id/button_done_task"
         android:scrollHorizontally="true"
         android:text="@string/WorkOutMessage"
         android:textAlignment="center"
         tools:layout_height="match_parent"
-        android:gravity="center" />
+        android:gravity="center"
+        android:layout_alignBottom="@+id/button_done_task" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/button_done_task"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:text="@string/Done" />
+        android:text="@string/Done"
+        android:layout_alignParentTop="true" />
 
     <TableLayout
         android:layout_width="match_parent"
@@ -70,18 +81,18 @@
         android:layout_width="match_parent"
         android:layout_height="77dp"
         android:layout_alignParentBottom="true"
-        android:layout_toLeftOf="@+id/button"
-        android:layout_toStartOf="@+id/button" />
+        android:layout_toLeftOf="@+id/button_done_task"
+        android:layout_toStartOf="@+id/button_done_task" />
 
     <ImageButton
+        android:id="@+id/imageButton"
         android:layout_width="wrap_content"
         app:srcCompat="@drawable/message_icon"
-        android:id="@+id/imageButton"
+        android:layout_toRightOf="@+id/messagesListView"
         android:layout_height="77dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_toRightOf="@+id/messagesListView"
         android:layout_toEndOf="@+id/messagesListView"
         android:padding="5dp"
         android:layout_margin="0dp"

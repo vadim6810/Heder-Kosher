@@ -5,60 +5,66 @@ package com.tr2016.hederkosher.utils;
  */
 
 public class Task {
-    private String task;
+    private String name;
     private String set;
     private String repeat;
     private String weight;
+    private int pause;
     private int timer;
+    private int pauseProcess;
+    private int timerProcess;
 
     public Task() {
     }
 
-    public Task(String task, String set, String repeat, String weight, int timer) {
-        this.task = task;
+    public Task(String name, String set, String repeat, String weight, int timer, int pause) {
+        this.name = name;
         this.set = set;
         this.repeat = repeat;
         this.weight = weight;
         this.timer = timer;
+        this.pause = pause;
+        this.timerProcess = timer;
+        this.pauseProcess = pause;
     }
 
-    public String getTask() {
-        return task;
-    }
-
-    public void setTask(String task) {
-        this.task = task;
+    public String getName() {
+        return name;
     }
 
     public String getSet() {
         return set;
     }
 
-    public void setSet(String set) {
-        this.set = set;
-    }
-
     public String getRepeat() {
         return repeat;
-    }
-
-    public void setRepeat(String repeat) {
-        this.repeat = repeat;
     }
 
     public String getWeight() {
         return weight;
     }
 
-    public void setWeight(String weight) {
-        this.weight = weight;
+    public int getPause() {
+        return pause;
     }
 
     public int getTimer() {
         return timer;
     }
 
-    public void setTimer(int timer) {
-        this.timer = timer;
+    public int getPauseProcess() {
+        return pauseProcess;
+    }
+
+    public int getTimerProcess() {
+        return timerProcess;
+    }
+
+    public void setPauseProcess(int pauseProcess) {
+        this.pauseProcess = pauseProcess;
+    }
+
+    public void setTimerProcess(int timerProcess) {
+        this.timerProcess = timerProcess;
     }
 }
