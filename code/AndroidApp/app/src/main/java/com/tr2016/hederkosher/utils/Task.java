@@ -67,4 +67,18 @@ public class Task {
     public void setTimerProcess(int timerProcess) {
         this.timerProcess = timerProcess;
     }
+
+    @Override
+    public String toString() {
+        return "Task{" +
+                "name='" + name + '\'' +
+                ", set='" + set + '\'' +
+                ", repeat='" + repeat + '\'' +
+                ", weight='" + weight + '\'' +
+                ", pause=" + pause +
+                ", timer=" + timer +
+                ", pauseProcess=" + pauseProcess +
+                ", timerProcess=" + timerProcess +
+                '}';
+    }
 }

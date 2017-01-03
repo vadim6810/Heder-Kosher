@@ -16,8 +16,8 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_above="@+id/tasksTableLayout"
-        android:layout_toLeftOf="@+id/button_done_task"
-        android:layout_toStartOf="@+id/button_done_task" />
+        android:layout_toStartOf="@+id/button_done_task"
+        android:layout_toLeftOf="@+id/button_done_task" />
 
     <TextView
         android:id="@+id/textView"
@@ -39,27 +39,31 @@
         android:id="@+id/button_done_task"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
         android:text="@string/Done"
-        android:layout_alignParentTop="true" />
+        android:background="@drawable/buttons"
+        style="@android:style/Widget.DeviceDefault.Button.Small"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="5dp" />
 
     <TableLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/textView"
-        android:layout_above="@+id/messagesListView"
         android:paddingBottom="5dp"
         android:paddingTop="5dp"
         android:layout_span="3"
-        android:id="@+id/tasksTableLayout">
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/taskHeaders" />
+        android:id="@+id/tasksTableLayout"
+        android:layout_below="@+id/textView"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/tabHost">
 
         <TableRow
             android:layout_width="match_parent"
@@ -76,27 +80,119 @@
     </TableLayout>
 
 
-    <ListView
-        android:id="@+id/messagesListView"
+    <TabHost
         android:layout_width="match_parent"
-        android:layout_height="77dp"
-        android:layout_alignParentBottom="true"
-        android:layout_toLeftOf="@+id/button_done_task"
-        android:layout_toStartOf="@+id/button_done_task" />
+        android:id="@+id/tabHost"
+        android:layout_height="200dp"
+        android:layout_above="@+id/messagesButtoms"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
 
-    <ImageButton
-        android:id="@+id/imageButton"
-        android:layout_width="wrap_content"
-        app:srcCompat="@drawable/message_icon"
-        android:layout_toRightOf="@+id/messagesListView"
-        android:layout_height="77dp"
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TabWidget
+                android:id="@android:id/tabs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="visible"
+                android:theme="@style/Widget.AppCompat.Light.ActionBar.TabText"
+                android:background="@drawable/tabs" />
+
+            <FrameLayout
+                android:id="@android:id/tabcontent"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:id="@+id/tab1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <ListView
+                        android:id="@+id/messagesProgramListView"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentBottom="true"
+                        android:layout_toLeftOf="@+id/button_done_task"
+                        android:layout_toStartOf="@+id/button_done_task" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/tab2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <ListView
+                        android:id="@+id/messagesTaskListView"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentBottom="true"
+                        android:layout_toLeftOf="@+id/button_done_task"
+                        android:layout_toStartOf="@+id/button_done_task" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/tab3"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <ListView
+                        android:id="@+id/messagesPersonListView"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentBottom="true"
+                        android:layout_toLeftOf="@+id/button_done_task"
+                        android:layout_toStartOf="@+id/button_done_task" />
+                </LinearLayout>
+            </FrameLayout>
+        </LinearLayout>
+
+    </TabHost>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/messagesButtoms"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_toEndOf="@+id/messagesListView"
-        android:padding="5dp"
-        android:layout_margin="0dp"
-        style="@style/Widget.AppCompat.ImageButton"/>
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <ImageButton
+            android:id="@+id/addMessage"
+            android:layout_width="wrap_content"
+            app:srcCompat="@drawable/message_icon"
+            android:layout_height="50dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:padding="5dp"
+            android:layout_margin="0dp"
+            style="@style/Widget.AppCompat.ImageButton"
+            android:background="@android:color/transparent" />
+
+        <EditText
+            android:id="@+id/messageNew"
+            style="@android:style/Widget.DeviceDefault.EditText"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="@string/new_message"
+            android:inputType="text"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_toLeftOf="@+id/addMessage"
+            android:layout_toStartOf="@+id/addMessage" />
+    </RelativeLayout>
 
 </RelativeLayout>
 
+    <!--android:layout_toRightOf="@+id/messagesListView"-->
+    <!--android:layout_toEndOf="@+id/messagesListView"-->

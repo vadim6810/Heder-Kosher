@@ -11,13 +11,19 @@ import java.util.Date;
 public class Message {
     private String text;
     private Date date;
+    private int type;
 
     public Message() {
     }
 
-    public Message(Date date,String message) {
+    public Message(Date date,String message,int type) {
         this.date = date;
         this.text = message;
+        this.type = type;
+    }
+
+    public int getType() {
+        return type;
     }
 
     public String getText() {
@@ -37,5 +43,14 @@ public class Message {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    @Override
+    public String toString() {
+        return "Message{" +
+                "text='" + text + '\'' +
+                ", date=" + date +
+                ", type=" + type +
+                '}';
     }
 }
